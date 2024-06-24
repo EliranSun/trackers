@@ -152,7 +152,7 @@ const KetoTable = ({columns, date}) => {
                         return (
                             <div
                                 key={`${row.name}-${index}`}
-                                className="bg-gray-800 m-4 p-4 grid grid-cols-3 gap-4 max-w-screen-sm rounded-lg w-full">
+                                className="bg-gray-800 my-4 p-4 grid grid-cols-3 gap-4 max-w-screen-sm rounded-lg w-full">
                                 {columns.map(({name: columnName, type}) => {
                                     const value = row[columnName];
                                     return (

@@ -2,6 +2,23 @@ import './App.css';
 import {useMemo, useState} from "react";
 import classNames from "classnames";
 
+// const FOOD_API = "https://walak.vercel.app/nutrition";
+const FOOD_API = "http://localhost:3000/nutrition";
+
+const fetchFoodNutrition = async (food) => {
+    const url = new URL(FOOD_API);
+    url.searchParams.append("food", food);
+
+    try {
+        const response = await fetch(url);
+        const results = await response.json();
+        return JSON.parse(results.content.replace("```json", "").replace("```", ""));
+    } catch (error) {
+        console.error(error);
+        return {};
+    }
+}
+
 const setStorageData = (key, value) => {
     localStorage.setItem(key, JSON.stringify(value));
 };
@@ -126,7 +143,7 @@ const KetoTable = ({columns, date}) => {
                         return (
                             <div
                                 key={`${row.name}-${index}`}
-                                className="bg-gray-900 p-4 grid grid-cols-3 gap-4 max-w-screen-sm w-full">
+                                className=" p-4 grid grid-cols-3 gap-4 max-w-screen-sm w-full">
                                 {columns.map(({name, type}) => {
                                     const value = row[name];
                                     return (
@@ -137,9 +154,14 @@ const KetoTable = ({columns, date}) => {
                                                 className="border-2 p-4 text-base border-gray-300 text-black w-full"
                                                 defaultValue={value}
                                                 key={`${date}-${KETO_KEY}-${name}-${value}`}
-                                                onBlur={(e) => {
-                                                    const newData = setData(date, KETO_KEY, index, name, e.target.value);
+                                                onBlur={async (event) => {
+                                                    const newData = setData(date, KETO_KEY, index, name, event.target.value);
                                                     setLocalData(Object.values(newData[date][KETO_KEY]));
+
+                                                    if (name === "name" && event.target.value !== "") {
+                                                        const nutrition = await fetchFoodNutrition(event.target.value);
+                                                        console.log(event.target.value, nutrition);
+                                                    }
                                                 }}
                                             />
                                         </div>
@@ -153,10 +175,9 @@ const KetoTable = ({columns, date}) => {
         )
     }
 ;
-const TrackerSection = ({name, type, date, component}) => {
+const TrackerSection = ({name, component}) => {
     return (
-        <section className="p-4">
-            <h1 className="text-xl">{name} - {date}</h1>
+        <section className="bg-gray-900 py-4">
             {component}
         </section>
     )
@@ -164,10 +185,9 @@ const TrackerSection = ({name, type, date, component}) => {
 
 const TrackerNames = {
     KETO: "Keto",
-    NO_PRON: "No Pron",
+    NO_PRON: "NoPron",
     SLEEP: "Sleep",
     WEIGHT: "Weight",
-    FAT: "Fat",
     HOURLY: "Hourly",
 };
 
@@ -197,8 +217,34 @@ const Tracker = [
 ]
 
 function App() {
+    const [selectedView, setSelectedView] = useState(TrackerNames.KETO);
+
     return (
-        <div className="">
+        <div className="p-4">
+            <div className="flex justify-evenly items-center h-10">
+                <button>◀</button>
+                <h1 className="mb-2">{date}</h1>
+                <button>▶</button>
+            </div>
+            <div className="flex justify-evenly mb-4 font-mono">
+                {Object.values(TrackerNames).map((name, index) => {
+                    return (
+                        <button
+                            key={name}
+                            className={classNames({
+                                "bg-gray-900": selectedView === name,
+                                "bg-transparent": selectedView !== name,
+                                "p-4 text-white": true,
+                            })}
+                            onClick={() => {
+                                console.log(name);
+                                setSelectedView(name);
+                            }}>
+                            {name}
+                        </button>
+                    );
+                })}
+            </div>
             {Tracker.map((tracker) => {
                 return (
                     <TrackerSection

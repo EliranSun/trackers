@@ -208,7 +208,7 @@ const KetoTable = ({columns, date}) => {
 ;
 const TrackerSection = ({name, component}) => {
     return (
-        <section className="bg-gray-900 py-4 shadow rounded-xl">
+        <section className="bg-gray-900 p-4 shadow rounded-xl">
             {component}
         </section>
     )

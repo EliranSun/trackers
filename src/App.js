@@ -1,6 +1,7 @@
 import './App.css';
 import {useMemo, useState} from "react";
 import classNames from "classnames";
+import {isNumber} from "lodash";
 
 const FOOD_API = "https://walak.vercel.app/nutrition";
 
@@ -170,10 +171,9 @@ const KetoTable = ({columns, date}) => {
                                                     const protein = newData[date][KETO_KEY][`row-${index}`].protein;
                                                     const carbs = newData[date][KETO_KEY][`row-${index}`].carbs;
 
-                                                    const hasMissingData =
-                                                        calories === null || calories === "" ||
-                                                        protein === null || protein === "" ||
-                                                        carbs === null || carbs === "";
+                                                    const hasMissingData = !isNumber(calories) || !isNumber(protein) || !isNumber(carbs);
+
+                                                    console.log({hasMissingData});
 
                                                     if (columnName === "name" && event.target.value !== "" && hasMissingData) {
                                                         const nutrition = await fetchFoodNutrition(event.target.value);

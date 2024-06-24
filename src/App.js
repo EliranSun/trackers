@@ -144,35 +144,38 @@ const KetoTable = ({columns, date}) => {
                 <div className="h-[66vh] overflow-y-auto">
                     {localData.concat({
                         name: "",
-                        calories: "",
-                        protein: "",
-                        carbs: "",
+                        calories: null,
+                        protein: null,
+                        carbs: null,
                     }).map((row, index) => {
                         return (
                             <div
                                 key={`${row.name}-${index}`}
                                 className=" p-4 grid grid-cols-3 gap-4 max-w-screen-sm w-full">
-                                {columns.map(({name, type}) => {
-                                    const value = row[name];
+                                {columns.map(({name: columnName, type}) => {
+                                    const value = row[columnName];
                                     return (
-                                        <div key={name} className="first-of-type:col-span-3">
-                                            {name}
+                                        <div key={columnName} className="first-of-type:col-span-3">
+                                            {columnName}
                                             <input
                                                 type={type}
                                                 className="border-2 p-4 text-base border-gray-300 text-black w-full"
                                                 defaultValue={value}
-                                                key={`${date}-${KETO_KEY}-${name}-${value}`}
+                                                key={`${date}-${KETO_KEY}-${columnName}-${value}`}
                                                 onBlur={async (event) => {
-                                                    const newData = setData(date, KETO_KEY, index, name, event.target.value);
+                                                    const newData = setData(date, KETO_KEY, index, columnName, event.target.value);
                                                     setLocalData(Object.values(newData[date][KETO_KEY]));
 
                                                     const calories = newData[date][KETO_KEY][`row-${index}`].calories;
                                                     const protein = newData[date][KETO_KEY][`row-${index}`].protein;
                                                     const carbs = newData[date][KETO_KEY][`row-${index}`].carbs;
 
-                                                    const hasMissingData = !calories || !protein || !carbs;
+                                                    const hasMissingData =
+                                                        calories === null || calories === "" ||
+                                                        protein === null || protein === "" ||
+                                                        carbs === null || carbs === "";
 
-                                                    if (name === "name" && event.target.value !== "" && hasMissingData) {
+                                                    if (columnName === "name" && event.target.value !== "" && hasMissingData) {
                                                         const nutrition = await fetchFoodNutrition(event.target.value);
 
                                                         if (!calories) {

@@ -1,5 +1,5 @@
 import './App.css';
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import classNames from "classnames";
 import {isNumber} from "lodash";
 
@@ -98,6 +98,11 @@ const Measurement = ({name, value, range = []}) => {
 
 const KetoTable = ({columns, date}) => {
         const [localData, setLocalData] = useState(Object.values(getData(date, KETO_KEY)));
+        console.log({date});
+        useEffect(() => {
+            setLocalData(Object.values(getData(date, KETO_KEY)));
+        }, [date]);
+
         const caloriesSum = useMemo(() => {
             return localData.reduce((acc, row) => {
                 if (!row.calories) {
@@ -206,10 +211,12 @@ const KetoTable = ({columns, date}) => {
         )
     }
 ;
-const TrackerSection = ({name, component}) => {
+const TrackerSection = ({name, component, ...rest}) => {
+    const Component = component;
+
     return (
         <section className="bg-gray-900 p-4 shadow rounded-xl">
-            {component}
+            <Component {...rest}/>
         </section>
     )
 };
@@ -228,34 +235,54 @@ const TrackerType = {
     TABLE: "Table",
 };
 
-const date = new Date().toLocaleDateString("en-IL");
-
 const Tracker = [
     {
         name: TrackerNames.KETO,
-        date,
-        component: (
-            <KetoTable
-                date={date}
-                columns={[
-                    {name: "name", type: "text"},
-                    {name: "calories", type: "number"},
-                    {name: "protein", type: "number"},
-                    {name: "carbs", type: "number"},
-                ]}/>
-        )
+        component: KetoTable,
+        columns: [
+            {name: "name", type: "text"},
+            {name: "calories", type: "number"},
+            {name: "protein", type: "number"},
+            {name: "carbs", type: "number"},
+        ]
+        // component: (
+        //     <KetoTable
+        //         date={date}
+        //         columns={[
+        //             {name: "name", type: "text"},
+        //             {name: "calories", type: "number"},
+        //             {name: "protein", type: "number"},
+        //             {name: "carbs", type: "number"},
+        //         ]}/>
+        // )
     }
 ]
 
+const ONE_DAY = 1000 * 60 * 60 * 24;
+
 function App() {
+    const [dateObject, setDateObject] = useState(new Date());
+    const [date, setDate] = useState(dateObject.toLocaleDateString("en-IL"));
     const [selectedView, setSelectedView] = useState(TrackerNames.KETO);
 
     return (
         <div className="p-4">
             <div className="flex justify-evenly items-center h-10">
-                <button>◀</button>
+                <button onClick={() => {
+                    const newDate = new Date(dateObject.getTime() - ONE_DAY);
+                    setDate(newDate.toLocaleDateString("en-IL"));
+                    setDateObject(newDate);
+                }}>
+                    ◀
+                </button>
                 <h1 className="mb-2">{date}</h1>
-                <button>▶</button>
+                <button onClick={() => {
+                    const newDate = new Date(dateObject.getTime() + ONE_DAY);
+                    setDate(newDate.toLocaleDateString("en-IL"));
+                    setDateObject(newDate);
+                }}>
+                    ▶
+                </button>
             </div>
             <div className="flex justify-evenly mb-4 font-mono">
                 {Object.values(TrackerNames).map((name, index) => {
@@ -280,6 +307,7 @@ function App() {
                 return (
                     <TrackerSection
                         key={tracker.name}
+                        date={date}
                         {...tracker}/>
                 );
             })}

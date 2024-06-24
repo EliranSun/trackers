@@ -90,7 +90,7 @@ const Measurement = ({name, value, range = []}) => {
             "text-red-500": value < range[0] || value > range[1],
             "text-green-500": value >= range[0] && value <= range[1],
         })}>
-            <h2 className="text-xl">{value}</h2>
+            <h2 className="text-xl">{Math.round(value)}</h2>
             <label className="text-sm">{name}</label>
         </div>
     )

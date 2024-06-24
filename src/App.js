@@ -11,6 +11,7 @@ const fetchFoodNutrition = async (food) => {
     try {
         const response = await fetch(url);
         const results = await response.json();
+        console.log({results});
         return JSON.parse(results.content.replace("```json", "").replace("```", ""));
     } catch (error) {
         console.error(error);

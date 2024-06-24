@@ -2,8 +2,7 @@ import './App.css';
 import {useMemo, useState} from "react";
 import classNames from "classnames";
 
-// const FOOD_API = "https://walak.vercel.app/nutrition";
-const FOOD_API = "http://localhost:3000/nutrition";
+const FOOD_API = "https://walak.vercel.app/nutrition";
 
 const fetchFoodNutrition = async (food) => {
     const url = new URL(FOOD_API);

@@ -116,37 +116,39 @@ const KetoTable = ({columns, date}) => {
                         value={carbsSum}
                         range={[0, 40]}/>
                 </div>
-                {localData.concat({
-                    name: "",
-                    calories: "",
-                    protein: "",
-                    carbs: "",
-                }).map((row, index) => {
-                    return (
-                        <div
-                            key={`${row.name}-${index}`}
-                            className="bg-gray-900 p-4 grid grid-cols-3 gap-4 max-w-screen-sm w-full">
-                            {columns.map(({name, type}) => {
-                                const value = row[name];
-                                return (
-                                    <div key={name} className="first-of-type:col-span-3">
-                                        {name}
-                                        <input
-                                            type={type}
-                                            className="border-2 p-4 text-base border-gray-300 text-black w-full"
-                                            defaultValue={value}
-                                            key={`${date}-${KETO_KEY}-${name}-${value}`}
-                                            onBlur={(e) => {
-                                                const newData = setData(date, KETO_KEY, index, name, e.target.value);
-                                                setLocalData(Object.values(newData[date][KETO_KEY]));
-                                            }}
-                                        />
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    )
-                })}
+                <div className="h-[80vh] overflow-y-auto">
+                    {localData.concat({
+                        name: "",
+                        calories: "",
+                        protein: "",
+                        carbs: "",
+                    }).map((row, index) => {
+                        return (
+                            <div
+                                key={`${row.name}-${index}`}
+                                className="bg-gray-900 p-4 grid grid-cols-3 gap-4 max-w-screen-sm w-full">
+                                {columns.map(({name, type}) => {
+                                    const value = row[name];
+                                    return (
+                                        <div key={name} className="first-of-type:col-span-3">
+                                            {name}
+                                            <input
+                                                type={type}
+                                                className="border-2 p-4 text-base border-gray-300 text-black w-full"
+                                                defaultValue={value}
+                                                key={`${date}-${KETO_KEY}-${name}-${value}`}
+                                                onBlur={(e) => {
+                                                    const newData = setData(date, KETO_KEY, index, name, e.target.value);
+                                                    setLocalData(Object.values(newData[date][KETO_KEY]));
+                                                }}
+                                            />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         )
     }

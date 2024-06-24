@@ -8,11 +8,19 @@ const fetchFoodNutrition = async (food) => {
     const url = new URL(FOOD_API);
     url.searchParams.append("food", food);
 
+    if (process.env.NODE_ENV === "development") {
+        return {
+            "calories": 100,
+            "protein": 100,
+            "carbs": 100,
+        };
+    }
+
     try {
         const response = await fetch(url);
         const results = await response.json();
         console.log({results});
-        return JSON.parse(results.content.replace("```json", "").replace("```", ""));
+        return JSON.parse(results.replace("```json", "").replace("```", ""));
     } catch (error) {
         console.error(error);
         return {};

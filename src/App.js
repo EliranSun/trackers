@@ -141,7 +141,7 @@ const KetoTable = ({columns, date}) => {
                         value={carbsSum}
                         range={[0, 40]}/>
                 </div>
-                <div className="h-[80vh] overflow-y-auto">
+                <div className="h-[66vh] overflow-y-auto">
                     {localData.concat({
                         name: "",
                         calories: "",

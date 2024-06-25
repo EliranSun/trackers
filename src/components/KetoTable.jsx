@@ -45,7 +45,7 @@ export const KetoTable = ({columns, date}) => {
 
         return (
             <div className="flex flex-col gap-2">
-                <div className="sticky top-28 bg-gray-900 flex justify-evenly p-4">
+                <div className="sticky top-28 bg-gray-800 flex justify-evenly p-4">
                     <Measurement
                         name="Calories"
                         value={caloriesSum}

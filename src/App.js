@@ -65,6 +65,7 @@ const setData = (date, key, rowIndex, columnName, value) => {
 
     if (!data || !data[date]) {
         data = {
+            ...data,
             [date]: {
                 [key]: {
                     [`row-${rowIndex}`]: {

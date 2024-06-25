@@ -268,8 +268,8 @@ function App() {
     const [selectedView, setSelectedView] = useState(TrackerNames.KETO);
 
     return (
-        <div className="p-4">
-            <div className="flex justify-evenly items-center h-10">
+        <div className="px-4">
+            <div className="flex justify-evenly items-center h-6">
                 <button 
                     className="text-xl p-4 bg-black"
                     onClick={() => {

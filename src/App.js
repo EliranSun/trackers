@@ -270,7 +270,9 @@ function App() {
     return (
         <div className="p-4">
             <div className="flex justify-evenly items-center h-10">
-                <button onClick={() => {
+                <button 
+                    className="text-xl p-4 bg-black"
+                    onClick={() => {
                     const newDate = new Date(dateObject.getTime() - ONE_DAY);
                     setDate(newDate.toLocaleDateString("en-IL"));
                     setDateObject(newDate);
@@ -278,7 +280,9 @@ function App() {
                     ◀
                 </button>
                 <h1 className="mb-2">{date}</h1>
-                <button onClick={() => {
+                <button 
+                    className="text-xl p-4 bg-black"
+                    onClick={() => {
                     const newDate = new Date(dateObject.getTime() + ONE_DAY);
                     setDate(newDate.toLocaleDateString("en-IL"));
                     setDateObject(newDate);

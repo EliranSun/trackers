@@ -39,7 +39,7 @@ function App() {
                             <button
                                 key={name}
                                 className={classNames({
-                                    "bg-gray-900": selectedView === name,
+                                    "bg-black": selectedView === name,
                                     "bg-transparent": selectedView !== name,
                                     "p-4 text-white": true,
                                 })}

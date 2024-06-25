@@ -98,9 +98,12 @@ const Measurement = ({name, value, range = []}) => {
 
 const KetoTable = ({columns, date}) => {
         const [localData, setLocalData] = useState(Object.values(getData(date, KETO_KEY)));
-        console.log({date});
+        
         useEffect(() => {
-            setLocalData(Object.values(getData(date, KETO_KEY)));
+            alert(date);
+            const newData = (getData(date, KETO_KEY));
+            alert(JSON.stringify(newData));
+            setLocalData(Object.values(newData));
         }, [date]);
 
         const caloriesSum = useMemo(() => {

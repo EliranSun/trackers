@@ -7,7 +7,7 @@ export const KetoInput = ({type, value, date, columnName, index, setLocalData}) 
     return (
         <input
             type={type}
-            className="border-2 p-4 text-base border-gray-300 text-black w-full"
+            className="border-2 p-4 text-base border-gray-300 bg-transparent text-white w-full"
             defaultValue={value}
             key={`${date}-${KETO_KEY}-${columnName}-${value}`}
             onBlur={async (event) => {

@@ -63,7 +63,7 @@ const getData = (date, key) => {
 const setData = (date, key, rowIndex, columnName, value) => {
     let data = getStorageData(key);
 
-    if (!data) {
+    if (!data || !data[date]) {
         data = {
             [date]: {
                 [key]: {

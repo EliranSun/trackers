@@ -59,7 +59,7 @@ export const KetoTable = ({columns, date}) => {
                         value={carbsSum}
                         range={[0, 40]}/>
                 </div>
-                <div className="h-full overflow-y-auto">
+                <div className="h-full overflow-x-hidden overflow-y-auto">
                     {localData.concat({
                         name: "",
                         calories: null,

@@ -13,7 +13,7 @@ function App() {
         <div className="w-full h-full overflow-x-hidden p-4">
                 <div className="flex justify-evenly items-center">
                     <button
-                        className="text-xl p-4 bg-black"
+                        className="text-xl px-4 pb-6 bg-black"
                         onClick={() => {
                             const newDate = new Date(dateObject.getTime() - ONE_DAY);
                             setDate(newDate.toLocaleDateString("en-IL"));

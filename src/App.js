@@ -101,9 +101,7 @@ const KetoTable = ({columns, date}) => {
         const [localData, setLocalData] = useState(Object.values(getData(date, KETO_KEY)));
         
         useEffect(() => {
-            alert(date);
             const newData = (getData(date, KETO_KEY));
-            alert(JSON.stringify(newData));
             setLocalData(Object.values(newData));
         }, [date]);
 

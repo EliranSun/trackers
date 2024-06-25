@@ -10,7 +10,7 @@ function App() {
     const [selectedView, setSelectedView] = useState(TrackerNames.KETO);
 
     return (
-        <div className="overflow-x-hidden p-4">
+        <div className="h-full overflow-x-hidden p-4">
             <div className="sticky top-0 bg-gray-900">
                 <div className="flex justify-evenly items-center">
                     <button

@@ -11,7 +11,6 @@ function App() {
 
     return (
         <div className="w-full h-full overflow-x-hidden p-4">
-            <div className="sticky top-0 bg-gray-900">
                 <div className="flex justify-evenly items-center">
                     <button
                         className="text-xl p-4 bg-black"
@@ -33,7 +32,7 @@ function App() {
                         ▶
                     </button>
                 </div>
-                <div className="flex justify-evenly mb-4 font-mono">
+                <div className="flex fixed bottom-20 bg-gray-900 justify-evenly p-4 font-mono">
                     {Object.values(TrackerNames).map((name, index) => {
                         return (
                             <button
@@ -52,7 +51,6 @@ function App() {
                         );
                     })}
                 </div>
-            </div>
             {Tracker.map((tracker) => {
                 return (
                     <TrackerSection

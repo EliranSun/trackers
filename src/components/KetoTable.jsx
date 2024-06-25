@@ -5,6 +5,7 @@ import {Measurement} from "./Measurement";
 import {isNumber} from "lodash";
 import {fetchFoodNutrition} from "../utils/api";
 import {KetoInput} from "./KetoInput";
+import classNames from "classnames";
 
 export const KetoTable = ({columns, date}) => {
         const [localData, setLocalData] = useState(Object.values(getData(date, KETO_KEY)));
@@ -45,7 +46,10 @@ export const KetoTable = ({columns, date}) => {
 
         return (
             <div className="flex flex-col gap-2">
-                <div className="sticky top-28 bg-gray-700 flex justify-evenly p-4">
+                <div className={classNames({
+                    "w-fit  bg-gray-500 flex gap-10 p-4 rounded-3xl shadow-xl": true,
+                    "fixed bottom-32 inset-x-0 m-auto": true,
+                })}>
                     <Measurement
                         name="Calories"
                         value={caloriesSum}
@@ -59,7 +63,7 @@ export const KetoTable = ({columns, date}) => {
                         value={carbsSum}
                         range={[0, 40]}/>
                 </div>
-                <div className="h-full overflow-x-hidden overflow-y-auto">
+                <div className="h-full overflow-x-hidden overflow-y-auto pt-16 pb-48">
                     {localData.concat({
                         name: "",
                         calories: null,

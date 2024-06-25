@@ -1,4 +1,5 @@
 import {KetoTable} from "../components/KetoTable";
+import {Bed, Egg, Ruler, SmileyXEyes, Timer} from "@phosphor-icons/react";
 
 export const FOOD_API = "https://walak.vercel.app/nutrition";
 export const KETO_KEY = "keto";
@@ -11,11 +12,14 @@ export const TrackerNames = {
     WEIGHT: "Weight",
     HOURLY: "Hourly",
 };
-const TrackerType = {
-    CHECKBOX: "Checkbox",
-    NUMBER: "Number",
-    TABLE: "Table",
-};
+
+export const TrackerIcons = {
+    [TrackerNames.KETO]: Egg,
+    [TrackerNames.NO_PRON]: SmileyXEyes,
+    [TrackerNames.SLEEP]: Bed,
+    [TrackerNames.WEIGHT]: Ruler,
+    [TrackerNames.HOURLY]: Timer,
+}
 
 export const Tracker = [
     {

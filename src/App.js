@@ -32,7 +32,7 @@ function App() {
                         ▶
                     </button>
                 </div>
-                <div className="flex fixed bottom-20 bg-gray-900 justify-evenly p-4 font-mono">
+                <div className="flex w-screen left-0 fixed bottom-0 h-20 bg-gray-900 justify-evenly p-4 font-mono">
                     {Object.values(TrackerNames).map((name, index) => {
                         return (
                             <button

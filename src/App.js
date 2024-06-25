@@ -1,9 +1,9 @@
 import './App.css';
 import {useState} from "react";
-import classNames from "classnames";
-import {ONE_DAY, Tracker, TrackerNames} from "./constants";
-import {TrackerSection} from "./components/TrackerSection";
+import {ONE_DAY, TrackerNames} from "./constants";
 import {Navbar} from "./components/Navbar";
+import {KetoTable} from "./components/KetoTable";
+import {RealityVsExpectationView} from "./components/RealityVsExpectationView";
 
 function App() {
     const [dateObject, setDateObject] = useState(new Date());
@@ -33,15 +33,22 @@ function App() {
                     ▶
                 </button>
             </div>
-            {Tracker.map((tracker) => {
-                return (
-                    <TrackerSection
-                        key={tracker.name}
+            <div className="pt-16 pb-48">
+                {selectedView === TrackerNames.KETO
+                    ? <KetoTable
                         date={date}
-                        {...tracker}/>
-                );
-            })}
-            <Navbar selectedView={selectedView} setSelectedView={setSelectedView}/>
+                        columns={[
+                            {name: "name", type: "text"},
+                            {name: "calories", type: "number"},
+                            {name: "protein", type: "number"},
+                            {name: "carbs", type: "number"},
+                        ]}/> : null}
+                {selectedView === TrackerNames.HOURLY
+                    ? <RealityVsExpectationView/> : null}
+            </div>
+            <Navbar
+                selectedView={selectedView}
+                setSelectedView={setSelectedView}/>
         </div>
     );
 }

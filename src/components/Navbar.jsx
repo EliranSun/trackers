@@ -1,5 +1,6 @@
 import { TrackerIcons, TrackerNames } from "../constants";
 import classNames from "classnames";
+import { ArrowClockwise } from "@phosphor-icons/react";
 
 export const Navbar = ({ selectedView, setSelectedView }) => {
   return (
@@ -20,6 +21,13 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
           </button>
         );
       })}
+      <button
+        onClick={() => window.location.reload()}
+        className={classNames({
+          "p-4 text-white": true,
+        })}>
+        <ArrowClockwise/>
+      </button>
     </div>
   );
 };

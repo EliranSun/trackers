@@ -1,49 +1,62 @@
-import { useEffect, useMemo, useState } from "react";
-import { getData, setData } from "../utils/storage";
-import { KETO_KEY } from "../constants";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Measurement } from "./Measurement";
-import { isNumber } from "lodash";
-import { fetchFoodNutrition } from "../utils/api";
-import { KetoInput } from "./KetoInput";
-import classNames from "classnames";
 import { Measurements } from "./Measurements";
+import { getKetoLogs } from "../utils/db";
+import { isSameDay } from "date-fns";
+import { KetoEntry } from "./KetoEntry";
 
-export const KetoTable = ({ columns, date }) => {
-    const [localData, setLocalData] = useState(Object.values(getData(date, KETO_KEY)));
+export const KetoTable = ({ date }) => {
+    const [logs, setLogs] = useState([]);
+    
+    const fetch = useCallback(() => {
+      getKetoLogs(date).then(data => {
+        const filteredKetoLogs = data.filter(log => isSameDay(log.created_at, new Date())).reverse();
+        setLogs([
+          {
+            name: "",
+            calories: null,
+            protein: null,
+            carbs: null,
+            created_at: new Date(),
+          },
+          ...filteredKetoLogs,
+        ]);
+      });
+    }, [date]);
     
     useEffect(() => {
-      const newData = (getData(date, KETO_KEY));
-      setLocalData(Object.values(newData));
+      fetch();
     }, [date]);
     
     const caloriesSum = useMemo(() => {
-      return localData.reduce((acc, row) => {
+      return logs.reduce((acc, row) => {
         if (!row.calories) {
           return acc;
         }
         
         return acc + Number(row.calories);
       }, 0);
-    }, [localData]);
+    }, [logs]);
     
     const proteinSum = useMemo(() => {
-      return localData.reduce((acc, row) => {
+      return logs.reduce((acc, row) => {
         if (!row.protein) {
           return acc;
         }
         
         return acc + Number(row.protein);
       }, 0);
-    }, [localData]);
+    }, [logs]);
+    
     const carbsSum = useMemo(() => {
-      return localData.reduce((acc, row) => {
+      return logs.reduce((acc, row) => {
         if (!row.carbs) {
           return acc;
         }
         
         return acc + Number(row.carbs);
       }, 0);
-    }, [localData]);
+    }, [logs]);
     
     return (
       <div className="flex flex-col gap-2 rounded-3xl py-4">
@@ -62,33 +75,13 @@ export const KetoTable = ({ columns, date }) => {
             range={[0, 40]}/>
         </Measurements>
         <div className="h-full overflow-x-hidden overflow-y-auto">
-          {localData.concat({
-            name: "",
-            calories: null,
-            protein: null,
-            carbs: null,
-          }).map((row, index) => {
-            return (
-              <div
-                key={`${row.name}-${index}`}
-                className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full">
-                {columns.map(({ name: columnName, type }) => {
-                  const value = row[columnName];
-                  return (
-                    <div key={columnName} className="first-of-type:col-span-3">
-                      <KetoInput
-                        type={type}
-                        value={value}
-                        date={date}
-                        name={columnName}
-                        index={index}
-                        setLocalData={setLocalData}/>
-                    </div>
-                  )
-                })}
-              </div>
-            )
-          })}
+          {logs.map(data => (
+            <KetoEntry
+              data={data}
+              key={data.created_at}
+              onAddEntry={() => setTimeout(fetch, 3000)}
+            />
+          ))}
         </div>
       </div>
     )

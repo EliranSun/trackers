@@ -11,7 +11,7 @@ export const TrackerNames = {
   SLEEP: "Sleep",
   WEIGHT: "Weight",
   HOURLY: "Hourly",
-  SETTINGS: "Settings",
+  // SETTINGS: "Settings",
 };
 
 export const TrackerIcons = {
@@ -21,27 +21,11 @@ export const TrackerIcons = {
   [TrackerNames.WEIGHT]: Ruler,
   [TrackerNames.HOURLY]: Timer,
   [TrackerNames.SETTINGS]: GearSix,
-}
+};
 
-export const Tracker = [
-  {
-    name: TrackerNames.KETO,
-    component: KetoTable,
-    columns: [
-      { name: "name", type: "text" },
-      { name: "calories", type: "number" },
-      { name: "protein", type: "number" },
-      { name: "carbs", type: "number" },
-    ]
-    // component: (
-    //     <KetoTable
-    //         date={date}
-    //         columns={[
-    //             {name: "name", type: "text"},
-    //             {name: "calories", type: "number"},
-    //             {name: "protein", type: "number"},
-    //             {name: "carbs", type: "number"},
-    //         ]}/>
-    // )
-  }
-]
+export const KetoKeys = {
+  NAME: "name",
+  CALORIES: "calories",
+  PROTEIN: "protein",
+  CARBS: "carbs",
+};

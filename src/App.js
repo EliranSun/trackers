@@ -4,11 +4,12 @@ import { ONE_DAY, TrackerNames } from "./constants";
 import { Navbar } from "./components/Navbar";
 import { KetoTable } from "./components/KetoTable";
 import { RealityVsExpectationView } from "./components/RealityVsExpectationView";
-import { Settings } from "./components/Settings";
+import { format } from "date-fns";
 
 function App() {
   const [dateObject, setDateObject] = useState(new Date());
-  const [date, setDate] = useState(dateObject.toLocaleDateString("en-IL"));
+  const [dateDB, setDateDB] = useState(format(new Date(), "yyyy-MM-dd 00:00:00"));
+  const [dateLabel, setDateLabel] = useState(dateObject.toLocaleDateString("en-IL"));
   const [selectedView, setSelectedView] = useState(TrackerNames.KETO);
   
   return (
@@ -18,17 +19,19 @@ function App() {
           className="text-xl p-4 w-1/3"
           onClick={() => {
             const newDate = new Date(dateObject.getTime() - ONE_DAY);
-            setDate(newDate.toLocaleDateString("en-IL"));
+            setDateLabel(newDate.toLocaleDateString("en-IL"));
+            setDateDB(format(newDate, "yyyy-MM-dd 00:00:00"));
             setDateObject(newDate);
           }}>
           ◀
         </button>
-        <h1 className="">{date}</h1>
+        <h1 className="">{dateLabel}</h1>
         <button
           className="text-xl p-4 w-1/3"
           onClick={() => {
             const newDate = new Date(dateObject.getTime() + ONE_DAY);
-            setDate(newDate.toLocaleDateString("en-IL"));
+            setDateLabel(newDate.toLocaleDateString("en-IL"));
+            setDateDB(format(newDate, "yyyy-MM-dd 00:00:00"));
             setDateObject(newDate);
           }}>
           ▶
@@ -37,7 +40,7 @@ function App() {
       <div className="pt-16 pb-48">
         {selectedView === TrackerNames.KETO
           ? <KetoTable
-            date={date}
+            date={dateDB}
             columns={[
               { name: "name", type: "text" },
               { name: "calories", type: "number" },
@@ -45,9 +48,9 @@ function App() {
               { name: "carbs", type: "number" },
             ]}/> : null}
         {selectedView === TrackerNames.HOURLY
-          ? <RealityVsExpectationView date={date}/> : null}
-        {selectedView === TrackerNames.SETTINGS
-          ? <Settings/> : null}
+          ? <RealityVsExpectationView date={dateDB}/> : null}
+        {/*{selectedView === TrackerNames.SETTINGS*/}
+        {/*  ? <Settings/> : null}*/}
       </div>
       <Navbar
         selectedView={selectedView}

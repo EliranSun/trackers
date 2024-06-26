@@ -40,7 +40,8 @@ export const KetoEntry = ({ data, onAddEntry }) => {
   useEffect(() => {
     const dataChanged = name !== data.name || macros.calories !== data.calories || macros.protein !== data.protein || macros.carbs !== data.carbs;
     if (!name || !dataChanged || !isNumber(macros.calories) || !isNumber(macros.protein) || !isNumber(macros.carbs)) {
-      return
+      alert(JSON.stringify({ name, dataChanged, macros }));
+      return;
     }
     
     addKetoLog({ name, ...macros })

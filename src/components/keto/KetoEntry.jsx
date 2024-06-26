@@ -66,21 +66,21 @@ export const KetoEntry = ({ data, onAddEntry }) => {
         type="number"
         name={KetoKeys.CALORIES}
         value={macros.calories}
-        onChange={value => setMacros(prev => { ...prev, calories: value })}
+        onChange={value => setMacros(prev => ({ ...prev, calories: value }))}
         onBlur={value => updateMacro(KetoKeys.CALORIES, value)}
       />
       <KetoInput
         type="number"
         name={KetoKeys.PROTEIN}
         value={macros.protein}
-        onChange={value => setMacros(prev => { ...prev, protein: value })}
+        onChange={value => setMacros(prev => ({ ...prev, protein: value }))}
         onBlur={value => updateMacro(KetoKeys.PROTEIN, value)}
       />
       <KetoInput
         type="number"
         name={KetoKeys.CARBS}
         value={macros.carbs}
-        onChange={value => setMacros(prev => { ...prev, carbs: value })}
+        onChange={value => setMacros(prev => ({ ...prev, carbs: value }))}
         onBlur={value => updateMacro(KetoKeys.CARBS, value)}
       />
     </div>

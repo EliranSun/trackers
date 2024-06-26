@@ -13,7 +13,7 @@ function App() {
   const [selectedView, setSelectedView] = useState(TrackerNames.KETO);
   
   return (
-    <div className="w-full h-screen bg-gray-900 overflow-x-hidden p-4">
+    <div className="w-screen h-screen bg-gray-900 m-auto flex flex-col items-center overflow-x-hidden p-4">
       <div className="fixed top-0 z-10 bg-gray-900 h-16 left-0 w-screen flex justify-evenly items-center">
         <button
           className="text-xl p-4 w-1/3"

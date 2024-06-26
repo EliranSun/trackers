@@ -79,6 +79,7 @@ export const KetoTable = ({date}) => {
                     {logs.map(data => (
                         <KetoEntry
                             data={data}
+                                date={date}
                             key={data.created_at}
                             onAddEntry={() => setTimeout(fetch, 3000)}
                         />

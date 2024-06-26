@@ -31,14 +31,14 @@ export const KetoEntry = ({data, onAddEntry}) => {
 
             console.info("Adding to DB", name, newMacros);
             
-            addKetoLog({name, ...newMacros})
+            addKetoLog(date, {name, ...newMacros})
                 .then(data => {
                     console.info("add keto log success!", {data});
                     onAddEntry();
                 })
                 .catch(error => console.error("add keto log error!", {error}));
         }
-    }, [name, macros]);
+    }, [name, date, macros]);
 
     const updateMacro = useCallback((key, value) => {
         if (isNumber(data[key])) {

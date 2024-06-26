@@ -5,7 +5,7 @@ import {fetchFoodNutrition} from "../../utils/api";
 import {isNumber} from "lodash";
 import {KetoKeys} from "../../constants";
 
-export const KetoEntry = ({data, onAddEntry}) => {
+export const KetoEntry = ({data, date, onAddEntry}) => {
     const [name, setName] = useState(data.name || "");
     const [macros, setMacros] = useState({
         calories: null,

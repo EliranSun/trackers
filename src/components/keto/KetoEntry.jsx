@@ -7,21 +7,27 @@ import { KetoKeys } from "../../constants";
 
 export const KetoEntry = ({ data, onAddEntry }) => {
   const [name, setName] = useState(data.name || "");
-  const [calories, setCalories] = useState(data.calories || null);
-  const [protein, setProtein] = useState(data.protein || null);
-  const [carbs, setCarbs] = useState(data.carbs || null);
-  
+  const [macros, setMacros] = useState({
+    calories: null,
+    carbs: null,
+    protein: null,
+  });
+    
   const updateMacrosWithAI = useCallback(async () => {
-    const hasMissingData = !isNumber(calories) || !isNumber(protein) || !isNumber(carbs);
+    const hasMissingData = 
+    !isNumber(macros.calories) || 
+    !isNumber(macros.protein) || 
+    !isNumber(macros.carbs);
     
     if (hasMissingData) {
       const nutrition = await fetchFoodNutrition(name);
-      
-      !isNumber(calories) && setCalories(nutrition.calories);
-      !isNumber(protein) && setProtein(nutrition.protein);
-      !isNumber(carbs) && setCarbs(nutrition.carbs);
+      setMacros({
+        calories: nutrition.calories,
+        carbs: nutrition.carbs,
+        protein: nutrition.protein
+      });
     }
-  }, [calories, carbs, name, protein]);
+  }, [name, macros]);
   
   const updateMacro = useCallback((key, value) => {
     if (isNumber(data[key])) {
@@ -37,13 +43,13 @@ export const KetoEntry = ({ data, onAddEntry }) => {
       return
     }
     
-    addKetoLog({ name, calories, protein, carbs })
+    addKetoLog({ name, ...macros })
       .then(data => {
         console.info("add keto log success!", { data });
         onAddEntry();
       })
       .catch(error => console.error("add keto log error!", { error }));
-  }, [calories, carbs, data.calories, data.carbs, data.name, data.protein, name, protein]);
+  }, [macros, data, name]);
   
   return (
     <div className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full">
@@ -59,22 +65,22 @@ export const KetoEntry = ({ data, onAddEntry }) => {
       <KetoInput
         type="number"
         name={KetoKeys.CALORIES}
-        value={calories}
-        onChange={setCalories}
+        value={macros.calories}
+        onChange={value => setMacros(prev => { ...prev, calories: value })}
         onBlur={value => updateMacro(KetoKeys.CALORIES, value)}
       />
       <KetoInput
         type="number"
         name={KetoKeys.PROTEIN}
-        value={protein}
-        onChange={setProtein}
+        value={macros.protein}
+        onChange={value => setMacros(prev => { ...prev, protein: value })}
         onBlur={value => updateMacro(KetoKeys.PROTEIN, value)}
       />
       <KetoInput
         type="number"
         name={KetoKeys.CARBS}
-        value={carbs}
-        onChange={setCarbs}
+        value={macros.carbs}
+        onChange={value => setMacros(prev => { ...prev, carbs: value })}
         onBlur={value => updateMacro(KetoKeys.CARBS, value)}
       />
     </div>

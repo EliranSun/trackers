@@ -23,7 +23,7 @@ export const RealityVsExpectationView = (props) => {
         <section className="flex flex-col w-screen gap-1">
             {hours.map(hour => (
             <div className="flex gap-1 w-full">
-            <div className="w-1/4 p-2 bg-white/10">
+            <div className="w-1/6 p-2 bg-white/10">
                 {hour}
             </div>
             <div className="flex flex-col gap-px">

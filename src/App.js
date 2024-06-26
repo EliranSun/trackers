@@ -1,9 +1,9 @@
 import './App.css';
 import { useState } from "react";
 import { ONE_DAY, TrackerNames } from "./constants";
-import { Navbar } from "./components/Navbar";
-import { KetoTable } from "./components/KetoTable";
-import { RealityVsExpectationView } from "./components/RealityVsExpectationView";
+import { Navbar } from "./components/atoms/Navbar";
+import { KetoTable } from "./components/keto/KetoTable";
+import { HourlyView } from "./components/hourly/HourlyView";
 import { format } from "date-fns";
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
               { name: "carbs", type: "number" },
             ]}/> : null}
         {selectedView === TrackerNames.HOURLY
-          ? <RealityVsExpectationView date={dateDB}/> : null}
+          ? <HourlyView date={dateLabel}/> : null}
         {/*{selectedView === TrackerNames.SETTINGS*/}
         {/*  ? <Settings/> : null}*/}
       </div>

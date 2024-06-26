@@ -13,7 +13,6 @@ export async function getKetoLogs(date) {
   const { data } = await supabase
     .from(DbTables.KETO_LOGS)
     .select("*")
-    // 2024-06-26 12:07:25.275906+00
     .gte("created_at", format(date, "yyyy-MM-dd 00:00:00"))
     .lt("created_at", format(addDays(date, 1), "yyyy-MM-dd 00:00:00"))
   
@@ -33,12 +32,15 @@ export async function addKetoLog(log) {
 }
 
 export async function editKetoLog(id, log) {
-  const { data, error } = await supabase.from(DbTables.KETO_LOGS).update({
-    name: log.name,
-    calories: log.calories,
-    protein: log.protein,
-    carbs: log.carbs,
-  }).eq('id', id);
+  const { data, error } = await supabase
+    .from(DbTables.KETO_LOGS)
+    .update({
+      name: log.name,
+      calories: log.calories,
+      protein: log.protein,
+      carbs: log.carbs,
+    })
+    .eq('id', id);
   
   return data;
 };
@@ -47,22 +49,32 @@ export async function getHourlyLogs(date) {
   const { data } = await supabase
     .from(DbTables.HOURLY_LOGS)
     .select("*")
-    .gte("created_at", format(date, "yyyy-MM-dd 00:00:00"))
-    .lt("created_at", format(addDays(date, 1), "yyyy-MM-dd 00:00:00"))
+    .eq("date", date);
   
   return data;
 }
 
 export async function InstantiateHours(date, hours) {
-  const { data, error } = await supabase.from(DbTables.HOURLY_LOGS).insert(hours.map(hour => ({ hour })));
+  const { data, error } = await supabase.from(DbTables.HOURLY_LOGS).insert(hours.map(hour => ({
+    hour,
+    date,
+  })));
+  
   return data;
 }
 
 export async function updateExpectation(date, hour, text) {
   const { data, error } = await supabase.from(DbTables.HOURLY_LOGS).update({ expectation: text })
     .eq('hour', hour)
-    .gte("created_at", format(date, "yyyy-MM-dd 00:00:00"))
-    .lt("created_at", format(addDays(date, 1), "yyyy-MM-dd 00:00:00"));
+    .eq('date', date);
+  
+  return data;
+}
+
+export async function updateReality(date, hour, text) {
+  const { data, error } = await supabase.from(DbTables.HOURLY_LOGS).update({ reality: text })
+    .eq('hour', hour)
+    .eq('date', date);
   
   return data;
 }

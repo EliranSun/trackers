@@ -1,9 +1,9 @@
 import { KetoInput } from "./KetoInput";
-import { addKetoLog, editKetoLog } from "../utils/db";
+import { addKetoLog, editKetoLog } from "../../utils/db";
 import { useCallback, useEffect, useState } from "react";
-import { fetchFoodNutrition } from "../utils/api";
+import { fetchFoodNutrition } from "../../utils/api";
 import { isNumber } from "lodash";
-import { KetoKeys } from "../constants";
+import { KetoKeys } from "../../constants";
 
 export const KetoEntry = ({ data, onAddEntry }) => {
   const [name, setName] = useState(data.name || "");

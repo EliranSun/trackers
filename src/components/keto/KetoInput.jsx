@@ -1,4 +1,4 @@
-import { KETO_KEY, KetoKeys } from "../constants";
+import { KETO_KEY, KetoKeys } from "../../constants";
 import classNames from "classnames";
 
 export const KetoInput = ({ className, placeholder, type, value, name, onChange, onBlur }) => {

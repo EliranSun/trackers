@@ -1,4 +1,4 @@
-import { TrackerIcons, TrackerNames } from "../constants";
+import { TrackerIcons, TrackerNames } from "../../constants";
 import classNames from "classnames";
 import { ArrowClockwise } from "@phosphor-icons/react";
 

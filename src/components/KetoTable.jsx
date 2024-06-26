@@ -45,11 +45,11 @@ export const KetoTable = ({columns, date}) => {
         }, [localData]);
 
         return (
-            <div className="flex flex-col gap-2 rounded-3xl p-4 bg-gray-800">
+            <div className="flex flex-col gap-2 rounded-3xl p-4">
                 <div className={classNames({
-                        "m-auto": true,
-                        "backdrop-blur rounded-3xl bg-gray-700 shadow-xl": true,
-                    "w-fit h-20 flex items-center gap-10 p-4": true,
+                    "m-auto": true,
+                    "backdrop-blur rounded-full bg-gray-700 shadow-xl": true,
+                    "w-fit h-20 flex items-center gap-10 py-4 px-10": true,
                     "fixed bottom-32 inset-x-0 ": false,
                 })}>
                     <Measurement
@@ -75,17 +75,16 @@ export const KetoTable = ({columns, date}) => {
                         return (
                             <div
                                 key={`${row.name}-${index}`}
-                                className="bg-gray-700 my-4 p-4 grid grid-cols-3 gap-4 max-w-screen-sm rounded-lg w-full">
+                                className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full">
                                 {columns.map(({name: columnName, type}) => {
                                     const value = row[columnName];
                                     return (
                                         <div key={columnName} className="first-of-type:col-span-3">
-                                            {columnName}
                                             <KetoInput
                                                 type={type}
                                                 value={value}
                                                 date={date}
-                                                columnName={columnName}
+                                                name={columnName}
                                                 index={index}
                                                 setLocalData={setLocalData}/>
                                         </div>

@@ -4,6 +4,7 @@ import { ONE_DAY, TrackerNames } from "./constants";
 import { Navbar } from "./components/Navbar";
 import { KetoTable } from "./components/KetoTable";
 import { RealityVsExpectationView } from "./components/RealityVsExpectationView";
+import { Settings } from "./components/Settings";
 
 function App() {
   const [dateObject, setDateObject] = useState(new Date());
@@ -45,6 +46,8 @@ function App() {
             ]}/> : null}
         {selectedView === TrackerNames.HOURLY
           ? <RealityVsExpectationView date={date}/> : null}
+        {selectedView === TrackerNames.SETTINGS
+          ? <Settings/> : null}
       </div>
       <Navbar
         selectedView={selectedView}

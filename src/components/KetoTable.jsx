@@ -48,7 +48,7 @@ export const KetoTable = ({columns, date}) => {
             <div className="flex flex-col gap-2">
                 <div className={classNames({
                         "backdrop-blur bg-white/10": true,
-                    "w-full h-20 flex justify-center gap-10 p-4": true,
+                    "w-full h-20 flex justify-center items-center gap-10 p-4": true,
                     "fixed bottom-32 inset-x-0 m-auto": true,
                 })}>
                     <Measurement

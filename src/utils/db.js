@@ -12,9 +12,10 @@ export async function getKetoLogs(date) {
     const {data} = await supabase
         .from(DbTables.KETO_LOGS)
         .select("*")
-        .eq("date", date);
+        .eq("date", date)
+        .order("id", {ascending: false});
 
-alert(data);
+    console.log({date, data});
     return data;
 }
 

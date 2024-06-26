@@ -8,9 +8,9 @@ import {KetoKeys} from "../../constants";
 export const KetoEntry = ({data, date, onAddEntry}) => {
     const [name, setName] = useState(data.name || "");
     const [macros, setMacros] = useState({
-        calories: null,
-        carbs: null,
-        protein: null,
+        calories: data.calories || null,
+        carbs: data.carbs || null,
+        protein: data.protein || null,
     });
 
     const updateMacrosWithAI = useCallback(async () => {
@@ -30,7 +30,7 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
             setMacros(newMacros);
 
             console.info("Adding to DB", name, newMacros);
-            
+
             addKetoLog(date, {name, ...newMacros})
                 .then(data => {
                     console.info("add keto log success!", {data});

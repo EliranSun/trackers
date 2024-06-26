@@ -10,8 +10,6 @@ export const KetoTable = ({date}) => {
 
         const fetch = useCallback(() => {
             getKetoLogs(date).then(data => {
-                const filteredKetoLogs = data.filter(log => isSameDay(log.created_at, date)).reverse();
-
                 setLogs([
                     {
                         name: "",
@@ -20,7 +18,7 @@ export const KetoTable = ({date}) => {
                         carbs: null,
                         created_at: new Date(),
                     },
-                    ...filteredKetoLogs,
+                    ...data,
                 ]);
             });
         }, [date]);
@@ -79,7 +77,7 @@ export const KetoTable = ({date}) => {
                     {logs.map(data => (
                         <KetoEntry
                             data={data}
-                                date={date}
+                            date={date}
                             key={data.created_at}
                             onAddEntry={() => setTimeout(fetch, 3000)}
                         />

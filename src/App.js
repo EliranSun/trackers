@@ -12,7 +12,7 @@ function App() {
 
     return (
         <div className="w-full h-full overflow-x-hidden p-4">
-            <div className="fixed top-0 h-16 left-0 w-screen bg-gray-700 flex justify-evenly items-center">
+            <div className="fixed top-0 h-16 left-0 w-screen flex justify-evenly items-center">
                 <button
                     className="text-xl p-4 bg-black w-1/3"
                     onClick={() => {

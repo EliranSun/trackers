@@ -47,9 +47,10 @@ export const KetoTable = ({columns, date}) => {
         return (
             <div className="flex flex-col gap-2">
                 <div className={classNames({
-                        "backdrop-blur rounded-full bg-white/10": true,
+                        "m-auto": true,
+                        "backdrop-blur rounded-2xl bg-gray-600 shadow-xl": true,
                     "w-fit h-20 flex justify-center items-center gap-10 p-4": true,
-                    "fixed bottom-32 inset-x-0 m-auto": true,
+                    "fixed bottom-32 inset-x-0 ": false,
                 })}>
                     <Measurement
                         name="Calories"

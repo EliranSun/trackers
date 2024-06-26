@@ -40,7 +40,7 @@ function App() {
       <div className="pt-16 pb-48">
         {selectedView === TrackerNames.KETO
           ? <KetoTable
-            date={dateDB}
+            date={dateLabel}
             columns={[
               { name: "name", type: "text" },
               { name: "calories", type: "number" },

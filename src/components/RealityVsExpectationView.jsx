@@ -20,10 +20,11 @@ const HourlyTypes = {
 
 export const RealityVsExpectationView = (props) => {
     return (
-        <section className="grid grid-cols-4 items-start w-screen gap-1">
+        <section className="flex items-start w-screen gap-1">
             <div className="p-2 bg-white/10">
                 {hours.map(hour => <div key={hour}>{hour}</div>)}
             </div>
+            <div className="flex flex-col gap-px">
             <div className="">
                 {hours.map(hour =>
                     <div key={`${hour}-expectation`} className="bg-white/10">
@@ -35,6 +36,7 @@ export const RealityVsExpectationView = (props) => {
                     <div key={`${hour}-reality`} className="bg-white/10">
                         <input type="text" className="w-full h-full bg-transparent"/>
                     </div>)}
+            </div>
             </div>
             <div className="p-2 bg-white/10">
                 {hours.map(hour => <div key={`${hour}-match}`}>

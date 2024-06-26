@@ -45,7 +45,7 @@ export const KetoTable = ({columns, date}) => {
         }, [localData]);
 
         return (
-            <div className="flex flex-col gap-2 rounded-3xl p-4">
+            <div className="flex flex-col gap-2 rounded-3xl py-4">
                 <div className={classNames({
                     "m-auto": true,
                     "backdrop-blur rounded-full bg-gray-700 shadow-xl": true,

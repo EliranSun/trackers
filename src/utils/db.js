@@ -9,6 +9,7 @@ const DbTables = {
 };
 
 export async function getKetoLogs(date) {
+    alert(date);
     const {data} = await supabase
         .from(DbTables.KETO_LOGS)
         .select("*")

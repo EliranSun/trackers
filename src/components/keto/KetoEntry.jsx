@@ -29,7 +29,7 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
 
             setMacros(newMacros);
 
-            alert(JSON.stringify({ m: "Adding to DB", name, newMacros });
+            alert(JSON.stringify({ m: "Adding to DB", name, newMacros }));
 
             addKetoLog(date, {name, ...newMacros})
                 .then(data => {

@@ -7,10 +7,10 @@ export const ONE_DAY = 1000 * 60 * 60 * 24;
 
 export const TrackerNames = {
   KETO: "Keto",
+  HOURLY: "Hourly",
+  WEIGHT: "Weight",
   NO_PRON: "NoPron",
   SLEEP: "Sleep",
-  WEIGHT: "Weight",
-  HOURLY: "Hourly",
   // SETTINGS: "Settings",
 };
 

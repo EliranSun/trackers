@@ -40,6 +40,29 @@ export async function editKetoLog(id, log) {
     carbs: log.carbs,
   }).eq('id', id);
   
-  console.log({ data, error });
+  return data;
+};
+
+export async function getHourlyLogs(date) {
+  const { data } = await supabase
+    .from(DbTables.HOURLY_LOGS)
+    .select("*")
+    .gte("created_at", format(date, "yyyy-MM-dd 00:00:00"))
+    .lt("created_at", format(addDays(date, 1), "yyyy-MM-dd 00:00:00"))
+  
+  return data;
+}
+
+export async function InstantiateHours(date, hours) {
+  const { data, error } = await supabase.from(DbTables.HOURLY_LOGS).insert(hours.map(hour => ({ hour })));
+  return data;
+}
+
+export async function updateExpectation(date, hour, text) {
+  const { data, error } = await supabase.from(DbTables.HOURLY_LOGS).update({ expectation: text })
+    .eq('hour', hour)
+    .gte("created_at", format(date, "yyyy-MM-dd 00:00:00"))
+    .lt("created_at", format(addDays(date, 1), "yyyy-MM-dd 00:00:00"));
+  
   return data;
 }

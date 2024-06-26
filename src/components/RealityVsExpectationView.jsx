@@ -1,11 +1,10 @@
 import classNames from "classnames";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Measurements } from "./Measurements";
 import { Measurement } from "./Measurement";
-import { setData } from "../utils/storage";
-import { TrackerNames } from "../constants";
+import { getHourlyLogs, InstantiateHours, updateExpectation } from "../utils/db";
 
-const hours = new Array(24).fill(0).map((_, i) => {
+const getHours = () => new Array(24).fill(0).map((_, i) => {
   const adjustedIndex = i + 7;
   
   if (adjustedIndex > 23) {
@@ -25,13 +24,11 @@ const HourlyTypes = {
   FULFILLED: "Fulfilled"
 };
 
-const EXPECTATION_ENTRY_KEY = "expectation";
-const REALITY_ENTRY_KEY = "reality";
 
-const Entry = ({ date, hour, rowIndex, onEntryComplete }) => {
+const Entry = ({ hour, reality, expectation, onEntryComplete }) => {
   const [status, setStatus] = useState(HourlyTypes.UNKNOWN);
-  const [reality, setReality] = useState("");
-  const [expectation, setExpectation] = useState("");
+  const [reality, setReality] = useState(reality || "");
+  const [expectation, setExpectation] = useState(expectation || "");
   
   return (
     <div className="flex gap-1 w-full">
@@ -43,22 +40,29 @@ const Entry = ({ date, hour, rowIndex, onEntryComplete }) => {
           <input
             type="text"
             className="w-full h-full bg-transparent"
-            onBlur={(event) => {
-              const key = TrackerNames.HOURLY.toLowerCase();
+            value={expectation}
+            onChange={event => {
               const value = event.target.value;
-              setData(date, key, rowIndex, EXPECTATION_ENTRY_KEY, value);
               setExpectation(value);
+            }}
+            onBlur={(event) => {
+              const value = event.target.value;
+              updateExpectation(date, hour, value)
+                .then(data => console.info("Updated expectation", data))
+                .catch(error => console.error("Failed to update expectation", error));
             }}/>
         </div>
         <div key={`${hour}-reality`} className="bg-white/10 h-16 px-2">
           <input
             type="text"
             className="w-full h-full bg-transparent"
-            onBlur={event => {
-              const key = TrackerNames.HOURLY.toLowerCase();
+            value={reality}
+            onChange={event => {
               const value = event.target.value;
-              setData(date, key, rowIndex, REALITY_ENTRY_KEY, value);
               setReality(value);
+            }}
+            onBlur={event => {
+              const value = event.target.value;
               const newStatus = value === expectation ? HourlyTypes.FULFILLED : HourlyTypes.MISMATCH;
               setStatus(newStatus);
               onEntryComplete(newStatus);
@@ -76,6 +80,28 @@ const Entry = ({ date, hour, rowIndex, onEntryComplete }) => {
 
 export const RealityVsExpectationView = ({ date }) => {
   const [fulfilledPercentage, setFulfilledPercentage] = useState(0);
+  const [hourlyData, setHourlyData] = useState(getHours().map(hour => ({
+    hour,
+    reality: "",
+    expectation: "",
+  })));
+  
+  const fetch = useCallback(async () => {
+    getHourlyLogs(date).then(data => {
+      if (data.length === 0) {
+        console.info(`No data found for ${date} Instantiating hours...`);
+        InstantiateHours(date, getHours());
+      } else {
+        console.info(`Fetched hourly data for ${date}`, data);
+        setHourlyData(data);
+      }
+    });
+  }, [date]);
+  
+  useEffect(() => {
+    fetch();
+  }, [date]);
+  
   return (
     <section className="flex flex-col w-screen px-4 gap-1">
       <Measurements>
@@ -92,11 +118,11 @@ export const RealityVsExpectationView = ({ date }) => {
           value={100 - fulfilledPercentage}
           range={[-1, 0]}/>
       </Measurements>
-      {hours.map((hour, index) =>
+      {hourlyData.map(({ hour, reality, expectation }) =>
         <Entry
           hour={hour}
-          date={date}
-          rowIndex={index}
+          reality={reality}
+          expectation={expectation}
           onEntryComplete={(status) => {
             if (status === HourlyTypes.FULFILLED) {
               setFulfilledPercentage(prev => prev + 1);

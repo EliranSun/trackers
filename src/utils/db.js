@@ -12,8 +12,7 @@ export async function getKetoLogs(date) {
     const {data} = await supabase
         .from(DbTables.KETO_LOGS)
         .select("*")
-        .gte("created_at", format(date, "yyyy-MM-dd 00:00:00"))
-        .lt("created_at", format(addDays(date, 1), "yyyy-MM-dd 00:00:00"))
+        .eq("date", date);
 
     return data;
 }

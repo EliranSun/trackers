@@ -130,11 +130,11 @@ export const KetoEntry = ({ date, refetch, name: initName, calories, id, protein
           })}>
           <Brain size={32} className=""/>
         </div> : null}
-      <div className="bg-black text-xs text-white font-mono w-full h-20  overflow-y-auto">
-        {messages.map(messages => {
-          return <pre className="overflow-x-auto w-96 py-1">{messages}</pre>
-        })}
-      </div>
+      {/*<div className="bg-black text-xs text-white font-mono w-full h-20  overflow-y-auto">*/}
+      {/*  {messages.map(messages => {*/}
+      {/*    return <pre className="overflow-x-auto w-96 py-1">{messages}</pre>*/}
+      {/*  })}*/}
+      {/*</div>*/}
     </>
   )
 }

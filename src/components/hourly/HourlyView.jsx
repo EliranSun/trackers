@@ -69,10 +69,6 @@ export const HourlyView = ({ date }) => {
           name="Mismatch"
           value={mismatchPercentage}
           range={[-1, 0]}/>
-        {/*<Measurement*/}
-        {/*  name="Unknown"*/}
-        {/*  value={100 - fulfilledPercentage}*/}
-        {/*  range={[-1, 0]}/>*/}
       </Measurements>
       <div className="flex flex-col gap-2">
         {hourlyData.map(({ hour, reality, expectation }) =>

@@ -50,10 +50,15 @@ export const KetoEntry = ({ date, refetch, name: initName, calories, id, protein
       const log = { name, ...newMacros };
       addMessage(`New log: ${JSON.stringify({ date, log })}`);
       
+      if (!log.name || (!log.carbs && !log.calories && !log.carbs)) {
+        addMessage(`Missing required params ${JSON.stringify(log)}`);
+        return;
+      }
+      
       addKetoLog(date, log)
         .then(() => {
           addMessage("add keto log success!");
-          // refetch();
+          refetch();
         })
         .catch(error => addMessage("add keto log error! " + error.message))
         .finally(() => setIsThinking(false));

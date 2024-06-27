@@ -17,6 +17,7 @@ export const KetoTable = ({date}) => {
                         protein: null,
                         carbs: null,
                         created_at: new Date(),
+                        isNew: true,
                     },
                     ...data,
                 ]);
@@ -76,10 +77,17 @@ export const KetoTable = ({date}) => {
                 <div className="h-full overflow-x-hidden overflow-y-auto">
                     {logs.map(data => (
                         <KetoEntry
-                            data={data}
                             date={date}
+                            isNew={data.isNew}
+                            id={data.id}
+                            name={data.name}
+                            calories={data.calories}
+                            protein={data.protein}
+                            carbs={data.carbs}
                             key={data.created_at}
-                            onAddEntry={() => setTimeout(fetch, 3000)}
+                            refetch={async () => {
+                                await fetch();
+                            }}
                         />
                     ))}
                 </div>

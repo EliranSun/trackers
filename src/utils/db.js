@@ -29,6 +29,15 @@ export async function addKetoLog(date, log) {
     });
 
     console.log({data, error});
+    return {data, error};
+}
+
+export async function deleteKetoLog(id) {
+    const {data, error} = await supabase
+        .from(DbTables.KETO_LOGS)
+        .delete()
+        .eq('id', id);
+
     return data;
 }
 

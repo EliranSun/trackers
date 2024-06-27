@@ -5,6 +5,7 @@ export const fetchFoodNutrition = async (food) => {
     url.searchParams.append("food", food);
 
     if (process.env.NODE_ENV === "development") {
+        await new Promise(resolve => setTimeout(resolve, 3000));
         return {
             "calories": Math.round(Math.random() * 1000),
             "protein": Math.round(Math.random() * 100),

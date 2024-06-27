@@ -133,6 +133,7 @@ export async function getWeightLogs(date) {
     console.error(error);
     throw new Error("Get weight logs failed");
   }
+  
   return data;
 }
 

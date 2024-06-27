@@ -2,40 +2,43 @@ import { useCallback, useEffect, useState } from "react";
 import { addWeightLog, editWeightLog, getWeightLogs } from "../utils/db";
 
 export const useWeightLogs = (date) => {
-  const [weightLogs, setWeightLogs] = useState([]);
+  const [currentLog, setWeightLogs] = useState({
+    weight: 0,
+    fat: 0,
+    date: "",
+  });
   
   useEffect(() => {
     getWeightLogs(date)
-      .then(data => setWeightLogs(data))
+      .then(data => {
+        if (!data[0]) {
+          setWeightLogs({
+            weight: 0,
+            fat: 0,
+            date: date,
+          });
+          return;
+        }
+        
+        setWeightLogs(data[0]);
+      })
       .catch(error => console.error("Error getting weight logs", error))
   }, [date]);
   
   const addLog = useCallback(async (log) => {
-    const { data, error } = await addWeightLog(date, log);
-    
-    if (error) {
-      console.error("Error adding weight log", error);
-      return;
-    }
-    
-    setWeightLogs([data, ...weightLogs]);
-  }, [date, weightLogs]);
+    const data = await addWeightLog(date, log);
+    setWeightLogs(data);
+  }, [date]);
   
   const editLog = useCallback(async (id, editedLog) => {
-    const { data, error } = await editWeightLog(id, editedLog);
-    
-    if (error) {
-      console.error("Error adding weight log", error);
-      return;
-    }
-    
-    const updatedLogs = weightLogs.map(log => log.id === id ? data : log);
-    setWeightLogs(updatedLogs);
-  }, [weightLogs]);
+    const data = await editWeightLog(id, editedLog);
+    setWeightLogs(data);
+  }, []);
   
   return {
-    logs: weightLogs,
+    currentLog,
     addLog,
-    editLog
+    editLog,
+    refetch: () => getWeightLogs(date).then(data => setWeightLogs(data[0])),
   };
 }

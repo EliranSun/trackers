@@ -8,15 +8,15 @@ export const TrackerNames = {
   KETO: "Keto",
   HOURLY: "Hourly",
   WEIGHT: "Weight",
-  NO_PRON: "NoPron",
-  SLEEP: "Sleep",
+  // NO_PRON: "NoPron",
+  // SLEEP: "Sleep",
   // SETTINGS: "Settings",
 };
 
 export const TrackerIcons = {
   [TrackerNames.KETO]: Egg,
-  [TrackerNames.NO_PRON]: SmileyXEyes,
-  [TrackerNames.SLEEP]: Bed,
+  // [TrackerNames.NO_PRON]: SmileyXEyes,
+  // [TrackerNames.SLEEP]: Bed,
   [TrackerNames.WEIGHT]: Ruler,
   [TrackerNames.HOURLY]: Timer,
   // [TrackerNames.SETTINGS]: GearSix,

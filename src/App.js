@@ -4,7 +4,7 @@ import { TrackerNames } from "./constants";
 import { Navbar } from "./components/atoms/Navbar";
 import { KetoTable } from "./components/keto/KetoTable";
 import { HourlyView } from "./components/hourly/HourlyView";
-import { DatePagination } from "./components/atoms/DatePagination";
+import { DateNavigation } from "./components/atoms/DateNavigation";
 import { WeightView } from "./components/weight/WeightView";
 
 const ViewComponent = {
@@ -20,8 +20,8 @@ function App() {
   const View = ViewComponent[selectedView];
   
   return (
-    <div className="w-screen h-screen bg-gray-900 m-auto flex flex-col items-center overflow-x-hidden p-4">
-      <DatePagination
+    <div className="w-screen h-screen bg-gray-900 m-auto flex flex-col items-center overflow-x-hidden px-4">
+      <DateNavigation
         dateObject={dateObject}
         setDateObject={setDateObject}
         dateLabel={dateLabel}

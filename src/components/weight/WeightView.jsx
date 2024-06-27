@@ -1,52 +1,58 @@
 import { useWeightLogs } from "../../hooks/useWeightLogs";
 import { useState } from "react";
 
+const Metrics = ({ children }) => {
+  return (
+    <div className="w-full bg-gray-700 my-4 p-2 flex flex-col gap-4 rounded-xl shadow">
+      {children}
+    </div>
+  );
+};
+
+const MetricInput = ({ value, onChange, label }) => {
+  return (
+    <div className="flex flex-col bg-gray-600 rounded-lg items-center relative">
+      <input
+        value={value}
+        type="number"
+        className="bg-transparent text-8xl w-full text-center"
+        onChange={event => onChange(Number(event.target.value))}
+      />
+      <label className="text-xl">{label}</label>
+    </div>
+  );
+};
 export const WeightView = ({ date }) => {
-  const { logs, addLog, editLog } = useWeightLogs(date);
-  const [newLog, setNewLog] = useState({ weight: 75, fat: 20 });
+  const { currentLog, addLog, editLog, refetch } = useWeightLogs(date);
+  const [newLog, setNewLog] = useState({ weight: 0, fat: 0 });
   
   return (
-    <section className="flex flex-col justify-center">
+    <section className="flex flex-col justify-center w-screen px-4">
       <div className="flex flex-col items-center">
-        <div className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full shadow">
-          <input
-            type="number"
-            className="col-span-3"
-            value={newLog.weight}
-            onChange={event => setNewLog({ ...newLog, weight: Number(event.target.value) })}
-          />
-          <label className="col-span-3">Weight</label>
-          <input
-            type="number"
-            className="col-span-3"
-            value={newLog.fat}
-            onChange={event => setNewLog({ ...newLog, fat: Number(event.target.value) })}
-          />
-          <label className="col-span-3">%</label>
-        </div>
-        <button onClick={() => addLog(newLog)}>
-          🪵 LOG IT!
+        <Metrics>
+          <MetricInput
+            value={currentLog.weight || newLog.weight}
+            onChange={value => setNewLog({ ...newLog, weight: value })}
+            label="Weight"/>
+          <MetricInput
+            value={currentLog.fat || newLog.fat}
+            onChange={value => setNewLog({ ...newLog, fat: value })}
+            label="% Fat"/>
+        </Metrics>
+        <button
+          disabled={newLog.weight === 0 || newLog.fat === 0}
+          className="text-4xl bg-black rounded-full py-4 px-8 disabled:opacity-30 disabled:grayscale"
+          onClick={async () => {
+            if (currentLog.weight || currentLog.fat) {
+              await editLog(currentLog.id, newLog);
+              return;
+            }
+            
+            await addLog(newLog);
+            await refetch();
+          }}>
+          {(currentLog.weight || currentLog.fat) ? "🪵LOGGED" : "🪵LOG IT!"}
         </button>
-        {logs.map(log => (
-          <div
-            key={`weight-log-${date}`}
-            className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full">
-            <input
-              type="number"
-              className="col-span-3"
-              value={log.weight}
-              onChange={event => editLog(log.id, { ...log, weight: Number(event.target.value) })}
-            />
-            <label className="col-span-3">Weight</label>
-            <input
-              type="number"
-              className="col-span-3"
-              value={log.fat}
-              onChange={event => editLog(log.id, { ...log, fat: Number(event.target.value) })}
-            />
-            <label className="col-span-3">%</label>
-          </div>
-        ))}
       </div>
     </section>
   )

@@ -4,6 +4,7 @@ import {useCallback, useState} from "react";
 import {fetchFoodNutrition} from "../../utils/api";
 import {isNumber} from "lodash";
 import {KetoKeys} from "../../constants";
+import {Brain} from "@phosphor-icons/react";
 
 export const KetoEntry = ({data, date, onAddEntry}) => {
     const [name, setName] = useState(data.name || "");
@@ -29,7 +30,7 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
 
             setMacros(newMacros);
 
-            alert(JSON.stringify({ m: "Adding to DB", name, newMacros }));
+            alert(JSON.stringify({m: "Adding to DB", name, newMacros}));
 
             addKetoLog(date, {name, ...newMacros})
                 .then(data => {

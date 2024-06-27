@@ -1,6 +1,6 @@
 import {KetoInput} from "./KetoInput";
 import {addKetoLog, deleteKetoLog, editKetoLog} from "../../utils/db";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {fetchFoodNutrition} from "../../utils/api";
 import {isNumber} from "lodash";
 import {KetoKeys} from "../../constants";
@@ -9,12 +9,24 @@ import classNames from "classnames";
 
 export const KetoEntry = ({date, refetch, name: initName, calories, id, protein, isNew, carbs}) => {
     const [isThinking, setIsThinking] = useState(false);
+    const [messages, setMessages] = useState([]);
     const [name, setName] = useState(initName || "");
     const [macros, setMacros] = useState({
         calories: calories || null,
         carbs: carbs || null,
         protein: protein || null,
     });
+
+    const addMessage = useCallback(newMessage => {
+        setMessages(prev => [...prev, newMessage]);
+    }, []);
+
+    useEffect(() => {
+        addMessage(`KetoEntry mount with ${JSON.stringify({id, name, calories, protein, carbs})}`);
+        return () => {
+            addMessage(`KetoEntry unmount`);
+        }
+    }, []);
 
     const updateMacrosWithAI = useCallback(async () => {
         const hasMissingData =
@@ -23,8 +35,11 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
             !isNumber(macros.carbs);
 
         if (hasMissingData) {
+            addMessage(`Has missing data ${JSON.stringify(macros)}`);
             setIsThinking(true);
             const nutrition = await fetchFoodNutrition(name);
+            addMessage(`Nutrition fetched ${JSON.stringify(nutrition)}`);
+
             const newMacros = {
                 calories: nutrition.calories,
                 carbs: nutrition.carbs,
@@ -32,24 +47,26 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
             };
 
             setMacros(newMacros);
-            console.log({name, ...newMacros});
+            addMessage(`New macros ${JSON.stringify(name, newMacros)}`);
             addKetoLog(date, {name, ...newMacros})
                 .then(() => {
-                    console.info("add keto log success!");
+                    addMessage("add keto log success!");
                     refetch();
                 })
-                .catch(error => console.error("add keto log error!", {error}))
+                .catch(error => addMessage("add keto log error! " + error.message))
                 .finally(() => setIsThinking(false));
+        } else {
+            addMessage("Does not have missing data");
         }
     }, [name, date, macros]);
 
     const updateMacro = useCallback((key, value) => {
         if (isNumber(value)) {
             editKetoLog(id, {[key]: value})
-                .then(data => console.info("edit keto log success!", {data}))
-                .catch(error => console.error("edit keto log error!", {error}));
+                .then(data => addMessage(`edit keto log success! ${JSON.stringify(data)}`))
+                .catch(error => addMessage("error editing keto log " + error.message));
         }
-    }, [id]);
+    }, [addMessage, id]);
 
     return (
         <>
@@ -102,10 +119,17 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
                     className={classNames({
                         "flex justify-center items-center": true,
                         "animate-pulse text-white/90 bg-black/50": true,
-                        "fixed bottom-32 inset-x-0 size-20 m-auto  rounded-full": true,
+                        "fixed bottom-32 z-10 inset-x-0 size-20 m-auto  rounded-full": true,
                     })}>
                     <Brain size={32} className=""/>
                 </div> : null}
+            <div className="bg-black text-xs text-white font-mono w-full h-20  overflow-y-auto">
+                {messages.map(messages => {
+                    return <pre className="overflow-x-auto w-96 py-1">{messages}</pre>
+                })}
+            </div>
         </>
     )
 }
+
+// sliced cucumber, 5 pieces

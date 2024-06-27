@@ -10,13 +10,17 @@ const DbTables = {
 };
 
 export async function getKetoLogs(date) {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from(DbTables.KETO_LOGS)
     .select("*")
     .eq("date", date)
     .order("id", { ascending: false });
   
-  console.log({ date, data });
+  if (error) {
+    console.error(error);
+    throw new Error("Get keto logs failed");
+  }
+  
   return data;
 }
 
@@ -29,8 +33,11 @@ export async function addKetoLog(date, log) {
     carbs: log.carbs,
   });
   
-  console.log({ data, error });
-  return { data, error };
+  if (error) {
+    console.error(error);
+    throw new Error("Add keto log failed");
+  }
+  return data;
 }
 
 export async function deleteKetoLog(id) {
@@ -38,6 +45,11 @@ export async function deleteKetoLog(id) {
     .from(DbTables.KETO_LOGS)
     .delete()
     .eq('id', id);
+  
+  if (error) {
+    console.error(error);
+    throw new Error("Delete keto log failed");
+  }
   
   return data;
 }
@@ -53,15 +65,23 @@ export async function editKetoLog(id, log) {
     })
     .eq('id', id);
   
+  if (error) {
+    console.error(error);
+    throw new Error("Edit keto log failed");
+  }
   return data;
-};
+}
 
 export async function getHourlyLogs(date) {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from(DbTables.HOURLY_LOGS)
     .select("*")
     .eq("date", date);
   
+  if (error) {
+    console.error(error);
+    throw new Error("Get hourly logs failed");
+  }
   return data;
 }
 
@@ -71,6 +91,10 @@ export async function InstantiateHours(date, hours) {
     date,
   })));
   
+  if (error) {
+    console.error(error);
+    throw new Error("Instantiate hours failed");
+  }
   return data;
 }
 
@@ -79,6 +103,10 @@ export async function updateExpectation(date, hour, text) {
     .eq('hour', hour)
     .eq('date', date);
   
+  if (error) {
+    console.error(error);
+    throw new Error("Update expectation failed");
+  }
   return data;
 }
 
@@ -87,16 +115,24 @@ export async function updateReality(date, hour, text) {
     .eq('hour', hour)
     .eq('date', date);
   
+  if (error) {
+    console.error(error);
+    throw new Error("Update reality failed");
+  }
   return data;
 }
 
 export async function getWeightLogs(date) {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from(DbTables.WEIGHT_LOGS)
     .select("*")
     .eq("date", date)
     .order("id", { ascending: false });
   
+  if (error) {
+    console.error(error);
+    throw new Error("Get weight logs failed");
+  }
   return data;
 }
 
@@ -107,7 +143,11 @@ export async function addWeightLog(date, log) {
     fat: log.fat,
   });
   
-  return { data, error };
+  if (error) {
+    console.error(error);
+    throw new Error("Add weight log failed");
+  }
+  return data;
 }
 
 export async function editWeightLog(id, log) {
@@ -119,5 +159,9 @@ export async function editWeightLog(id, log) {
     })
     .eq('id', id);
   
+  if (error) {
+    console.error(error);
+    throw new Error("edit weight log failed");
+  }
   return data;
-};
+}

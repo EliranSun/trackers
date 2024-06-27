@@ -8,9 +8,7 @@ export const WeightView = ({ date }) => {
   return (
     <section className="flex flex-col justify-center">
       <div className="flex flex-col items-center">
-        <div
-          key={`weight-log-${date}`}
-          className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full">
+        <div className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full shadow">
           <input
             type="number"
             className="col-span-3"

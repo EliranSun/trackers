@@ -8,9 +8,9 @@ import { DatePagination } from "./components/atoms/DatePagination";
 import { WeightView } from "./components/weight/WeightView";
 
 const ViewComponent = {
-  KETO: KetoTable,
-  HOURLY: HourlyView,
-  WEIGHT: WeightView,
+  [TrackerNames.KETO]: KetoTable,
+  [TrackerNames.HOURLY]: HourlyView,
+  [TrackerNames.WEIGHT]: WeightView,
 }
 
 function App() {

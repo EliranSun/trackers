@@ -47,7 +47,7 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
             };
 
             setMacros(newMacros);
-            addMessage(`New macros ${JSON.stringify(name, newMacros)}`);
+            addMessage(`New log: ${JSON.stringify({date, name, newMacros})}`);
             addKetoLog(date, {name, ...newMacros})
                 .then(() => {
                     addMessage("add keto log success!");

@@ -81,7 +81,7 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
                 onBlur={value => updateMacro(KetoKeys.CARBS, value)}
             />
         </div>
-        <div className="fixed bottom-32 inset-x-0 w-full h-20 m-auto">
+        <div className="fixed flex justify-center bottom-32 inset-x-0 w-full h-20 m-auto">
             <Brain color="white" size={32} className="animate-pulse"/>
         </div>
         </>

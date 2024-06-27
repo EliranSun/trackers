@@ -50,6 +50,7 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
     }, [data]);
 
     return (
+        <>
         <div className="bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full">
             <KetoInput
                 type="text"
@@ -82,5 +83,9 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
                 onBlur={value => updateMacro(KetoKeys.CARBS, value)}
             />
         </div>
+        <div className="fixed bottom-32 inset-x-0 m-auto w-20 h-20>
+            <Brain color="white" className="animate-pulse"/>
+        </div>
+        </>
     )
 }

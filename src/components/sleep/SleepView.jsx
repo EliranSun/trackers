@@ -1,13 +1,17 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import {get, format, getDaysInMonth} from "date-fns";
 import classNames from "classnames";
+import {getSleepLogs, setSleepLog} from "../../utils/db";
 
 const DayInYear = ({monthCount, todayIndex, dayInMonthIndex}) => {
     const [isTargetMet, setIsTargetMet] = useState(false);
 
     return (
         <div
-            onClick={() => setIsTargetMet(!isTargetMet)}
+            onClick={() => {
+                setIsTargetMet(!isTargetMet);
+                setSleepLog(`${todayIndex}/${monthCount}/2024`, !isTargetMet);
+            }}
             className={classNames({
                 "text-xs text-white/80 flex justify-center items-center size-10": true,
                 "bg-green-500": isTargetMet,
@@ -46,6 +50,7 @@ const MonthDays = ({count = 0, todayIndex}) => {
 }
 
 export const SleepView = ({date}) => {
+    const [sleepLogs, setSleepLogs] = useState([]);
     const ref = useRef();
     const [monthsCount] = useState(new Array(12).fill(0));
     const todayIndex = useMemo(() => {
@@ -55,6 +60,12 @@ export const SleepView = ({date}) => {
     useEffect(() => {
         ref.current.scrollTo(0, todayIndex * 9)
     }, []);
+
+    useEffect(() => {
+        getSleepLogs(date).then(logs => {
+            setSleepLogs(logs);
+        });
+    }, [date]);
 
     return (
         <section className="w-full">

@@ -51,7 +51,7 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
             addKetoLog(date, {name, ...newMacros})
                 .then(() => {
                     addMessage("add keto log success!");
-                    refetch();
+                    // refetch();
                 })
                 .catch(error => addMessage("add keto log error! " + error.message))
                 .finally(() => setIsThinking(false));

@@ -30,8 +30,6 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
 
             setMacros(newMacros);
 
-            alert(JSON.stringify({m: "Adding to DB", name, newMacros}));
-
             addKetoLog(date, {name, ...newMacros})
                 .then(data => {
                     console.info("add keto log success!", {data});
@@ -83,8 +81,8 @@ export const KetoEntry = ({data, date, onAddEntry}) => {
                 onBlur={value => updateMacro(KetoKeys.CARBS, value)}
             />
         </div>
-        <div className="fixed bottom-32 inset-x-0 m-auto w-20 h-20">
-            <Brain color="white" className="animate-pulse"/>
+        <div className="fixed bottom-32 inset-x-0 m-auto">
+            <Brain color="white" size={32} className="animate-pulse"/>
         </div>
         </>
     )

@@ -5,6 +5,7 @@ import classNames from "classnames";
 export const HourlyTypes = {
   UNKNOWN: "Unknown",
   MISMATCH: "Mismatch",
+  PARTIAL: "Partial",
   FULFILLED: "Fulfilled"
 };
 export const HourEntry = ({ date, hour, reality: initReality, expectation: initExpectation, onEntryComplete }) => {
@@ -12,21 +13,34 @@ export const HourEntry = ({ date, hour, reality: initReality, expectation: initE
   const [reality, setReality] = useState(initReality || "");
   const [expectation, setExpectation] = useState(initExpectation || "");
   
+  
   useEffect(() => {
     if (initReality !== "") setReality(initReality);
     if (initExpectation !== "") setExpectation(initExpectation);
     
     if (initReality && initExpectation) {
-      setStatus(initReality === initExpectation ? HourlyTypes.FULFILLED : HourlyTypes.MISMATCH);
+      const fullMatch = initReality.toLowerCase() === initExpectation.toLowerCase();
+      const partialMatch = initReality.replace(",", "").split(" ").some(word => {
+        return initExpectation.replace(",", "").toLowerCase().split(" ").includes(word.replace(",", "").toLowerCase());
+      });
+      
+      if (fullMatch) {
+        setStatus(HourlyTypes.FULFILLED);
+      } else if (partialMatch) {
+        setStatus(HourlyTypes.PARTIAL);
+      } else {
+        setStatus(HourlyTypes.MISMATCH);
+      }
     }
   }, [initReality, initExpectation]);
   
   return (
     <div className="flex gap-1 w-full">
       <div className={classNames({
-        "w-1/6 p-2 bg-white/10": true,
-        "bg-gray-200": status === HourlyTypes.UNKNOWN,
+        "w-1/6 p-2": true,
+        "bg-gray-900": status === HourlyTypes.UNKNOWN,
         "bg-red-500": status === HourlyTypes.MISMATCH,
+        "bg-orange-500": status === HourlyTypes.PARTIAL,
         "bg-green-500": status === HourlyTypes.FULFILLED,
       })}>
         {hour}

@@ -14,10 +14,10 @@ export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLa
         }}>
         <ArrowSquareLeft size={32} weight="fill"/>
       </button>
-      <h1 className="flex justify-center items-center flex-col">
-        {dateLabel}
-        {format(dateObject, "EEEE")}
-        </h1>
+      <div className="flex justify-center items-center flex-col">
+        <h1>{dateLabel}</h1>
+        <h2 className="text-lg">{format(dateObject, "EEEE")}</div>
+      </div>
       <button
         className="text-xl p-4 w-1/3 flex justify-center items-center"
         onClick={() => {

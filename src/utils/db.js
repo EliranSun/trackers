@@ -168,11 +168,10 @@ export async function editWeightLog(id, log) {
     return data;
 }
 
-export async function getSleepLogs(date) {
+export async function getSleepLogs() {
     const {data, error} = await supabase
         .from(DbTables.SLEEP_LOGS)
         .select("*")
-        .eq("date", date)
         .order("id", {ascending: false});
 
     if (error) {
@@ -183,14 +182,30 @@ export async function getSleepLogs(date) {
     return data;
 }
 
-export async function setSleepLog(date, isTargetMet) {
-    const {data, error} = await supabase.from(DbTables.SLEEP_LOGS).update({
+export async function setSleepLog(date, isTargetMet, id) {
+    if (id) {
+        const {data, error} = await supabase
+            .from(DbTables.SLEEP_LOGS)
+            .update({isMet: isTargetMet})
+            .eq('id', id);
+
+        if (error) {
+            console.error(error);
+            throw new Error("Set sleep log failed");
+        }
+
+        return data;
+    }
+
+    const {data, error} = await supabase.from(DbTables.SLEEP_LOGS).insert({
+        date,
         isMet: isTargetMet,
-    }).eq('date', date);
+    });
 
     if (error) {
         console.error(error);
         throw new Error("Set sleep log failed");
     }
+
     return data;
 }

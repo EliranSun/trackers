@@ -29,7 +29,7 @@ function App() {
                 setDateObject={setDateObject}
                 dateLabel={dateLabel}
                 setDateLabel={setDateLabel}/>
-            <div className="pt-16 pb-48">
+            <div className="w-full pt-16 pb-48">
                 <View date={dateLabel}/>
             </div>
             <Navbar

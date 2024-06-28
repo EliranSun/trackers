@@ -1,6 +1,6 @@
 import {TrackerIcons, TrackerNames} from "../../constants";
 import classNames from "classnames";
-import {ArrowClockwise, DotsThreeOutlineVertical, SmileyXEyes, Bed} from "@phosphor-icons/react";
+import {ArrowClockwise, DotsThreeOutlineVertical, SmileyXEyes, ChartBar} from "@phosphor-icons/react";
 import {useState} from "react";
 
 const NavButton = ({children, isSelected, onClick}) => {
@@ -48,20 +48,29 @@ export const Navbar = ({selectedView, setSelectedView}) => {
                 </NavButton>
             </div>
             {isMenuOpen ?
-                <div className={classNames({
-                    "flex flex-col gap-20 items-center justify-center backdrop-blur-lg": true,
-                    "w-screen h-screen bg-white/20 fixed inset-0 z-20 ": true,
-                })}>
-                    <NavButton onClick={() => window.location.reload()}>
+                <div
+                    onClick={() => setIsMenuOpen(false)}
+                    className={classNames({
+                        "flex flex-col gap-20 items-center justify-center backdrop-blur-lg": true,
+                        "w-screen h-screen bg-white/20 fixed inset-0 z-20 ": true,
+                    })}>
+                    <NavButton onClick={(event) => {
+                        event.stopPropagation();
+                        window.location.reload();
+                    }}>
                         <ArrowClockwise size={50}/>
                     </NavButton>
                     <NavButton
                         isSelected={selectedView === TrackerNames.NO_PRON}
-                        onClick={() => {
+                        onClick={(event) => {
+                            event.stopPropagation();
                             setSelectedView(TrackerNames.NO_PRON);
                             setIsMenuOpen(false);
                         }}>
                         <SmileyXEyes size={50}/>
+                    </NavButton>
+                    <NavButton>
+                        <ChartBar size={50}/>
                     </NavButton>
                 </div> : null}
         </>

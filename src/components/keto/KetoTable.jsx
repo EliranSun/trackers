@@ -63,14 +63,17 @@ export const KetoTable = ({date}) => {
                 <Measurements>
                     <Measurement
                         name="Calories"
+                        showMax
                         value={caloriesSum}
                         range={[100, 2000]}/>
                     <Measurement
                         name="Protein"
+                        showMin
                         value={proteinSum}
                         range={[120, 150]}/>
                     <Measurement
                         name="Carbs"
+                        showMax
                         value={carbsSum}
                         range={[0, 40]}/>
                 </Measurements>

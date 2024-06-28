@@ -46,7 +46,7 @@ export const HourEntry = ({ date, hour, reality: initReality, expectation: initE
         {hour}
       </div>
       <div className="flex flex-col gap-px w-full">
-        <div key={`${hour}-expectation`} className="bg-white/10 h-16 px-2">
+        <div key={`${hour}-expectation`} className="bg-white/10 h-10 px-2">
           <input
             type="text"
             className="w-full h-full bg-transparent"
@@ -62,7 +62,7 @@ export const HourEntry = ({ date, hour, reality: initReality, expectation: initE
                 .catch(error => console.error("Failed to update expectation", error));
             }}/>
         </div>
-        <div key={`${hour}-reality`} className="bg-white/10 h-16 px-2">
+        <div key={`${hour}-reality`} className="bg-white/10 h-10 px-2">
           <input
             type="text"
             className="w-full h-full bg-transparent"

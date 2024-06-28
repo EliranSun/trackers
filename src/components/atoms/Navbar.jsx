@@ -50,7 +50,7 @@ export const Navbar = ({selectedView, setSelectedView}) => {
             {isMenuOpen ?
                 <div className={classNames({
                     "flex flex-col gap-20 items-center justify-center backdrop-blur-lg": true,
-                    "w-screen h-screen bg-white/20 fixed inset-0 z-10 ": true,
+                    "w-screen h-screen bg-white/20 fixed inset-0 z-20 ": true,
                 })}>
                     <NavButton onClick={() => window.location.reload()}>
                         <ArrowClockwise size={50}/>

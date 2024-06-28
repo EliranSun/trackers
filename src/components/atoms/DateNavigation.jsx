@@ -1,5 +1,6 @@
 import { ONE_DAY } from "../../constants";
 import { ArrowSquareLeft, ArrowSquareRight } from "@phosphor-icons/react";
+import { format } from "date-fns";
 
 export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLabel }) => {
   return (
@@ -13,7 +14,10 @@ export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLa
         }}>
         <ArrowSquareLeft size={32} weight="fill"/>
       </button>
-      <h1 className="">{dateLabel}</h1>
+      <h1 className="flex justify-center items-center flex-col">
+        {dateLabel}
+        {forat(dateObject, "EEEE")}
+        </h1>
       <button
         className="text-xl p-4 w-1/3 flex justify-center items-center"
         onClick={() => {

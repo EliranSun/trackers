@@ -16,7 +16,7 @@ export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLa
       </button>
       <h1 className="flex justify-center items-center flex-col">
         {dateLabel}
-        {forat(dateObject, "EEEE")}
+        {format(dateObject, "EEEE")}
         </h1>
       <button
         className="text-xl p-4 w-1/3 flex justify-center items-center"

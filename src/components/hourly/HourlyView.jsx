@@ -59,7 +59,7 @@ export const HourlyView = ({date}) => {
     }, [date]);
 
     return (
-        <section className="flex flex-col w-screen px-4 gap-1">
+        <section className="flex flex-col gap-1">
             <Measurements>
                 <Measurement
                     name="Fulfilled"

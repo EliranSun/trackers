@@ -86,6 +86,19 @@ export async function getHourlyLogs(date) {
     return data;
 }
 
+export async function updateHourlyIsApproved(id, isApproved) {
+    const {data, error} = await supabase
+        .from(DbTables.HOURLY_LOGS)
+        .update({isApproved})
+        .eq('id', id);
+
+    if (error) {
+        console.error(error);
+        throw new Error("Update hourly isApproved failed");
+    }
+    return data;
+}
+
 export async function InstantiateHours(date, hours) {
     const {data, error} = await supabase.from(DbTables.HOURLY_LOGS).insert(hours.map(hour => ({
         hour,

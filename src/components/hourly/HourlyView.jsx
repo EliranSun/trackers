@@ -71,10 +71,12 @@ export const HourlyView = ({date}) => {
                     range={[-1, 0]}/>
             </Measurements>
             <div className="flex flex-col gap-2 mt-8">
-                {hourlyData.map(({hour, reality, expectation}) =>
+                {hourlyData.map(({id, hour, reality, expectation, isApproved}) =>
                     <HourEntry
                         hour={hour}
                         date={date}
+                        id={id}
+                        isApproved={isApproved}
                         key={`${date}-${hour}`}
                         reality={reality}
                         expectation={expectation}

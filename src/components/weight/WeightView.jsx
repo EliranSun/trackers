@@ -27,7 +27,7 @@ export const WeightView = ({ date }) => {
   const [newLog, setNewLog] = useState({ weight: 0, fat: 0 });
   
   return (
-    <section className="flex flex-col justify-center w-screen px-4">
+    <section className="flex flex-col justify-center">
       <div className="flex flex-col items-center">
         <Metrics>
           <MetricInput

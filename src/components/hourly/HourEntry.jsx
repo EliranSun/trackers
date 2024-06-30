@@ -72,24 +72,6 @@ export const HourEntry = ({
         <span>{hour}</span>
       </div>
       <div className="flex flex-col gap-1 w-full">
-        {isApproved ? null :
-          <div key={`${hour}-expectation`} className="bg-gray-700 h-10 px-2">
-            <input
-              type="text"
-              className="w-full h-full bg-transparent"
-              value={expectation}
-              placeholder="What would you do instead?"
-              onChange={event => {
-                const value = event.target.value;
-                setExpectation(value);
-              }}
-              onBlur={(event) => {
-                const value = event.target.value;
-                updateExpectation(date, hour, value)
-                  .then(data => console.info("Updated expectation", data))
-                  .catch(error => console.error("Failed to update expectation", error));
-              }}/>
-          </div>}
         <div key={`${hour}-reality`} className="bg-gray-700 h-full px-2">
           <input
             type="text"
@@ -112,8 +94,25 @@ export const HourEntry = ({
             }}
           />
         </div>
+        {isApproved ? null :
+          <div key={`${hour}-expectation`} className="bg-gray-700 px-2">
+            <input
+              type="text"
+              className="w-full h-full bg-transparent"
+              value={expectation}
+              placeholder="What would you do instead?"
+              onChange={event => {
+                const value = event.target.value;
+                setExpectation(value);
+              }}
+              onBlur={(event) => {
+                const value = event.target.value;
+                updateExpectation(date, hour, value)
+                  .then(data => console.info("Updated expectation", data))
+                  .catch(error => console.error("Failed to update expectation", error));
+              }}/>
+          </div>}
       </div>
-    
     </div>
   )
 }

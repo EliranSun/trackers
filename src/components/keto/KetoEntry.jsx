@@ -6,8 +6,20 @@ import {isNumber} from "lodash";
 import {KetoKeys} from "../../constants";
 import {Brain, X} from "@phosphor-icons/react";
 import classNames from "classnames";
+import {FoodEmoji} from "./FoodEmoji";
 
-export const KetoEntry = ({date, refetch, name: initName, calories, id, protein, isNew, carbs}) => {
+export const KetoEntry = ({
+                              date,
+                              refetch,
+                              name: initName,
+                              calories,
+                              id,
+                              protein,
+                              isNew,
+                              carbs,
+                              onSelectEntry,
+                              isSelected,
+                          }) => {
     const [isThinking, setIsThinking] = useState(false);
     const [messages, setMessages] = useState([]);
     const [name, setName] = useState(initName || "");
@@ -28,6 +40,15 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
             addMessage(`KetoEntry unmount`);
         }
     }, []);
+
+    useEffect(() => {
+        setName(initName);
+        setMacros({
+            calories,
+            protein,
+            carbs,
+        });
+    }, [initName, calories, protein, carbs]);
 
     const updateMacrosWithAI = useCallback(async () => {
         const hasMissingData =
@@ -59,7 +80,7 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
             addKetoLog(date, log)
                 .then(() => {
                     addMessage("add keto log success!");
-                    refetch();
+                    setTimeout(refetch, 5000);
                 })
                 .catch(error => addMessage("add keto log error! " + error.message))
                 .finally(() => setIsThinking(false));
@@ -79,6 +100,16 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
         }
     }, [addMessage, id]);
 
+    if (!isSelected) {
+        return (
+            <FoodEmoji
+                carbs={macros.carbs}
+                totalCarbs={macros.carbs}
+                onClick={onSelectEntry}
+                name={name}/>
+        );
+    }
+
     return (
         <>
             <div className="relative bg-gray-700 my-4 p-2 grid grid-cols-3 gap-2 max-w-screen-sm rounded-lg w-full">
@@ -89,6 +120,13 @@ export const KetoEntry = ({date, refetch, name: initName, calories, id, protein,
                         size={32}
                         onClick={async () => {
                             setIsThinking(true);
+                            console.log(id);
+                            if (!id) {
+                                addMessage("No id found");
+                                setIsThinking(false);
+                                return;
+                            }
+
                             await deleteKetoLog(id);
                             await refetch();
                             setIsThinking(false);

@@ -2,25 +2,26 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import {Measurement} from "../atoms/Measurement";
 import {Measurements} from "../atoms/Measurements";
 import {getKetoLogs} from "../../utils/db";
-import {isSameDay} from "date-fns";
 import {KetoEntry} from "./KetoEntry";
+
+const getEmptyEntry = () => ({
+    name: "",
+    calories: null,
+    protein: null,
+    carbs: null,
+    created_at: new Date(),
+});
+
+export const TOTAL_CARBS = 40;
 
 export const KetoTable = ({date}) => {
         const [logs, setLogs] = useState([]);
+        const [mainEntry, setMainEntry] = useState(getEmptyEntry());
 
         const fetch = useCallback(() => {
             getKetoLogs(date).then(data => {
-                setLogs([
-                    {
-                        name: "",
-                        calories: null,
-                        protein: null,
-                        carbs: null,
-                        created_at: new Date(),
-                        isNew: true,
-                    },
-                    ...data,
-                ]);
+                setMainEntry(getEmptyEntry());
+                setLogs(data);
             });
         }, [date]);
 
@@ -75,21 +76,37 @@ export const KetoTable = ({date}) => {
                         name="Carbs"
                         showMax
                         value={carbsSum}
-                        range={[0, 40]}/>
+                        range={[0, TOTAL_CARBS]}/>
                 </Measurements>
+
                 <div className="h-full overflow-x-hidden overflow-y-auto">
+                    <KetoEntry
+                        date={date}
+                        id={mainEntry.id}
+                        name={mainEntry.name}
+                        isSelected={true}
+                        calories={mainEntry.calories}
+                        protein={mainEntry.protein}
+                        carbs={mainEntry.carbs}
+                        isNew={mainEntry.isNew}
+                        refetch={fetch}
+                    />
+                </div>
+                <div className="flex gap-1 flex-wrap">
                     {logs.map(data => (
                         <KetoEntry
                             date={date}
-                            isNew={data.isNew}
                             id={data.id}
                             name={data.name}
+                            isNew={data.isNew}
                             calories={data.calories}
                             protein={data.protein}
                             carbs={data.carbs}
                             key={data.created_at}
-                            refetch={async () => {
-                                await fetch();
+                            refetch={fetch}
+                            onSelectEntry={(isSelected) => {
+                                // alert(JSON.stringify(isSelected));
+                                setMainEntry(isSelected ? data : getEmptyEntry());
                             }}
                         />
                     ))}

@@ -94,7 +94,7 @@ export const HourEntry = ({
             }}
           />
         </div>
-        {isApproved ? null :
+        {isApproved === false ? null :
           <div key={`${hour}-expectation`} className="bg-gray-700 px-2">
             <input
               type="text"

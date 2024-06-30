@@ -1,6 +1,12 @@
 import {TrackerIcons, TrackerNames} from "../../constants";
 import classNames from "classnames";
-import {ArrowClockwise, DotsThreeOutlineVertical, SmileyXEyes, ChartBar} from "@phosphor-icons/react";
+import {
+ArrowClockwise, 
+DotsThreeOutlineVertical, 
+SmileyXEyes, 
+SmileyAngry,
+Megaphone,
+ChartBar} from "@phosphor-icons/react";
 import {useState} from "react";
 
 const NavButton = ({children, isSelected, onClick}) => {
@@ -68,6 +74,12 @@ export const Navbar = ({selectedView, setSelectedView}) => {
                             setIsMenuOpen(false);
                         }}>
                         <SmileyXEyes size={50}/>
+                    </NavButton>
+                    <NavButton>
+                        <SmileyAngry size={50}/>
+                    </NavButton>
+                    <NavButton>
+                        <Megaphone size={50}/>
                     </NavButton>
                     <NavButton>
                         <ChartBar size={50}/>

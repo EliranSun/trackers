@@ -100,6 +100,7 @@ export const HourlyView = ({ date }) => {
             isApproved={isApproved}
             reality={reality}
             expectation={expectation}
+            refetch={fetch}
             onEntryComplete={fetch}/>
         )}
       </div>

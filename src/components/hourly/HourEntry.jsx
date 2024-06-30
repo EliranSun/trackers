@@ -16,7 +16,8 @@ export const HourEntry = ({
   reality: initReality,
   expectation: initExpectation,
   isApproved: initIsApproved,
-  onEntryComplete
+  onEntryComplete,
+  refetch,
 }) => {
   const [status, setStatus] = useState(HourlyTypes.UNKNOWN);
   const [reality, setReality] = useState(initReality || "");
@@ -54,7 +55,8 @@ export const HourEntry = ({
           setIsApproved(!isApproved);
           updateHourlyIsApproved(id, !isApproved)
             .then(data => console.info("Updated isApproved", data))
-            .catch(error => console.error("Failed to update isApproved", error));
+            .catch(error => console.error("Failed to update isApproved", error))
+            .finally(refetch);
         }}
         className={classNames({
           "w-1/3 p-2 flex gap-2 justify-center items-center": true,

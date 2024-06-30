@@ -44,6 +44,7 @@ export const FoodType = {
     omelette: "🍳",
     pancake: "🥞",
     bacon: "🥓",
+    beef: "🥩",
     steak: "🥩",
     chicken: "🍗",
     patty: "🍔",

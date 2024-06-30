@@ -45,8 +45,8 @@ export const HourlyView = ({date}) => {
                 console.info(`Fetched hourly data for ${date}`, data);
                 setHourlyData(data.sort((a, b) => a.id - b.id));
                 const handledItems = data.filter(({reality, expectation}) => reality && expectation);
-                const fulfilled = handledItems.filter(({reality, expectation}) => reality === expectation).length;
-                const mismatch = handledItems.filter(({reality, expectation}) => reality !== expectation).length;
+                const fulfilled = handledItems.filter(({isApproved}) => isApproved).length;
+                const mismatch = handledItems.filter(({isApproved}) => isApproved === false).length;
 
                 setFulfilledPercentage((fulfilled / handledItems.length) * 100);
                 setMismatchPercentage((mismatch / handledItems.length) * 100);
@@ -62,11 +62,11 @@ export const HourlyView = ({date}) => {
         <section className="flex flex-col gap-1">
             <Measurements>
                 <Measurement
-                    name="Fulfilled"
+                    name="Approved"
                     value={fulfilledPercentage}
                     range={[1, 100]}/>
                 <Measurement
-                    name="Mismatch"
+                    name="Rejected"
                     value={mismatchPercentage}
                     range={[-1, 0]}/>
             </Measurements>

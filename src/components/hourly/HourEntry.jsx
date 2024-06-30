@@ -96,7 +96,7 @@ export const HourEntry = ({
             }}
           />
         </div>
-        {isApproved === false ? null :
+        {(isApproved === false) ?
           <div key={`${hour}-expectation`} className="bg-gray-700 px-2">
             <input
               type="text"
@@ -113,7 +113,7 @@ export const HourEntry = ({
                   .then(data => console.info("Updated expectation", data))
                   .catch(error => console.error("Failed to update expectation", error));
               }}/>
-          </div>}
+          </div> : null}
       </div>
     </div>
   )

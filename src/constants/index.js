@@ -78,4 +78,6 @@ export const FoodType = {
     würstchen: "🌭",
     hotdog: "🌭",
     "hot dog": "🌭",
+    "pringles": "🍿",
+    "snack": "🍫",
 };

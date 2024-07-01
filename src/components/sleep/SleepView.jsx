@@ -1,100 +1,45 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { format, getDaysInMonth } from "date-fns";
-import classNames from "classnames";
-import { getSleepLogs, setSleepLog } from "../../utils/db";
+import {useEffect, useMemo, useRef, useState} from "react";
+import {getSleepLogs} from "../../utils/db";
+import {MonthDays} from "./MonthDays";
+import {getFirstDayOfYearIndex} from "../../utils";
+import {DayOfYear} from "./DayOfYear";
+import {format} from "date-fns";
 
-const DayInYear = ({
-    id,
-    isTargetMet: initIsTargetMet,
-    date,
-    now,
-    dayInMonthIndex,
-}) => {
-    const [isTargetMet, setIsTargetMet] = useState(null);
+const DAY_HEIGHT = 50;
 
-    useEffect(() => {
-        setIsTargetMet(initIsTargetMet);
-    }, [initIsTargetMet]);
-
-    return (
-        <div
-            onClick={async () => {
-                setIsTargetMet(!isTargetMet);
-                try {
-                    await setSleepLog(date, !isTargetMet, id);
-                    console.info("Sleep log updated");
-                } catch (error) {
-                    console.error(error);
-                }
-            }}
-            className={classNames({
-                "opacity-0": dayInMonthIndex === 0,
-                "text-xs text-white/80 flex justify-center items-center size-14": true,
-                "bg-green-500": isTargetMet,
-                "bg-red-500": isTargetMet === false,
-                "bg-gray-600": isTargetMet === null,
-                "border-2 border-white": date === now,
-                "cursor-pointer": true,
-            })}
-        >
-            {dayInMonthIndex}
-        </div>
-    );
-};
-
-const MonthDays = ({ count = 0, todayIndex, logs }) => {
-    const year = new Date().getFullYear();
-    const daysFromPreviousMonth =
-        getDaysInMonth(new Date(year, count - 1, 1)) % 7;
-    const monthName = format(new Date(year, count, 1), "MMMM");
-    const daysInMonth = getDaysInMonth(new Date(year, count, 1));
-
-    return (
-        <span>
-        <span className="absolute bg-black">{monthName}</span>
-                {new Array(daysInMonth).fill(0).map((_, index) => {
-                    const now = new Date().toLocaleDateString("en-IL");
-                    const date = new Date(
-                        year,
-                        count,
-                        index + 1,
-                    ).toLocaleDateString("en-IL");
-                    const currentDayLog = logs.find((log) => log.date === date);
-
-                    return (
-                        <DayInYear
-                            key={date}
-                            now={now}
-                            date={date}
-                            id={currentDayLog?.id}
-                            isTargetMet={
-                                currentDayLog ? currentDayLog.isMet : null
-                            }
-                            dayInMonthIndex={index + 1}
-                        />
-                    );
-                })}
-        </span>
-    );
-};
-
-const DAY_HEIGHT = 12;
-
-export const SleepView = ({ date }) => {
-    const [sleepLogs, setSleepLogs] = useState([]);
+export const SleepView = ({date}) => {
     const ref = useRef();
+    const [sleepLogs, setSleepLogs] = useState([]);
+    const [monthName, setMonthName] = useState("");
     const [monthsCount] = useState(new Array(12).fill(0));
-    const todayIndex = useMemo(() => {
-        return new Date().getDate() * new Date().getMonth();
+    const extraDays = useMemo(() => {
+        const startOfYearExtraDays = getFirstDayOfYearIndex(new Date().getFullYear());
+        return new Array(startOfYearExtraDays).fill(0).map((_, index) => _);
     }, []);
 
     useEffect(() => {
         if (!ref.current) return;
+        setMonthName(new Date().toLocaleDateString("en-IL", {month: "long"}));
+        const weekOfYear = format(new Date(), "I");
+
+        console.log(weekOfYear);
 
         ref.current.scrollTo({
-            top: todayIndex * DAY_HEIGHT,
+            top: weekOfYear * 40,
             behavior: "smooth",
         });
+
+        ref.current.addEventListener("scroll", () => {
+            const percentage = ref.current.scrollTop / ref.current.clientHeight;
+            const monthIndex = Math.floor(percentage * 40 / 12);
+            const month = new Date().setMonth(monthIndex);
+            setMonthName(format(month, "MMMM"));
+        });
+
+        return () => {
+            // ref.current.removeEventListener("scroll", () => {
+            // });
+        }
     }, [ref]);
 
     useEffect(() => {
@@ -106,21 +51,37 @@ export const SleepView = ({ date }) => {
     return (
         <section className="w-full">
             <div className="w-full flex flex-col text-center font-mono text-xl text-white my-4">
-                <h1 className="">8 hours sleep</h1>
-                <h2 className="">
-                    {monthsCount.length} months, {todayIndex}
+                <h2 className="text-5xl">
+                    {monthName}
                 </h2>
+                <h1 className="text-sm">8 hours sleep</h1>
+            </div>
+            <div className="sticky top-0 font-mono w-full flex justify-evenly font-sm">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
             </div>
             <div
                 ref={ref}
-                className="flex relative flex-wrap m-auto gap-1 h-[60vh] overflow-y-auto w-[calc(60px*7)]"
-            >
+                className="relative m-auto h-[60vh] overflow-y-auto w-full grid grid-cols-7 gap-1">
+                {extraDays.map((_, index) => {
+                    return (
+                        <DayOfYear
+                            key={index}
+                            date={date}
+                            dayInMonthIndex={index + 1}
+                        />
+                    );
+                })}
                 {monthsCount.map((_, index) => {
                     return (
                         <MonthDays
                             key={index}
                             logs={sleepLogs}
-                            todayIndex={todayIndex}
                             count={index}
                         />
                     );

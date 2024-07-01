@@ -5,7 +5,7 @@ import { getHourlyLogs, InstantiateHours } from "../../utils/db";
 import { HourEntry, HourlyTypes } from "./HourEntry";
 
 const getHours = () => new Array(24).fill(0).map((_, i) => {
-  const adjustedIndex = i + 7;
+  const adjustedIndex = i + 6;
   
   if (adjustedIndex > 23) {
     return `0${adjustedIndex - 24}:00`;

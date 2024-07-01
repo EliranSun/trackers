@@ -51,7 +51,7 @@ const MonthDays = ({ count = 0, todayIndex, logs }) => {
 
     return (
         <>
-        <div>{monthName}</div>
+        <div className="absolute bg-black">{monthName}</div>
                 {new Array(daysInMonth).fill(0).map((_, index) => {
                     const now = new Date().toLocaleDateString("en-IL");
                     const date = new Date(
@@ -113,7 +113,7 @@ export const SleepView = ({ date }) => {
             </div>
             <div
                 ref={ref}
-                className="flex flex-wrap m-auto gap-1 h-[60vh] overflow-y-auto w-[calc(60px*7)]"
+                className="flex relative flex-wrap m-auto gap-1 h-[60vh] overflow-y-auto w-[calc(60px*7)]"
             >
                 {monthsCount.map((_, index) => {
                     return (

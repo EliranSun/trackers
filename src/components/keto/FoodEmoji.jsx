@@ -1,4 +1,4 @@
-see import {FoodType} from "../../constants";
+import {FoodType} from "../../constants";
 import {useRef, useState} from "react";
 import classNames from "classnames";
 import {useClickOutside} from "../../hooks/useClickOutside";

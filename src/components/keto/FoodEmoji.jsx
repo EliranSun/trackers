@@ -22,7 +22,7 @@ export const FoodEmoji = ({name, onClick, carbs}) => {
             ref={ref}
             data-name={name}
             className={classNames({
-                "flex flex-col items-center justify-center flex-grow h-max": true,
+                "flex flex-col items-center justify-center flex-grow h-20": true,
                 "size-10": carbs === 0,
                 "size-16": carbs < 10,
                 "size-24": carbs >= 10,

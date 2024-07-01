@@ -40,7 +40,7 @@ export const FoodEmoji = ({name, onClick, carbs}) => {
             }}>
             <span className="mt-0 text-3xl">{foodEmoji ? foodEmoji[1] : null}</span>
             <span className="-mt-1 text-[8px]">
-                {name.replace(",", "").split(" ")[0]}, {carbs}
+                {name.replace(",", "").split(" ")[0]}, {Math.round(carbs)}
                 </span>
         </div>
     );

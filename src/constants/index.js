@@ -58,6 +58,7 @@ export const FoodType = {
     sandwich: "🥪",
     pita: "🫓",
     falafel: "🧆",
+    meatballs: "🧆",
     taco: "🌯",
     salad: "🥗",
     stew: "🥘",

@@ -59,15 +59,9 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
         <div
           onClick={() => setIsMenuOpen(false)}
           className={classNames({
-            "flex flex-col gap-20 items-center justify-center backdrop-blur-lg": true,
+            "flex flex-col gap-20 items-center justify-end backdrop-blur-lg": true,
             "w-screen h-screen bg-white/20 fixed inset-0 z-20 ": true,
           })}>
-          <NavButton onClick={(event) => {
-            event.stopPropagation();
-            window.location.reload();
-          }}>
-            <ArrowClockwise size={50}/>
-          </NavButton>
           <NavButton
             isSelected={selectedView === TrackerNames.NO_PRON}
             onClick={(event) => {
@@ -85,6 +79,12 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
           </NavButton>
           <NavButton>
             <ChartBar size={50}/>
+          </NavButton>
+          <NavButton onClick={(event) => {
+            event.stopPropagation();
+            window.location.reload();
+          }}>
+            <ArrowClockwise size={50}/>
           </NavButton>
         </div> : null}
     </>

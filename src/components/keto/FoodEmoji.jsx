@@ -38,7 +38,7 @@ export const FoodEmoji = ({name, onClick, carbs}) => {
                 setIsSelected(!isSelected);
                 onClick(!isSelected);
             }}>
-            <span className="mt-2 text-3xl">{foodEmoji ? foodEmoji[1] : null}</span>
+            <span className="mt-0 text-3xl">{foodEmoji ? foodEmoji[1] : null}</span>
             <span className="-mt-1 text-[8px]">{name.replace(",", "").split(" ")[0]}</span>
         </div>
     );

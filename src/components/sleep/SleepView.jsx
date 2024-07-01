@@ -51,6 +51,7 @@ const MonthDays = ({ count = 0, todayIndex, logs }) => {
 
     return (
         <>
+        <div>{monthName}</div>
                 {new Array(daysInMonth).fill(0).map((_, index) => {
                     const now = new Date().toLocaleDateString("en-IL");
                     const date = new Date(

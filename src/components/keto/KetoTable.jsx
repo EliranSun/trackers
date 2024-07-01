@@ -60,7 +60,7 @@ export const KetoTable = ({date}) => {
         }, [logs]);
 
         return (
-            <div className="flex flex-col gap-2 rounded-3xl py-4">
+            <div className="flex flex-col justify-center gap-2 rounded-3xl py-4">
                 <Measurements>
                     <Measurement
                         name="Calories"

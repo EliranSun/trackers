@@ -30,6 +30,10 @@ export const KetoKeys = {
 
 export const FoodType = {
     coffee: "☕",
+    espresso: "☕",
+    cappuccino: "☕",
+    americano: "☕",
+    latte: "☕",
     watermelon: "🍉",
     broccoli: "🥦",
     cucumber: "🥒",

@@ -31,14 +31,14 @@ export const FoodEmoji = ({name, onClick, carbs}) => {
                 "size-36": carbs >= 40,
                 "size-40": carbs >= 50,
                 "user-select-none": true,
-                "cursor-pointer bg-gray-700 text-2xl": true,
+                "cursor-pointer bg-gray-700": true,
                 "bg-gray-500": isSelected,
             })}
             onClick={() => {
                 setIsSelected(!isSelected);
                 onClick(!isSelected);
             }}>
-            <span className="mt-4">{foodEmoji ? foodEmoji[1] : null}</span>
+            <span className="mt-4 texl-3xl">{foodEmoji ? foodEmoji[1] : null}</span>
             <span className="-mt-3 text-[8px]">{name.replace(",", "").split(" ")[0]}</span>
         </div>
     );

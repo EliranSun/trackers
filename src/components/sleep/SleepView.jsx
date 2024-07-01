@@ -51,7 +51,7 @@ const MonthDays = ({ count = 0, todayIndex, logs }) => {
 
     return (
         <span>
-        <span className="absolute bg-black">{monthName}</div>
+        <span className="absolute bg-black">{monthName}</span>
                 {new Array(daysInMonth).fill(0).map((_, index) => {
                     const now = new Date().toLocaleDateString("en-IL");
                     const date = new Date(

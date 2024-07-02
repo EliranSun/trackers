@@ -4,8 +4,8 @@ import { Measurement } from "../atoms/Measurement";
 import { getHourlyLogs, InstantiateHours } from "../../utils/db";
 import { HourEntry, HourlyTypes } from "./HourEntry";
 
-const getHours = () => new Array(24).fill(0).map((_, i) => {
-  const adjustedIndex = i + 6;
+const getHours = (startOfDay = 6) => new Array(24).fill(0).map((_, i) => {
+  const adjustedIndex = i + startOfDay;
   
   if (adjustedIndex > 23) {
     return `0${adjustedIndex - 24}:00`;

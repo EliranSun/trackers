@@ -75,6 +75,8 @@ export const FoodType = {
     beer: "🍺",
     cocktail: "🍹",
     wine: "🍷",
+    vodka: "🥃",
+    whiskey: "🥃",
     chocolate: "🍫",
     mustard: "🥫",
     mayonnaise: "🥫",

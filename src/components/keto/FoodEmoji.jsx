@@ -1,21 +1,14 @@
 import {FoodType} from "../../constants";
 import {useRef, useState} from "react";
 import classNames from "classnames";
-import {useClickOutside} from "../../hooks/useClickOutside";
-import {TOTAL_CARBS} from "./KetoTable";
 
 export const FoodEmoji = ({name, onClick, carbs}) => {
     const ref = useRef(null);
     const [isSelected, setIsSelected] = useState(false);
 
-    // useClickOutside(ref, () => {
-    //     setIsSelected(false);
-    //     onClick(false);
-    // });
-
     const foodEmoji = Object
         .entries(FoodType)
-        .find(([key, emoji]) => name.toLowerCase().includes(key));
+        .find(([key]) => name.toLowerCase().includes(key)) || [null, "😋"];
 
     return (
         <div

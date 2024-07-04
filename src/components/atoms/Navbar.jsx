@@ -71,21 +71,26 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
               setIsMenuOpen(false);
             }}>
             <SmileyXEyes size={50}/>
+            Pron
           </NavButton>
           <NavButton>
             <SmileyAngry size={50}/>
+            Anger
           </NavButton>
           <NavButton>
             <Megaphone size={50}/>
+            
           </NavButton>
           <NavButton>
             <ChartBar size={50}/>
+            Stats
           </NavButton>
           <NavButton onClick={(event) => {
             event.stopPropagation();
             window.location.reload();
           }}>
             <ArrowClockwise size={50}/>
+            Refresh
           </NavButton>
         </div> : null}
     </>

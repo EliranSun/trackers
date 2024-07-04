@@ -79,7 +79,7 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
           </NavButton>
           <NavButton>
             <Megaphone size={50}/>
-            
+            Snore
           </NavButton>
           <NavButton>
             <ChartBar size={50}/>

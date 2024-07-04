@@ -95,4 +95,5 @@ export const FoodType = {
     schnitchel: "🍖",
     shnitchel: "🍖",
     couscous: "🍚",
+    nuts: "🥜",
 };

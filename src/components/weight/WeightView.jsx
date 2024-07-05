@@ -22,6 +22,22 @@ const MetricInput = ({value, onChange, label}) => {
         </div>
     );
 };
+
+export const getCreatedTime = (date) => {
+    if (!date) {
+        return "No logs yet";
+    }
+
+    const createdDate = new Date(date);
+    // 24-hour time format
+    const createdTime = createdDate.toLocaleTimeString("en-IL", {
+        hour: "2-digit",
+        minute: "2-digit",
+    });
+
+    return `${createdTime}`;
+}
+
 export const WeightView = ({date}) => {
     const {currentLog, addLog, editLog, refetch} = useWeightLogs(date);
     const [newLog, setNewLog] = useState({weight: 0, fat: 0});
@@ -34,6 +50,7 @@ export const WeightView = ({date}) => {
         <section className="flex flex-col justify-center">
             <div className="flex flex-col items-center">
                 <Metrics>
+                    {getCreatedTime(newLog.created_at)}
                     <MetricInput
                         value={newLog?.weight}
                         onChange={value => setNewLog({...newLog, weight: value})}

@@ -60,8 +60,8 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
           onClick={() => setIsMenuOpen(false)}
           className={classNames({
             "text-black px-4": true,
-            "flex flex-wrap gap-8 items-end justify-center backdrop-blur-lg": true,
-            "w-screen h-screen bg-white/20 fixed inset-0 z-20 ": true,
+            "flex flex-wrap gap-8 backdrop-blur-lg": true,
+            "w-screen h-screen bg-white/20 fixed inset-0 z-20": true,
           })}>
           <NavButton
             isSelected={selectedView === TrackerNames.NO_PRON}

@@ -9,6 +9,7 @@ export const NavButton = ({ children, isSelected, onClick }) => {
         "text-white/50": !isSelected,
         "hover:bg-black user-select-none": true,
         "p-4 relative z-20": true,
+        "flex items-center justify-center": true,
       })}>
       {children}
     </button>

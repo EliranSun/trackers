@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getSleepLogs, setSleepLog } from "../../utils/db";
 import { CalendarTemplate } from "../../components/templates/CalendarTemplate";
 
-export const SleepView = ({ date }) => {
+export const AngerView = ({ date }) => {
   const [sleepLogs, setSleepLogs] = useState([]);
   
   useEffect(() => {

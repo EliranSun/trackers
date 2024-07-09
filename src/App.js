@@ -8,6 +8,8 @@ import { DateNavigation } from "./components/atoms/DateNavigation";
 import { WeightView } from "./features/weight/WeightView";
 import { SleepView } from "./features/sleep/SleepView";
 import { AngerView } from "./features/anger/AngerView";
+import { DatesView } from "./features/dates/DatesView";
+import { DinnerView } from "./features/dinner/DinnerView";
 
 const ViewComponent = {
   [TrackerNames.KETO]: KetoTable,
@@ -15,6 +17,8 @@ const ViewComponent = {
   [TrackerNames.WEIGHT]: WeightView,
   [TrackerNames.SLEEP]: SleepView,
   [TrackerNames.ANGER]: AngerView,
+  [TrackerNames.DATES]: DatesView,
+  [TrackerNames.DINNER]: DinnerView,
 }
 
 function App() {

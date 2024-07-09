@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import { getSleepLogs, setSleepLog } from "../../utils/db";
 import { CalendarTemplate } from "../../components/templates/CalendarTemplate";
 
-export const AngerView = ({ date }) => {
-  const [sleepLogs, setSleepLogs] = useState([]);
+export const DinnerView = ({ date }) => {
+  const [dinnerLogs, setDinnerLogs] = useState([]);
   
   useEffect(() => {
     getSleepLogs().then((logs) => {
-      setSleepLogs(logs);
+      setDinnerLogs(logs);
     });
   }, []);
   
   return (
     <CalendarTemplate
-      title="Anger"
+      title="Dinner"
       date={date}
-      data={sleepLogs}
+      data={dinnerLogs}
       onClick={async (id, value) => {
         try {
           await setSleepLog(date, value, id);

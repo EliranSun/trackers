@@ -9,7 +9,6 @@ export const DayOfYear = ({
   date,
   now,
   dayInMonthIndex,
-  isLastInMonth,
   isEven,
   onClick = noop,
 }) => {

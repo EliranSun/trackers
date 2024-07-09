@@ -47,6 +47,75 @@ export const TrackerIcons = {
     [TrackerNames.DATES]: Heart,
 };
 
+export const TrackerType = {
+    CHECKBOX: "checkbox",
+    NUMBER: "number",
+    TEXT: "text",
+}
+
+export const Trackers = {
+    [TrackerNames.KETO]: {
+        name: TrackerNames.KETO,
+        icon: TrackerIcons[TrackerNames.KETO],
+        type: TrackerType.TEXT,
+    },
+    [TrackerNames.PRON]: {
+        name: TrackerNames.PRON,
+        icon: TrackerIcons[TrackerNames.PRON],
+        type: TrackerType.CHECKBOX,
+    },
+    [TrackerNames.SLEEP]: {
+        name: TrackerNames.SLEEP,
+        icon: TrackerIcons[TrackerNames.SLEEP],
+        type: TrackerType.NUMBER,
+    },
+    [TrackerNames.WEIGHT]: {
+        name: TrackerNames.WEIGHT,
+        icon: TrackerIcons[TrackerNames.WEIGHT],
+        type: TrackerType.NUMBER,
+    },
+    [TrackerNames.HOURLY]: {
+        name: TrackerNames.HOURLY,
+        icon: TrackerIcons[TrackerNames.HOURLY],
+        type: TrackerType.TEXT,
+    },
+    [TrackerNames.ANGER]: {
+        name: TrackerNames.ANGER,
+        icon: TrackerIcons[TrackerNames.ANGER],
+        type: TrackerType.CHECKBOX,
+    },
+    [TrackerNames.ESX]: {
+        name: TrackerNames.ESX,
+        icon: TrackerIcons[TrackerNames.ESX],
+        type: TrackerType.CHECKBOX,
+    },
+    [TrackerNames.LYING]: {
+        name: TrackerNames.LYING,
+        icon: TrackerIcons[TrackerNames.LYING],
+        type: TrackerType.CHECKBOX,
+    },
+    [TrackerNames.DINNER]: {
+        name: TrackerNames.DINNER,
+        icon: TrackerIcons[TrackerNames.DINNER],
+        type: TrackerType.CHECKBOX,
+    },
+    [TrackerNames.SMALL_THINGS]: {
+        name: TrackerNames.SMALL_THINGS,
+        icon: TrackerIcons[TrackerNames.SMALL_THINGS],
+        type: TrackerType.CHECKBOX,
+    },
+    [TrackerNames.SNORE]: {
+        name: TrackerNames.SNORE,
+        icon: TrackerIcons[TrackerNames.SNORE],
+        type: TrackerType.CHECKBOX,
+    },
+    [TrackerNames.DATES]: {
+        name: TrackerNames.DATES,
+        icon: TrackerIcons[TrackerNames.DATES],
+        type: TrackerType.CHECKBOX,
+    },
+}
+
 export const KetoKeys = {
     NAME: "name",
     CALORIES: "calories",

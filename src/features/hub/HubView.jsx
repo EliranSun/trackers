@@ -1,33 +1,60 @@
-import {useCallback, useEffect, useState} from "react";
-import {getHourlyLogs, getKetoLogs, getWeightLogs} from "../../utils/db";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import {DbTables, getHourlyLogs, getKetoLogs, getLogs, getWeightLogs, setLog} from "../../utils/db";
 import {KetoEntry} from "../keto/KetoEntry";
 import {MetricInput} from "../weight/WeightView";
 import {HourEntry} from "../hourly/HourEntry";
 import {formatHour} from "../hourly/HourlyView";
+import {TrackerIcons, TrackerNames, Trackers, TrackerType} from "../../constants";
+import classNames from "classnames";
 
 const hour = new Date().getHours();
 
-const Checkbox = ({label, isChecked, onChange}) => {
+const Checkbox = ({label, date, icon: Icon, isChecked: initIsChecked = null, onChange}) => {
+    const [isChecked, setIsChecked] = useState(initIsChecked);
+
+    useEffect(() => {
+        const key = DbTables[label];
+        if (!key || !date) {
+            console.log({DbTables, label, date});
+            return;
+        }
+
+        getLogs(DbTables[label], date).then(data => {
+            if (data.length === 0) {
+                setIsChecked(null);
+                return;
+            }
+
+            setIsChecked(data[0].isMet);
+        });
+    }, []);
     return (
-        <div className="flex flex-col items-center gap-2">
-            <input
-                type="checkbox"
-                checked={isChecked}
-                onChange={onChange}
-                className="size-8"/>
+        <button
+            onClick={() => onChange(!isChecked)}
+            className={classNames({
+                "flex flex-col items-center gap-2 p-8": true,
+                "border-2 border-gray-300": true,
+                "bg-green-100 border-green-500": isChecked !== null && isChecked,
+                "bg-red-100 border-red-500": isChecked !== null && !isChecked,
+            })}>
+            {/*<input*/}
+            {/*    type="checkbox"*/}
+            {/*    checked={isChecked}*/}
+            {/*    onChange={onChange}*/}
+            {/*    className="size-8"/>*/}
+            <Icon size={42}/>
             <h2>{label}</h2>
-        </div>
+        </button>
     )
 }
 
 export const HubView = ({date, time}) => {
     const [ketoEntry, setKetoEntry] = useState({});
     const [hourEntry, setHourEntry] = useState({});
-    const [isSleepGoalMet, setIsSleepGoalMet] = useState(false);
-    const [weightEntry, setWeightEntry] = useState({
-        weight: 0,
-        fat: 0,
-    });
+    const [weightEntry, setWeightEntry] = useState({weight: 0, fat: 0,});
+    const checkboxTrackers = useMemo(() => {
+        return Object.values(Trackers).filter(tracker => tracker.type === TrackerType.CHECKBOX);
+    }, []);
 
     const fetch = useCallback(() => {
         getKetoLogs(date).then(data => {
@@ -100,43 +127,22 @@ export const HubView = ({date, time}) => {
                     onChange={value => setWeightEntry({...weightEntry, fat: value})}
                     label="% Fat"/>
             </div>
-            <div className="grid grid-cols-3 gap-4 py-8">
-                <Checkbox
-                    label="Sleep"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Pron"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Angry"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Date"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Esx"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Lie/Not saying what I want"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Dinner"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Snore"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
-                <Checkbox
-                    label="Small Things"
-                    isChecked={isSleepGoalMet}
-                    onChange={() => setIsSleepGoalMet(!isSleepGoalMet)}/>
+            <div className="grid grid-cols-2 gap-2 justify-center py-8">
+                {checkboxTrackers.map(tracker => (
+                    <Checkbox
+                        key={tracker.name}
+                        label={tracker.name}
+                        icon={tracker.icon}
+                        date={date}
+                        isChecked={tracker.isChecked}
+                        onChange={async (isChecked) => {
+                            try {
+                                await setLog(date, tracker.name, isChecked);
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        }}/>
+                ))}
             </div>
         </section>
     )

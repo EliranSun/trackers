@@ -60,7 +60,8 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
           onClick={() => setIsMenuOpen(false)}
           className={classNames({
             "text-black px-4": true,
-            "flex flex-wrap gap-8 backdrop-blur-lg": true,
+            "grid grid-cols-3 grid-rows-3": true,
+            "backdrop-blur-lg": true,
             "w-screen h-screen bg-white/20 fixed inset-0 z-20": true,
           })}>
           <NavButton

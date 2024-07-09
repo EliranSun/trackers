@@ -23,6 +23,7 @@ export const NavMenu = ({items, onClose, selectedMenuItem, onSelect = noop}) => 
                     return (
                         <NavButton
                             key={name}
+                            color="black"
                             isSelected={selectedMenuItem === name}
                             onClick={() => {
                                 onSelect(name);

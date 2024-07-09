@@ -9,7 +9,7 @@ const Metrics = ({children}) => {
     );
 };
 
-const MetricInput = ({value, onChange, label}) => {
+export const MetricInput = ({value, onChange, label}) => {
     return (
         <div className="flex flex-col bg-gray-600 rounded-lg items-center relative">
             <input

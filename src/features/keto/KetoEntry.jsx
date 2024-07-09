@@ -9,17 +9,17 @@ import classNames from "classnames";
 import {FoodEmoji} from "./FoodEmoji";
 
 export const KetoEntry = ({
-                              date,
-                              refetch,
-                              name: initName,
-                              calories,
-                              id,
-                              protein,
-                              isNew,
-                              carbs,
-                              onSelectEntry,
-                              isSelected,
-                          }) => {
+    date,
+    refetch,
+    name: initName,
+    calories,
+    id,
+    protein,
+    isNew,
+    carbs,
+    onSelectEntry,
+    isSelected,
+}) => {
     const [isThinking, setIsThinking] = useState(false);
     const [messages, setMessages] = useState([]);
     const [name, setName] = useState(initName || "");
@@ -30,15 +30,11 @@ export const KetoEntry = ({
     });
 
     const addMessage = useCallback(newMessage => {
-        console.log(newMessage);
         setMessages(prev => [...prev, newMessage]);
     }, []);
 
     useEffect(() => {
         addMessage(`KetoEntry mount with ${JSON.stringify({id, name, calories, protein, carbs})}`);
-        return () => {
-            addMessage(`KetoEntry unmount`);
-        }
     }, []);
 
     useEffect(() => {

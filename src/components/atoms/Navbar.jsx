@@ -41,7 +41,7 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
       </div>
       {isMenuOpen ?
         <NavMenu
-          items={PagesList.slice(4)}
+          items={PagesList.slice(4, PagesList.length)}
           onClose={() => setIsMenuOpen(false)}
           selectedMenuItem={selectedView}
           onSelect={setSelectedView}/> : null}

@@ -16,24 +16,22 @@ export const NavMenu = ({ items, onClose, selectedMenuItem, onSelect = noop }) =
         "backdrop-blur-lg": true,
         "w-screen h-screen bg-white/20 fixed inset-0 z-20": true,
       })}>
-      {items
-        .slice(4, items.length)
-        .map((name) => {
-          const Icon = TrackerIcons[name];
-          
-          return (
-            <NavButton
-              key={name}
-              isSelected={selectedMenuItem === name}
-              onClick={() => {
-                onSelect(name);
-                onClose();
-              }}>
-              <Icon size={ICON_SIZE}/>
-              <label>{name}</label>
-            </NavButton>
-          );
-        })}
+      {items.map((name) => {
+        const Icon = TrackerIcons[name];
+        
+        return (
+          <NavButton
+            key={name}
+            isSelected={selectedMenuItem === name}
+            onClick={() => {
+              onSelect(name);
+              onClose();
+            }}>
+            <Icon size={ICON_SIZE}/>
+            <label>{name}</label>
+          </NavButton>
+        );
+      })}
       <NavButton onClick={(event) => {
         event.stopPropagation();
         window.location.reload();

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { getSleepLogs, setSleepLog } from "../../utils/db";
+import { DbTables, getLogs, setLog } from "../../utils/db";
 import { CalendarTemplate } from "../../components/templates/CalendarTemplate";
 
-export const DatesView = ({ date }) => {
-  const [datesLogs, setDatesLogs] = useState([]);
+export const AngerView = ({ date }) => {
+  const [sleepLogs, setSleepLogs] = useState([]);
   
   useEffect(() => {
-    getSleepLogs().then((logs) => {
-      setDatesLogs(logs);
+    getLogs(DbTables.DATES_LOGS).then((logs) => {
+      setSleepLogs(logs);
     });
   }, []);
   
@@ -15,10 +15,10 @@ export const DatesView = ({ date }) => {
     <CalendarTemplate
       title="Dates"
       date={date}
-      data={datesLogs}
+      data={sleepLogs}
       onClick={async (id, value) => {
         try {
-          await setSleepLog(date, value, id);
+          await setLog(DbTables.DATES_LOGS, date, value, id);
         } catch (error) {
           console.error(error);
         }

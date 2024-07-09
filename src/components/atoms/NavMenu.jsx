@@ -4,6 +4,8 @@ import { ArrowClockwise } from "@phosphor-icons/react";
 import { NavButton } from "./NavButton";
 import { noop } from "lodash";
 
+const ICON_SIZE = 50;
+
 export const NavMenu = ({ items, onClose, selectedMenuItem, onSelect = noop }) => {
   return (
     <div
@@ -15,7 +17,7 @@ export const NavMenu = ({ items, onClose, selectedMenuItem, onSelect = noop }) =
         "w-screen h-screen bg-white/20 fixed inset-0 z-20": true,
       })}>
       {items
-        .slice(4)
+        .slice(4, items.length)
         .map((name) => {
           const Icon = TrackerIcons[name];
           
@@ -27,7 +29,8 @@ export const NavMenu = ({ items, onClose, selectedMenuItem, onSelect = noop }) =
                 onSelect(name);
                 onClose();
               }}>
-              <Icon size={30}/>
+              <Icon size={ICON_SIZE}/>
+              <label>{name}</label>
             </NavButton>
           );
         })}
@@ -35,8 +38,8 @@ export const NavMenu = ({ items, onClose, selectedMenuItem, onSelect = noop }) =
         event.stopPropagation();
         window.location.reload();
       }}>
-        <ArrowClockwise size={50}/>
-        Refresh
+        <ArrowClockwise size={ICON_SIZE}/>
+        <label>Refresh</label>
       </NavButton>
     </div>
   );

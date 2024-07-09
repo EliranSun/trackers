@@ -17,7 +17,7 @@ const NavButton = ({ children, isSelected, onClick }) => {
       className={classNames({
         "text-white": isSelected,
         "text-white/50": !isSelected,
-        "hover:bg-black": true,
+        "hover:bg-black user-select-none": true,
         "p-4 relative z-20": true,
       })}>
       {children}

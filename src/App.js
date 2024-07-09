@@ -24,6 +24,7 @@ const ViewComponent = {
 function App() {
   const [dateObject, setDateObject] = useState(new Date());
   const [dateLabel, setDateLabel] = useState(dateObject.toLocaleDateString("en-IL"));
+  const [time, setTime] = useState(dateObject.toLocaleTimeString("en-IL"));
   const [selectedView, setSelectedView] = useState(TrackerNames.KETO);
   const View = ViewComponent[selectedView];
   
@@ -35,7 +36,7 @@ function App() {
         dateLabel={dateLabel}
         setDateLabel={setDateLabel}/>
       <div className="w-full pt-16 pb-48">
-        <View date={dateLabel}/>
+        <View date={dateLabel} time={time}/>
       </div>
       <Navbar
         selectedView={selectedView}

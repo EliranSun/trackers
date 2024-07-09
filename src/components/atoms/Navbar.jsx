@@ -6,7 +6,10 @@ import {
   SmileyXEyes,
   SmileyAngry,
   Megaphone,
-  ChartBar
+  ChartBar,
+  Heart,
+  CircleHalfTilt,
+  ForkKnife,
 } from "@phosphor-icons/react";
 import { useState } from "react";
 
@@ -84,15 +87,15 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
             Snore
           </NavButton>
           <NavButton>
-            <Megaphone size={50}/>
+            <Heart size={50}/>
             Dates
           </NavButton>
           <NavButton>
-            <Megaphone size={50}/>
+            <CircleHalfTilt size={50}/>
             Sex
           </NavButton>
           <NavButton>
-            <Megaphone size={50}/>
+            <ForkKnife size={50}/>
             Dinner
           </NavButton>
           <NavButton>

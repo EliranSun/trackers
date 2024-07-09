@@ -1,32 +1,12 @@
 import { TrackerIcons, TrackerNames } from "../../constants";
 import classNames from "classnames";
-import {
-  ArrowClockwise,
-  DotsThreeOutlineVertical,
-  SmileyXEyes,
-  SmileyAngry,
-  Waveform,
-  ChartBar,
-  Heart,
-  CircleHalfTilt,
-  ForkKnife,
-} from "@phosphor-icons/react";
+import { DotsThreeOutlineVertical, } from "@phosphor-icons/react";
 import { useState } from "react";
+import { NavButton } from "./NavButton";
+import { NavMenu } from "./NavMenu";
 
-const NavButton = ({ children, isSelected, onClick }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={classNames({
-        "text-white": isSelected,
-        "text-white/50": !isSelected,
-        "hover:bg-black user-select-none": true,
-        "p-4 relative z-20": true,
-      })}>
-      {children}
-    </button>
-  )
-}
+const PagesList = Object.values(TrackerNames);
+
 export const Navbar = ({ selectedView, setSelectedView }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
@@ -38,9 +18,9 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
         "bg-gray-700": !isMenuOpen,
         "bg-transparent": isMenuOpen,
       })}>
-        {Object.values(TrackerNames)
-          .filter(name => name !== TrackerNames.NO_PRON)
-          .map((name, index) => {
+        {PagesList
+          .slice(0, 4)
+          .map((name) => {
             const Icon = TrackerIcons[name];
             
             return (
@@ -60,56 +40,11 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
         </NavButton>
       </div>
       {isMenuOpen ?
-        <div
-          onClick={() => setIsMenuOpen(false)}
-          className={classNames({
-            "text-black px-4": true,
-            "grid grid-cols-3 grid-rows-3": true,
-            "backdrop-blur-lg": true,
-            "w-screen h-screen bg-white/20 fixed inset-0 z-20": true,
-          })}>
-          <NavButton
-            isSelected={selectedView === TrackerNames.NO_PRON}
-            onClick={(event) => {
-              event.stopPropagation();
-              setSelectedView(TrackerNames.NO_PRON);
-              setIsMenuOpen(false);
-            }}>
-            <SmileyXEyes size={50}/>
-            Porn
-          </NavButton>
-          <NavButton>
-            <SmileyAngry size={50}/>
-            Anger
-          </NavButton>
-          <NavButton>
-            <Waveform size={50}/>
-            Snore
-          </NavButton>
-          <NavButton>
-            <Heart size={50}/>
-            Dates
-          </NavButton>
-          <NavButton>
-            <CircleHalfTilt size={50}/>
-            Sex
-          </NavButton>
-          <NavButton>
-            <ForkKnife size={50}/>
-            Dinner
-          </NavButton>
-          <NavButton>
-            <ChartBar size={50}/>
-            Stats
-          </NavButton>
-          <NavButton onClick={(event) => {
-            event.stopPropagation();
-            window.location.reload();
-          }}>
-            <ArrowClockwise size={50}/>
-            Refresh
-          </NavButton>
-        </div> : null}
+        <NavMenu
+          items={PagesList.slice(4)}
+          onClose={() => setIsMenuOpen(false)}
+          selectedMenuItem={selectedView}
+          onSelect={setSelectedView}/> : null}
     </>
   );
 };

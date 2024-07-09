@@ -5,7 +5,7 @@ import {
   DotsThreeOutlineVertical,
   SmileyXEyes,
   SmileyAngry,
-  Megaphone,
+  Waveform,
   ChartBar,
   Heart,
   CircleHalfTilt,
@@ -83,7 +83,7 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
             Anger
           </NavButton>
           <NavButton>
-            <Megaphone size={50}/>
+            <Waveform size={50}/>
             Snore
           </NavButton>
           <NavButton>

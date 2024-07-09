@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { Measurements } from "../atoms/Measurements";
-import { Measurement } from "../atoms/Measurement";
+import { Measurements } from "../../components/atoms/Measurements";
+import { Measurement } from "../../components/atoms/Measurement";
 import { getHourlyLogs, InstantiateHours } from "../../utils/db";
 import { HourEntry, HourlyTypes } from "./HourEntry";
 

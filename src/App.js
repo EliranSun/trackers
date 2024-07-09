@@ -2,11 +2,11 @@ import './App.css';
 import { useState } from "react";
 import { TrackerNames } from "./constants";
 import { Navbar } from "./components/atoms/Navbar";
-import { KetoTable } from "./components/keto/KetoTable";
-import { HourlyView } from "./components/hourly/HourlyView";
+import { KetoTable } from "./features/keto/KetoTable";
+import { HourlyView } from "./features/hourly/HourlyView";
 import { DateNavigation } from "./components/atoms/DateNavigation";
-import { WeightView } from "./components/weight/WeightView";
-import { SleepView } from "./components/sleep/SleepView";
+import { WeightView } from "./features/weight/WeightView";
+import { SleepView } from "./features/sleep/SleepView";
 
 const ViewComponent = {
   [TrackerNames.KETO]: KetoTable,

@@ -16,7 +16,7 @@ export const NavMenu = ({items, onClose, selectedMenuItem, onSelect = noop}) => 
                 "backdrop-blur-lg": true,
                 "w-screen h-[calc(100vh-6rem)] bg-white/20 fixed inset-0 z-20": true,
             })}>
-            <div className="grid grid-cols-3 grid-rows-3 gap-16">
+            <div className="grid grid-cols-4 grid-rows-3 gap-16">
                 {items.map((name) => {
                     const Icon = TrackerIcons[name];
 

@@ -10,7 +10,8 @@ import {
     SmileyAngry,
     SmileyXEyes,
     Timer,
-    Waveform
+    Waveform,
+    ToiletPaper,
 } from "@phosphor-icons/react";
 
 export const FOOD_API = "https://walak.vercel.app/nutrition";
@@ -34,7 +35,7 @@ export const TrackerNames = {
 
 export const TrackerIcons = {
     [TrackerNames.KETO]: Egg,
-    [TrackerNames.PRON]: SmileyXEyes,
+    [TrackerNames.PRON]: ToiletPaper,
     [TrackerNames.SLEEP]: Bed,
     [TrackerNames.WEIGHT]: Ruler,
     [TrackerNames.HOURLY]: Timer,

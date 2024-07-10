@@ -26,7 +26,7 @@ export const Navbar = ({selectedView, setSelectedView}) => {
                         setIsMenuOpen(false);
                     }}>
                     <House size={30}/>
-                    <label>Home</label>
+                    <label className="text-sm">Home</label>
                 </NavButton>
                 {PagesList
                     .slice(0, NAVBAR_PAGE_LIMIT)
@@ -42,7 +42,7 @@ export const Navbar = ({selectedView, setSelectedView}) => {
                                     setIsMenuOpen(false);
                                 }}>
                                 <Icon size={30}/>
-                                <label>{name}</label>
+                                <label className="text-sm">{name}</label>
                             </NavButton>
                         );
                     })}

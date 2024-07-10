@@ -127,7 +127,7 @@ export const HubView = ({date, time}) => {
                     onChange={value => setWeightEntry({...weightEntry, fat: value})}
                     label="% Fat"/>
             </div>
-            <div className="grid grid-cols-2 gap-2 justify-center py-8">
+            <div className="grid grid-cols-3 gap-2 justify-center py-8">
                 {checkboxTrackers.map(tracker => (
                     <Checkbox
                         key={tracker.name}

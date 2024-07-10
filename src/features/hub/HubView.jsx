@@ -137,6 +137,8 @@ export const HubView = ({date}) => {
                         key={tracker.name}
                         id={tracker.id}
                         label={tracker.name}
+                        isSuccessMessage={tracker.isSuccessMessage}
+                        isFailureMessage={tracker.isFailureMessage}
                         icon={tracker.icon}
                         date={date}
                         isChecked={tracker.isChecked}/>

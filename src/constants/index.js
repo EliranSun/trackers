@@ -108,8 +108,8 @@ export const Trackers = {
         name: TrackerNames.LYING,
         icon: TrackerIcons[TrackerNames.LYING],
         type: TrackerType.CHECKBOX,
-        isSuccessMessage: "lied",
-        isFailureMessage: "truthful",
+        isSuccessMessage: "truthful",
+        isFailureMessage: "lied",
         isPositive: false,
     },
     [TrackerNames.DINNER]: {

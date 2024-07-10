@@ -59,8 +59,8 @@ isPositive,
             <h2 className="text-xs">
                 {(isChecked && isPositive) ? isSuccessMessage : ""}
                  {(!isChecked && isPositive) ? isFailureMessage : ""}
-                {(isChecked && !isPositive) ? isFailureMessage : ""}
-                {(!isChecked && !isPositive) ? isSuccessMessage : ""}
+                {(isChecked && !isPositive) ? isSuccessMessage : ""}
+                {(!isChecked && !isPositive) ? isFailureMessage : ""}
             </h2>
         </button>
     )

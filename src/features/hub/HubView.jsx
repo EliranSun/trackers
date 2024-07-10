@@ -20,6 +20,7 @@ isSuccessMessage,
 isPositive,
 }) => {
     const [isChecked, setIsChecked] = useState(initIsChecked);
+    const showPositive = (isChecked && isPositive) || (!isChecked && !isPositive);
 
     useEffect(() => {
         const key = DbTables[label];
@@ -52,16 +53,14 @@ isPositive,
             className={classNames({
                 "flex flex-col items-center gap-2 p-5": true,
                 "border-2 border-gray-300": true,
-                "bg-green-300 border-green-500 text-black": isChecked !== null && isChecked,
-                "bg-red-300 border-red-500 text-black": isChecked !== null && !isChecked,
+                "bg-green-300 border-green-500 text-black": isChecked !== null && showPositive,
+                "bg-red-300 border-red-500 text-black": isChecked !== null && !showPositive,
             })}>
             <Icon size={42}/>
+            {isChecked !== null ?
             <h2 className="text-xs">
-                {(isChecked && isPositive) ? isSuccessMessage : ""}
-                 {(!isChecked && isPositive) ? isFailureMessage : ""}
-                {(isChecked && !isPositive) ? isSuccessMessage : ""}
-                {(!isChecked && !isPositive) ? isFailureMessage : ""}
-            </h2>
+                {showPositive ? isSuccessMessage : isFailureMessage}
+            </h2> : null}
         </button>
     )
 }

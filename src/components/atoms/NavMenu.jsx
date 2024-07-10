@@ -14,7 +14,7 @@ export const NavMenu = ({items, onClose, selectedMenuItem, onSelect = noop}) => 
                 "text-black px-4": true,
                 "flex items-center justify-center": true,
                 "backdrop-blur-lg": true,
-                "w-screen h-[calc(100vh-6rem)] bg-white/20 fixed inset-0 z-20": true,
+                "w-screen h-[calc(100vh-6rem)] bg-white/40 fixed inset-0 z-20": true,
             })}>
             <div className="grid grid-cols-3 grid-rows-3 gap-16">
                 {items.map((name) => {
@@ -34,7 +34,7 @@ export const NavMenu = ({items, onClose, selectedMenuItem, onSelect = noop}) => 
                         </NavButton>
                     );
                 })}
-                <NavButton onClick={(event) => {
+                <NavButton color="black" onClick={(event) => {
                     event.stopPropagation();
                     window.location.reload();
                 }}>

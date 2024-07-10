@@ -16,8 +16,7 @@ export const Navbar = ({selectedView, setSelectedView}) => {
             <div className={classNames({
                 "text-gray-700": true,
                 "flex w-screen left-0 fixed bottom-0 z-20 h-24 justify-between pb-4 px-4 font-mono": true,
-                "bg-gray-700": !isMenuOpen,
-                "bg-transparent": isMenuOpen,
+                "bg-gray-700": true,
             })}>
                 <NavButton
                     isSelected={selectedView === "home"}
@@ -26,7 +25,7 @@ export const Navbar = ({selectedView, setSelectedView}) => {
                         setIsMenuOpen(false);
                     }}>
                     <House size={30}/>
-                    <label className="text-sm">Home</label>
+                    {/*<label className="text-sm">Home</label>*/}
                 </NavButton>
                 {PagesList
                     .slice(0, NAVBAR_PAGE_LIMIT)
@@ -42,7 +41,7 @@ export const Navbar = ({selectedView, setSelectedView}) => {
                                     setIsMenuOpen(false);
                                 }}>
                                 <Icon size={30}/>
-                                <label className="text-sm">{name}</label>
+                                {/*<label className="text-xs">{name}</label>*/}
                             </NavButton>
                         );
                     })}

@@ -67,7 +67,7 @@ export const Trackers = {
     [TrackerNames.SLEEP]: {
         name: TrackerNames.SLEEP,
         icon: TrackerIcons[TrackerNames.SLEEP],
-        type: TrackerType.NUMBER,
+        type: TrackerType.CHECKBOX,
     },
     [TrackerNames.WEIGHT]: {
         name: TrackerNames.WEIGHT,

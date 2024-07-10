@@ -41,13 +41,13 @@ const Checkbox = ({id, label, date, icon: Icon, isChecked: initIsChecked = null}
                 }
             }}
             className={classNames({
-                "flex flex-col items-center gap-2 p-8": true,
+                "flex flex-col items-center gap-2 p-5": true,
                 "border-2 border-gray-300": true,
                 "bg-green-300 border-green-500 text-black": isChecked !== null && isChecked,
                 "bg-red-300 border-red-500 text-black": isChecked !== null && !isChecked,
             })}>
             <Icon size={42}/>
-            <h2>{label}</h2>
+            {/*<h2 className="text-xs">{label.slice(0, 5)}</h2>*/}
         </button>
     )
 }
@@ -131,7 +131,7 @@ export const HubView = ({date}) => {
                     onChange={value => setWeightEntry({...weightEntry, fat: value})}
                     label="% Fat"/>
             </div>
-            <div className="grid grid-cols-4 gap-2 justify-center py-8">
+            <div className="grid grid-cols-4 grid-rows-3 gap-2 justify-center py-8 h-72">
                 {checkboxTrackers.map(tracker => (
                     <Checkbox
                         key={tracker.name}

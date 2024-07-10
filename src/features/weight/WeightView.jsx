@@ -15,10 +15,10 @@ export const MetricInput = ({value, onChange, label}) => {
             <input
                 value={value}
                 type="number"
-                className="bg-transparent text-8xl w-full text-center"
+                className="bg-transparent text-7xl w-full text-center"
                 onChange={event => onChange(Number(event.target.value))}
             />
-            <label className="text-xl">{label}</label>
+            <label className="text-sm">{label}</label>
         </div>
     );
 };

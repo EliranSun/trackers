@@ -9,7 +9,16 @@ import classNames from "classnames";
 
 const hour = new Date().getHours();
 
-const Checkbox = ({id, label, date, icon: Icon, isChecked: initIsChecked = null}) => {
+const Checkbox = ({
+id, 
+label, 
+date, 
+icon: Icon, 
+isChecked: initIsChecked = null,
+isFailureMessage,
+isSuccessMessage,
+isPositive,
+}) => {
     const [isChecked, setIsChecked] = useState(initIsChecked);
 
     useEffect(() => {
@@ -47,7 +56,12 @@ const Checkbox = ({id, label, date, icon: Icon, isChecked: initIsChecked = null}
                 "bg-red-300 border-red-500 text-black": isChecked !== null && !isChecked,
             })}>
             <Icon size={42}/>
-            {/*<h2 className="text-xs">{label.slice(0, 5)}</h2>*/}
+            <h2 className="text-xs">
+                {(isChecked && isPositive) ? isSuccessMessage : ""}
+                 {(!isChecked && isPositive) ? isFailureMessage : ""}
+                {(isChecked && !isPositive) ? isFailureMessage : ""}
+                {(!isChecked && !isPositive) ? isSuccessMessage : ""}
+            </h2>
         </button>
     )
 }
@@ -139,6 +153,7 @@ export const HubView = ({date}) => {
                         label={tracker.name}
                         isSuccessMessage={tracker.isSuccessMessage}
                         isFailureMessage={tracker.isFailureMessage}
+                        isPositive={tracker.isPositive}
                         icon={tracker.icon}
                         date={date}
                         isChecked={tracker.isChecked}/>

@@ -63,11 +63,16 @@ export const Trackers = {
         name: TrackerNames.PRON,
         icon: TrackerIcons[TrackerNames.PRON],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
+        
     },
     [TrackerNames.SLEEP]: {
         name: TrackerNames.SLEEP,
         icon: TrackerIcons[TrackerNames.SLEEP],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
     [TrackerNames.WEIGHT]: {
         name: TrackerNames.WEIGHT,
@@ -83,36 +88,50 @@ export const Trackers = {
         name: TrackerNames.ANGER,
         icon: TrackerIcons[TrackerNames.ANGER],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
     [TrackerNames.ESX]: {
         name: TrackerNames.ESX,
         icon: TrackerIcons[TrackerNames.ESX],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
     [TrackerNames.LYING]: {
         name: TrackerNames.LYING,
         icon: TrackerIcons[TrackerNames.LYING],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
     [TrackerNames.DINNER]: {
         name: TrackerNames.DINNER,
         icon: TrackerIcons[TrackerNames.DINNER],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
     [TrackerNames.SMALL_THINGS]: {
         name: TrackerNames.SMALL_THINGS,
         icon: TrackerIcons[TrackerNames.SMALL_THINGS],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
     [TrackerNames.SNORE]: {
         name: TrackerNames.SNORE,
         icon: TrackerIcons[TrackerNames.SNORE],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
     [TrackerNames.DATES]: {
         name: TrackerNames.DATES,
         icon: TrackerIcons[TrackerNames.DATES],
         type: TrackerType.CHECKBOX,
+        isSuccessMessage: "abstained",
+        isFailureMessage: "watched"
     },
 }
 

@@ -12,6 +12,7 @@ import {
     Timer,
     Waveform,
     ToiletPaper,
+    Bandaids
 } from "@phosphor-icons/react";
 
 export const FOOD_API = "https://walak.vercel.app/nutrition";
@@ -39,7 +40,7 @@ export const TrackerIcons = {
     [TrackerNames.SLEEP]: Bed,
     [TrackerNames.WEIGHT]: Ruler,
     [TrackerNames.HOURLY]: Timer,
-    [TrackerNames.ANGER]: SmileyAngry,
+    [TrackerNames.ANGER]: Bandaids,
     [TrackerNames.ESX]: CircleHalfTilt,
     [TrackerNames.LYING]: Ghost,
     [TrackerNames.DINNER]: ForkKnife,

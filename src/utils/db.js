@@ -11,6 +11,12 @@ export const DbTables = {
     [TrackerNames.ANGER]: "anger_logs",
     [TrackerNames.DINNER]: "dinner_logs",
     [TrackerNames.DATES]: "dates_logs",
+    [TrackerNames.SNORE]: "snore_logs",
+    [TrackerNames.ESX]: "sex_logs",
+    [TrackerNames.PRON]: "porn_logs",
+    [TrackerNames.SNORE]: "snore_logs",
+    [TrackerNames.SMALL_THINGS]: "small_things_logs",
+    [TrackerNames.LYING]: "lying_logs",
 };
 
 export async function getKetoLogs(date) {

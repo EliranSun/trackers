@@ -4,22 +4,22 @@ import {KetoEntry} from "../keto/KetoEntry";
 import {MetricInput} from "../weight/WeightView";
 import {HourEntry} from "../hourly/HourEntry";
 import {formatHour} from "../hourly/HourlyView";
-import {TrackerIcons, TrackerNames, Trackers, TrackerType} from "../../constants";
+import {Trackers, TrackerType} from "../../constants";
 import classNames from "classnames";
 
 const hour = new Date().getHours();
 
-const Checkbox = ({label, date, icon: Icon, isChecked: initIsChecked = null, onChange}) => {
+const Checkbox = ({id, label, date, icon: Icon, isChecked: initIsChecked = null}) => {
     const [isChecked, setIsChecked] = useState(initIsChecked);
 
     useEffect(() => {
         const key = DbTables[label];
         if (!key || !date) {
-            console.log({DbTables, label, date});
             return;
         }
 
         getLogs(DbTables[label], date).then(data => {
+            console.log({label, date, data});
             if (data.length === 0) {
                 setIsChecked(null);
                 return;
@@ -27,28 +27,32 @@ const Checkbox = ({label, date, icon: Icon, isChecked: initIsChecked = null, onC
 
             setIsChecked(data[0].isMet);
         });
-    }, []);
+    }, [date, label]);
+
     return (
         <button
-            onClick={() => onChange(!isChecked)}
+            onClick={async () => {
+                setIsChecked(!isChecked);
+                try {
+                    await setLog(DbTables[label], date, !isChecked, id);
+                    console.info("Log updated", date, label, isChecked)
+                } catch (error) {
+                    console.error(error, date, label, isChecked);
+                }
+            }}
             className={classNames({
                 "flex flex-col items-center gap-2 p-8": true,
                 "border-2 border-gray-300": true,
-                "bg-green-100 border-green-500": isChecked !== null && isChecked,
-                "bg-red-100 border-red-500": isChecked !== null && !isChecked,
+                "bg-green-300 border-green-500 text-black": isChecked !== null && isChecked,
+                "bg-red-300 border-red-500 text-black": isChecked !== null && !isChecked,
             })}>
-            {/*<input*/}
-            {/*    type="checkbox"*/}
-            {/*    checked={isChecked}*/}
-            {/*    onChange={onChange}*/}
-            {/*    className="size-8"/>*/}
             <Icon size={42}/>
             <h2>{label}</h2>
         </button>
     )
 }
 
-export const HubView = ({date, time}) => {
+export const HubView = ({date}) => {
     const [ketoEntry, setKetoEntry] = useState({});
     const [hourEntry, setHourEntry] = useState({});
     const [weightEntry, setWeightEntry] = useState({weight: 0, fat: 0,});
@@ -81,8 +85,8 @@ export const HubView = ({date, time}) => {
                 return;
             }
 
-            const entry = data.find(entry => entry.hour === formatHour(hour));
-            console.log({check: !entry.reality});
+            const entry = data.find(entry =>
+                entry.hour === formatHour(hour));
             if (!entry.reality) {
                 setHourEntry({});
                 return;
@@ -94,7 +98,7 @@ export const HubView = ({date, time}) => {
 
     useEffect(() => {
         fetch();
-    }, [date]);
+    }, [date]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <section>
@@ -127,21 +131,15 @@ export const HubView = ({date, time}) => {
                     onChange={value => setWeightEntry({...weightEntry, fat: value})}
                     label="% Fat"/>
             </div>
-            <div className="grid grid-cols-3 gap-2 justify-center py-8">
+            <div className="grid grid-cols-4 gap-2 justify-center py-8">
                 {checkboxTrackers.map(tracker => (
                     <Checkbox
                         key={tracker.name}
+                        id={tracker.id}
                         label={tracker.name}
                         icon={tracker.icon}
                         date={date}
-                        isChecked={tracker.isChecked}
-                        onChange={async (isChecked) => {
-                            try {
-                                await setLog(date, tracker.name, isChecked);
-                            } catch (error) {
-                                console.error(error);
-                            }
-                        }}/>
+                        isChecked={tracker.isChecked}/>
                 ))}
             </div>
         </section>

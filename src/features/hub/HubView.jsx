@@ -7,8 +7,6 @@ import {formatHour} from "../hourly/HourlyView";
 import {Trackers, TrackerType} from "../../constants";
 import classNames from "classnames";
 
-const hour = new Date().getHours();
-
 const Checkbox = ({
 id, 
 label, 
@@ -66,6 +64,8 @@ isPositive,
 }
 
 export const HubView = ({date}) => {
+    const hour = new Date().getHours();
+    
     const [ketoEntry, setKetoEntry] = useState({});
     const [hourEntry, setHourEntry] = useState({});
     const [weightEntry, setWeightEntry] = useState({weight: 0, fat: 0,});

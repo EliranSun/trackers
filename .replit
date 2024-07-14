@@ -1,0 +1,9 @@
+run = "npm start"
+modules = ["nodejs-20"]
+
+[deployment]
+run = ["sh", "-c", "npm start"]
+
+[[ports]]
+localPort = 3007
+externalPort = 80

@@ -1,7 +1,9 @@
 import {createClient} from "@supabase/supabase-js";
 import {TrackerNames} from "../constants";
 
-const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
+const supabase = 
+    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
 
 export const DbTables = {
     [TrackerNames.KETO]: "keto_logs",
@@ -20,6 +22,10 @@ export const DbTables = {
 };
 
 export async function getKetoLogs(date) {
+    if (!supabase) {
+        return [];
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.KETO])
         .select("*")
@@ -35,6 +41,10 @@ export async function getKetoLogs(date) {
 }
 
 export async function addKetoLog(date, log) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.KETO])
         .insert({
@@ -53,6 +63,10 @@ export async function addKetoLog(date, log) {
 }
 
 export async function deleteKetoLog(id) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.KETO])
         .delete()
@@ -67,6 +81,10 @@ export async function deleteKetoLog(id) {
 }
 
 export async function editKetoLog(id, log) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.KETO])
         .update({
@@ -85,6 +103,10 @@ export async function editKetoLog(id, log) {
 }
 
 export async function getHourlyLogs(date) {
+    if (!supabase) {
+        return [];
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.HOURLY])
         .select("*")
@@ -98,6 +120,10 @@ export async function getHourlyLogs(date) {
 }
 
 export async function updateHourlyIsApproved(id, isApproved) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.HOURLY])
         .update({isApproved})
@@ -111,6 +137,10 @@ export async function updateHourlyIsApproved(id, isApproved) {
 }
 
 export async function InstantiateHours(date, hours) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.HOURLY])
         .insert(hours.map(hour => ({
@@ -126,6 +156,10 @@ export async function InstantiateHours(date, hours) {
 }
 
 export async function updateExpectation(date, hour, text) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.HOURLY])
         .update({expectation: text})
@@ -140,6 +174,10 @@ export async function updateExpectation(date, hour, text) {
 }
 
 export async function updateReality(date, hour, text) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.HOURLY])
         .update({reality: text})
@@ -154,6 +192,10 @@ export async function updateReality(date, hour, text) {
 }
 
 export async function getWeightLogs(date) {
+    if (!supabase) {
+        return [];
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.WEIGHT])
         .select("*")
@@ -169,6 +211,10 @@ export async function getWeightLogs(date) {
 }
 
 export async function addWeightLog(date, log) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.WEIGHT])
         .insert({
@@ -185,6 +231,10 @@ export async function addWeightLog(date, log) {
 }
 
 export async function editWeightLog(id, log) {
+    if (!supabase) {
+        return;
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.WEIGHT])
         .update({
@@ -201,6 +251,10 @@ export async function editWeightLog(id, log) {
 }
 
 export async function getLogs(dbName, date) {
+    if (!supabase) {
+        return [];
+    }
+    
     const {data, error} = await supabase
         .from(dbName)
         .select("*")
@@ -216,6 +270,10 @@ export async function getLogs(dbName, date) {
 }
 
 export async function setLog(dbName, date, isTargetMet, id) {
+   if (!supabase) {
+        return;
+    }
+    
     if (id) {
         const {data, error} = await supabase
             .from(dbName)
@@ -244,6 +302,10 @@ export async function setLog(dbName, date, isTargetMet, id) {
 }
 
 export async function getSleepLogs() {
+    if (!supabase) {
+        return [];
+    }
+    
     const {data, error} = await supabase
         .from(DbTables[TrackerNames.SLEEP])
         .select("*")
@@ -258,6 +320,10 @@ export async function getSleepLogs() {
 }
 
 export async function setSleepLog(date, isTargetMet, id) {
+    if (!supabase) {
+        return;
+    }
+    
     if (id) {
         const {data, error} = await supabase
             .from(DbTables[TrackerNames.SLEEP])

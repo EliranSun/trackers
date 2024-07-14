@@ -2,7 +2,7 @@ import {createClient} from "@supabase/supabase-js";
 import {TrackerNames} from "../constants";
 
 const supabase = 
-    process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    process.env.REACT_APP_SUPABASE_URL &&
     createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
 
 export const DbTables = {

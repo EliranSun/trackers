@@ -1,22 +1,9 @@
 import { useWeightLogs } from "../../hooks/useWeightLogs";
 import { useEffect, useState } from "react";
 import { WeightMetrics } from "./WeightMetrics";
-import { MetricInput } from "./WeightMetricInput";
-
-export const getCreatedTime = (date) => {
-  if (!date) {
-    return "No logs yet";
-  }
-  
-  const createdDate = new Date(date);
-  // 24-hour time format
-  const createdTime = createdDate.toLocaleTimeString("en-IL", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  
-  return `${createdTime}`;
-}
+import { WeightMetricInput } from "./WeightMetricInput";
+import { getCreatedTime } from "../../utils/date";
+import { WeightLineChart } from "./WeightChart";
 
 export const WeightView = ({ date }) => {
   const { currentLog, addLog, editLog, refetch } = useWeightLogs(date);
@@ -31,11 +18,11 @@ export const WeightView = ({ date }) => {
       <div className="flex flex-col items-center">
         <WeightMetrics>
           {getCreatedTime(newLog?.created_at)}
-          <MetricInput
+          <WeightMetricInput
             value={newLog?.weight}
             onChange={value => setNewLog({ ...newLog, weight: value })}
             label="Weight"/>
-          <MetricInput
+          <WeightMetricInput
             value={newLog?.fat}
             onChange={value => setNewLog({ ...newLog, fat: value })}
             label="% Fat"/>
@@ -55,6 +42,8 @@ export const WeightView = ({ date }) => {
           {(currentLog?.weight || currentLog?.fat) ? "🪵LOGGED" : "🪵LOG IT!"}
         </button>
       </div>
+      
+      <WeightLineChart/>
     </section>
   )
 }

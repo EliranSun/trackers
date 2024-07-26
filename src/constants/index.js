@@ -7,12 +7,12 @@ import {
     Gift,
     Heart,
     Ruler,
-    SmileyAngry,
-    SmileyXEyes,
+    House,
     Timer,
     Waveform,
     ToiletPaper,
-    Bandaids
+    Bandaids,
+    CheckFat
 } from "@phosphor-icons/react";
 
 export const FOOD_API = "https://walak.vercel.app/nutrition";
@@ -22,6 +22,7 @@ export const ONE_DAY = 1000 * 60 * 60 * 24;
 export const TrackerNames = {
     KETO: "Keto",
     HOURLY: "Hourly",
+    HABIT: "Habit",
     WEIGHT: "Weight",
     SLEEP: "Sleep",
     PRON: "Pron",
@@ -39,6 +40,8 @@ export const TrackerIcons = {
     [TrackerNames.PRON]: ToiletPaper,
     [TrackerNames.SLEEP]: Bed,
     [TrackerNames.WEIGHT]: Ruler,
+    [TrackerNames.HABIT]: CheckFat,
+    [TrackerNames.HOME]: House,
     [TrackerNames.HOURLY]: Timer,
     [TrackerNames.ANGER]: Bandaids,
     [TrackerNames.ESX]: CircleHalfTilt,
@@ -68,7 +71,7 @@ export const Trackers = {
         isSuccessMessage: "abstained",
         isFailureMessage: "watched",
         isPositive: false,
-        
+
     },
     [TrackerNames.SLEEP]: {
         name: TrackerNames.SLEEP,
@@ -77,6 +80,14 @@ export const Trackers = {
         isSuccessMessage: "rested",
         isFailureMessage: "deprived",
         isPositive: true,
+    },
+    [TrackerNames.SNORE]: {
+        name: TrackerNames.SNORE,
+        icon: TrackerIcons[TrackerNames.SNORE],
+        type: TrackerType.CHECKBOX,
+        isSuccessMessage: "quiet",
+        isFailureMessage: "snored",
+        isPositive: false,
     },
     [TrackerNames.WEIGHT]: {
         name: TrackerNames.WEIGHT,
@@ -127,14 +138,6 @@ export const Trackers = {
         isSuccessMessage: "care",
         isFailureMessage: "neglect",
         isPositive: true,
-    },
-    [TrackerNames.SNORE]: {
-        name: TrackerNames.SNORE,
-        icon: TrackerIcons[TrackerNames.SNORE],
-        type: TrackerType.CHECKBOX,
-        isSuccessMessage: "quiet",
-        isFailureMessage: "snored",
-        isPositive: false,
     },
     [TrackerNames.DATES]: {
         name: TrackerNames.DATES,

@@ -11,9 +11,11 @@ import {AngerView} from "./features/anger/AngerView";
 import {DatesView} from "./features/dates/DatesView";
 import {DinnerView} from "./features/dinner/DinnerView";
 import {HubView} from "./features/hub/HubView";
+import {HabitTemplate} from "./components/templates/HabitTemplate";
 
 const ViewComponent = {
-    "home": HubView,
+    [TrackerNames.HOME]: HubView,
+    [TrackerNames.HABIT]: HabitTemplate,
     [TrackerNames.KETO]: KetoTable,
     [TrackerNames.HOURLY]: HourlyView,
     [TrackerNames.WEIGHT]: WeightView,
@@ -27,11 +29,12 @@ function App() {
     const [dateObject, setDateObject] = useState(new Date());
     const [dateLabel, setDateLabel] = useState(dateObject.toLocaleDateString("en-IL"));
     const [time, setTime] = useState(dateObject.toLocaleTimeString("en-IL"));
-    const [selectedView, setSelectedView] = useState("home");
+    const [selectedView, setSelectedView] = useState(TrackerNames.HABIT);
     const View = ViewComponent[selectedView];
 
     return (
-        <div className="overflow-x-hidden w-screen h-screen bg-gray-900 m-auto flex flex-col items-center px-4">
+        <div
+            className="overflow-x-hidden w-screen h-screen bg-gray-50 dark:bg-gray-900 m-auto flex flex-col text-center m-auto items-center px-4">
             <DateNavigation
                 dateObject={dateObject}
                 setDateObject={setDateObject}

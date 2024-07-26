@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {TrackerNames} from "./constants";
 import {Navbar} from "./components/atoms/Navbar";
 import {KetoTable} from "./features/keto/KetoTable";
@@ -31,6 +31,16 @@ function App() {
     const [time, setTime] = useState(dateObject.toLocaleTimeString("en-IL"));
     const [selectedView, setSelectedView] = useState(TrackerNames.HABIT);
     const View = ViewComponent[selectedView];
+
+    useEffect(() => {
+        // set meta theme color based on day/night
+        const metaThemeColor = document.querySelector("meta[name=theme-color]");
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            metaThemeColor.setAttribute("content", "#1a202c");
+        } else {
+            metaThemeColor.setAttribute("content", "#f7fafc");
+        }
+    }, []);
 
     return (
         <div

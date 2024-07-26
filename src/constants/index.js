@@ -227,7 +227,10 @@ export const FoodType = {
     cinnabon: "🥮",
     cinnamon: "🥮",
     burger: "🍔",
+    biscuit: "🍪",
+    doritos: "🍟",
 };
+
 export const MonthsColors = {
     0: "bg-red-500",
     1: "bg-orange-500",

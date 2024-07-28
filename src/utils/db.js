@@ -369,4 +369,99 @@ export async function setSleepLog(date, isTargetMet, id) {
   }
   
   return data;
+};
+
+export const getHabits = async () => {
+  if (!supabase) {
+    return [];
+  }
+  
+  const { data, error } = await supabase
+    .from("habits")
+    .select("*");
+  
+  if (error) {
+    console.error(error);
+    throw new Error("Get habits failed");
+  }
+  
+  return data;
+};
+
+export const getLogsNew = async (date) => {
+  if (!supabase) {
+    return [];
+  }
+  
+  const { data, error } = await supabase
+    .from("logs")
+    .select("*")
+    .eq("date", date)
+    .order("id", { ascending: false });
+  
+  if (error) {
+    console.error(error);
+    throw new Error("Get logs failed");
+  }
+  
+  return data;
+};
+
+export const addLog = async ({ date, type, value, note }) => {
+  if (!supabase) {
+    return;
+  }
+  
+  const { data, error } = await supabase
+    .from("logs")
+    .insert({
+      date,
+      type,
+      value,
+      note
+    });
+  
+  if (error) {
+    console.error(error);
+    throw new Error("Add log failed");
+  }
+  return data;
+};
+
+export const editLog = async (id, { value, note }) => {
+  if (!supabase) {
+    return;
+  }
+  
+  const { data, error } = await supabase
+    .from("logs")
+    .update({
+      value,
+      note
+    })
+    .eq('id', id);
+  
+  if (error) {
+    console.error(error);
+    throw new Error("Edit log failed");
+  }
+  return data;
+}
+
+export const deleteLog = async (id) => {
+  if (!supabase) {
+    return;
+  }
+  
+  const { data, error } = await supabase
+    .from("logs")
+    .delete()
+    .eq('id', id);
+  
+  if (error) {
+    console.error(error);
+    throw new Error("Delete log failed");
+  }
+  
+  return data;
 }

@@ -29,7 +29,7 @@ function App() {
   const [dateObject, setDateObject] = useState(new Date());
   const [dateLabel, setDateLabel] = useState(dateObject.toLocaleDateString("en-IL"));
   const [time, setTime] = useState(dateObject.toLocaleTimeString("en-IL"));
-  const [selectedView, setSelectedView] = useState(TrackerNames.WEIGHT);
+  const [selectedView, setSelectedView] = useState(TrackerNames.HABIT);
   const View = ViewComponent[selectedView];
   
   useEffect(() => {

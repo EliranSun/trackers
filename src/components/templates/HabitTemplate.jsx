@@ -46,9 +46,9 @@ export const HabitTemplate = ({date}) => {
             {checkboxTrackers.map(tracker => {
                 const Icon = tracker.icon;
                 return (
-                    <div key={tracker.name} className="flex gap-2 my-2">
-                        <h1 className="flex items-center gap-2 mb-1">
-                            <Icon size={20}/> {tracker.name}
+                    <div key={tracker.name} className="flex gap-2 my-1">
+                        <h1 className="flex">
+                            <Icon size={20}/>
                         </h1>
                         <div className={classNames({
                             "flex w-full": true,

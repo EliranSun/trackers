@@ -49,7 +49,9 @@ export const HabitTemplate = ({date}) => {
                     <div key={tracker.name} className="flex gap-2 my-1">
                         <h1 className="flex flex-col">
                             <Icon size={20}/>
-                            <span className="text-[10px]">{tracker.name}</span>
+                            <span className="text-[7px]">
+                                {tracker.name.slice(0,3).toUpperCase()}
+                                </span>
                         </h1>
                         <div className={classNames({
                             "flex w-full": true,

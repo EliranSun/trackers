@@ -31,8 +31,6 @@ export const WeightLineChart = () => {
     });
   }, []);
   
-  console.log({ logs });
-  
   return (
     <div>
       <button onClick={() => setShowTrendLine(!showTrendLine)}>Toggle Trendline</button>
@@ -41,7 +39,7 @@ export const WeightLineChart = () => {
         <Line type="monotone" yAxisId="right" dataKey="fat" stroke="#82ca9d"/>
         {showTrendLine ? <Line type="linear" data={trendLine} dataKey="y" stroke="#82ca9d" dot={false} name="Trendline"/> : null}
         <XAxis dataKey="date"/>
-        <YAxis domain={['auto', 'auto']}/>
+        <YAxis domain={[60, 80]}/>
         <YAxis yAxisId="left" domain={['auto', 'auto']}/>
         <YAxis yAxisId="right" orientation="right" domain={['auto', 'auto']}/>
       </LineChart>

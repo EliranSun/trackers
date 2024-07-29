@@ -44,10 +44,10 @@ export const HabitTemplate = ({ date }) => {
         const Icon = tracker.icon;
         return (
           <div key={tracker.name} className="flex flex-col gap-2 my-1">
-            <h1 className="flex items-center">
+            <h1 className="flex items-center gap-1">
               <Icon size={20}/>
-              <span className="text-[7px]">
-                {tracker.name.slice(0, 3).toUpperCase()}
+              <span className="text-sm">
+                {tracker.name}
               </span>
             </h1>
             <div className={classNames({

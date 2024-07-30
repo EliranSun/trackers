@@ -51,7 +51,7 @@ export const Checkbox = ({
         "border-gray-300": !isHighlighted,
         "border-2 border-black": isHighlighted,
         "bg-green-400 text-black": isChecked !== null && showPositive,
-        "bg-red-700 text-black": isChecked !== null && !showPositive,
+        "bg-red-400 text-black": isChecked !== null && !showPositive,
       })}>
       {/*<span className="opacity-40">{date}</span>*/}
       {/*{isChecked !== null ?*/}

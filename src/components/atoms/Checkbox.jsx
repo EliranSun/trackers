@@ -47,10 +47,10 @@ export const Checkbox = ({
         "flex-grow": true,
         "h-6": true,
         // "border-2 font-mono": true,
-        "bg-gray-200": isChecked === null,
+        "bg-gray-50": isChecked === null,
         "border-gray-300": !isHighlighted,
         "border-2 border-black": isHighlighted,
-        "bg-green-200 text-black": isChecked !== null && showPositive,
+        "bg-green-400 text-black": isChecked !== null && showPositive,
         "bg-red-700 text-black": isChecked !== null && !showPositive,
       })}>
       {/*<span className="opacity-40">{date}</span>*/}

@@ -104,7 +104,7 @@ export const HourEntry = ({
                     <div key={`${hour}-expectation`} className="bg-gray-700 px-2">
                         <input
                             type="text"
-                            className="w-full h-full text-xs bg-transparent"
+                            className="w-full h-full text-wrap text-xs bg-transparent"
                             value={expectation}
                             placeholder="What would you do instead?"
                             onChange={event => {

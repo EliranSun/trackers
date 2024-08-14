@@ -79,8 +79,7 @@ export const HourEntry = ({
             </div>
             <div className="flex flex-col gap-1 w-full">
                 <div key={`${hour}-reality`} className="bg-gray-700 h-full px-2">
-                    <input
-                        type="text"
+                    <textarea
                         className="w-full h-full text-xs bg-transparent"
                         value={reality}
                         placeholder="Reality"

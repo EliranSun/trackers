@@ -81,19 +81,6 @@ export const HourlyView = ({date}) => {
 
   return (
       <section className="flex flex-col gap-1">
-        <Measurements>
-          <Measurement
-              name="Approved"
-              isPercent
-              value={fulfilledPercentage}
-              range={[1, 100]}/>
-          <Measurement
-              name="Rejected"
-              isPercent
-              value={mismatchPercentage}
-              range={[-1, 0]}/>
-        </Measurements>
-        <div className="flex flex-col gap-2 mt-8">
           {hourlyData.map(({id, hour, reality, expectation, isApproved}) =>
               <HourEntry
                   key={`${id}-${date}-${hour}`}
@@ -106,7 +93,6 @@ export const HourlyView = ({date}) => {
                   refetch={fetch}
                   onEntryComplete={fetch}/>
           )}
-        </div>
       </section>
   )
 };

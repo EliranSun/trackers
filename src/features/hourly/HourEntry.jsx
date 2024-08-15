@@ -33,12 +33,12 @@ const Hour = ({ value, ...rest }) => {
 };
 
 const LogEntry = ({ children, isActive }) => {
-    if (isActive) {
+    if (!isActive) {
         return null;
     }
     
     return (
-        <div className="bg-white text-black dark:text-white dark:bg-gray-700 h-full px-2">
+        <div className="bg-white text-black dark:text-white dark:bg-gray-700 p-2 h-16 font-mono">
             {children}
         </div>
     );
@@ -88,7 +88,7 @@ export const HourEntry = ({
     }, [initReality, initExpectation]);
     
     return (
-        <div className="flex gap-1 w-full rounded-lg overflow-hidden">
+        <div className="flex gap-1 w-full rounded-lg overflow-hidden border">
             <Hour
                 value={hour}
                 onClick={() => {
@@ -99,7 +99,7 @@ export const HourEntry = ({
                         .finally(refetch);
                 }}/>
             <div className="flex flex-col gap-1 w-full">
-                <LogEntry>
+                <LogEntry isActive>
                     <textarea
                         className="w-full h-full text-xs bg-transparent"
                         value={reality}

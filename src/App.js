@@ -15,54 +15,54 @@ import { HabitTemplate } from "./components/templates/HabitTemplate";
 import classNames from "classnames";
 
 const ViewComponent = {
-  [TrackerNames.HOME]: HubView,
-  [TrackerNames.HABIT]: HabitTemplate,
-  [TrackerNames.KETO]: KetoTable,
-  [TrackerNames.HOURLY]: HourlyView,
-  [TrackerNames.WEIGHT]: WeightView,
-  [TrackerNames.SLEEP]: SleepView,
-  [TrackerNames.ANGER]: AngerView,
-  [TrackerNames.DATES]: DatesView,
-  [TrackerNames.DINNER]: DinnerView,
+    [TrackerNames.HOME]: HubView,
+    [TrackerNames.HABIT]: HabitTemplate,
+    [TrackerNames.KETO]: KetoTable,
+    [TrackerNames.HOURLY]: HourlyView,
+    [TrackerNames.WEIGHT]: WeightView,
+    [TrackerNames.SLEEP]: SleepView,
+    [TrackerNames.ANGER]: AngerView,
+    [TrackerNames.DATES]: DatesView,
+    [TrackerNames.DINNER]: DinnerView,
 }
 
 function App() {
-  const [dateObject, setDateObject] = useState(new Date());
-  const [dateLabel, setDateLabel] = useState(dateObject.toLocaleDateString("en-IL"));
-  const [time, setTime] = useState(dateObject.toLocaleTimeString("en-IL"));
-  const [selectedView, setSelectedView] = useState(TrackerNames.HABIT);
-  const View = ViewComponent[selectedView];
-  
-  useEffect(() => {
-    // set meta theme color based on day/night
-    const metaThemeColor = document.querySelector("meta[name=theme-color]");
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      metaThemeColor.setAttribute("content", "#1a202c");
-    } else {
-      metaThemeColor.setAttribute("content", "#f7fafc");
-    }
-  }, []);
-  
-  return (
-    <div
-      className={classNames({
-        "overflow-x-hidden w-screen h-screen": true,
-        "bg-gray-100 dark:bg-gray-900": true,
-        "flex flex-col text-center m-auto items-center px-4": true,
-      })}>
-      <DateNavigation
-        dateObject={dateObject}
-        setDateObject={setDateObject}
-        dateLabel={dateLabel}
-        setDateLabel={setDateLabel}/>
-      <div className="w-full pt-16 pb-48">
-        <View date={dateLabel} time={time}/>
-      </div>
-      <Navbar
-        selectedView={selectedView}
-        setSelectedView={setSelectedView}/>
-    </div>
-  );
+    const [dateObject, setDateObject] = useState(new Date());
+    const [dateLabel, setDateLabel] = useState(dateObject.toLocaleDateString("en-IL"));
+    const [time, setTime] = useState(dateObject.toLocaleTimeString("en-IL"));
+    const [selectedView, setSelectedView] = useState(TrackerNames.HABIT);
+    const View = ViewComponent[selectedView];
+    
+    useEffect(() => {
+        // set meta theme color based on day/night
+        const metaThemeColor = document.querySelector("meta[name=theme-color]");
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            metaThemeColor.setAttribute("content", "#1a202c");
+        } else {
+            metaThemeColor.setAttribute("content", "#f7fafc");
+        }
+    }, []);
+    
+    return (
+        <div
+            className={classNames({
+                "overflow-x-hidden w-screen h-screen": true,
+                "bg-slate-100 dark:bg-gray-900": true,
+                "flex flex-col text-center m-auto items-center px-4": true,
+            })}>
+            <DateNavigation
+                dateObject={dateObject}
+                setDateObject={setDateObject}
+                dateLabel={dateLabel}
+                setDateLabel={setDateLabel}/>
+            <div className="w-full pt-16 pb-48">
+                <View date={dateLabel} time={time}/>
+            </div>
+            <Navbar
+                selectedView={selectedView}
+                setSelectedView={setSelectedView}/>
+        </div>
+    );
 }
 
 export default App;

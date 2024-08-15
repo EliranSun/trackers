@@ -12,6 +12,7 @@ import { DatesView } from "./features/dates/DatesView";
 import { DinnerView } from "./features/dinner/DinnerView";
 import { HubView } from "./features/hub/HubView";
 import { HabitTemplate } from "./components/templates/HabitTemplate";
+import classNames from "classnames";
 
 const ViewComponent = {
   [TrackerNames.HOME]: HubView,
@@ -44,7 +45,11 @@ function App() {
   
   return (
     <div
-      className="overflow-x-hidden w-screen h-screen bg-gray-50 dark:bg-gray-900 m-auto flex flex-col text-center m-auto items-center px-4">
+      className={classNames({
+        "overflow-x-hidden w-screen h-screen": true,
+        "bg-gray-100 dark:bg-gray-900": true,
+        "flex flex-col text-center m-auto items-center px-4": true,
+      })}>
       <DateNavigation
         dateObject={dateObject}
         setDateObject={setDateObject}

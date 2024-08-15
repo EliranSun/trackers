@@ -64,7 +64,7 @@ export const HourEntry = ({
                 }}
                 className={classNames({
                     "w-1/3 p-2 flex gap-2 justify-center items-center": true,
-                    "bg-gray-700": true,
+                    "bg-white dark:bg-gray-700": true,
                     // "bg-gray-700": status === HourlyTypes.UNKNOWN,
                     // "bg-red-500": status === HourlyTypes.MISMATCH,
                     // "bg-orange-500": status === HourlyTypes.PARTIAL,

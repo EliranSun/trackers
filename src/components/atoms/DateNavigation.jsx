@@ -12,7 +12,6 @@ export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLa
                 "text-black dark:text-white": true,
                 "flex justify-between items-center": true,
                 "bg-[#fcd34d] dark:bg-amber-900": true,
-                "border-b": true,
             })}>
             <div className="flex items-center font-bold gap-2">
                 <h2 className="text-lg">{format(dateObject, "EEEE")},</h2>

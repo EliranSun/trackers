@@ -78,7 +78,7 @@ export const HourEntry = ({
                 <span>{hour}</span>
             </div>
             <div className="flex flex-col gap-1 w-full">
-                <div key={`${hour}-reality`} className="bg-gray-700 h-full px-2">
+                <div key={`${hour}-reality`} className="bg-white dark:bg-gray-700 h-full px-2">
                     <textarea
                         className="w-full h-full text-xs bg-transparent"
                         value={reality}

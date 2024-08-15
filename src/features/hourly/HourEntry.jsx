@@ -65,6 +65,7 @@ export const HourEntry = ({
                 className={classNames({
                     "w-1/3 p-2 flex gap-2 justify-center items-center": true,
                     "bg-white dark:bg-gray-700": true,
+                    "text-black dark:text-white": true,
                     // "bg-gray-700": status === HourlyTypes.UNKNOWN,
                     // "bg-red-500": status === HourlyTypes.MISMATCH,
                     // "bg-orange-500": status === HourlyTypes.PARTIAL,
@@ -78,7 +79,7 @@ export const HourEntry = ({
                 <span>{hour}</span>
             </div>
             <div className="flex flex-col gap-1 w-full">
-                <div key={`${hour}-reality`} className="bg-white dark:bg-gray-700 h-full px-2">
+                <div key={`${hour}-reality`} className="bg-white text-black dark:text-white dark:bg-gray-700 h-full px-2">
                     <textarea
                         className="w-full h-full text-xs bg-transparent"
                         value={reality}

@@ -14,7 +14,7 @@ export const Navbar = ({ selectedView, setSelectedView }) => {
     <>
       <div className={classNames({
         "text-gray-700": true,
-        "w-screen left-0 fixed bottom-0 z-20 h-24 pb-4 px-4 font-mono": true,
+        "w-screen left-0 fixed bottom-0 z-20 h-24 pb-4 px-16 font-mono": true,
         "bg-white dark:bg-gray-700": true,
         "flex justify-between": true,
       })}>

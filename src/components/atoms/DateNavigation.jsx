@@ -11,7 +11,7 @@ export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLa
                 "fixed top-0 z-10 h-10 left-0 p-2 px-8": true,
                 "text-black dark:text-white": true,
                 "flex justify-between items-center": true,
-                "bg-amber-200 dark:bg-amber-900": true,
+                "bg-[#fcd34d] dark:bg-amber-900": true,
                 "border-b": true,
             })}>
             <div className="flex items-center font-bold gap-2">

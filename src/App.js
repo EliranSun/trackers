@@ -39,7 +39,7 @@ function App() {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             metaThemeColor.setAttribute("content", "#1a202c");
         } else {
-            metaThemeColor.setAttribute("content", "#f7fafc");
+            metaThemeColor.setAttribute("content", "#fcd34d");
         }
     }, []);
     

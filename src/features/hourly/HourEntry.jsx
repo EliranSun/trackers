@@ -15,7 +15,7 @@ const Hour = ({value, ...rest}) => {
             {...rest}
             className={classNames({
                 "w-1/3 p-2 flex gap-2 justify-center items-center": true,
-                "bg-white dark:bg-gray-700": true,
+                "bg-transparent dark:bg-gray-700": true,
                 "text-black dark:text-white": true,
             })}>
             {value}

@@ -14,7 +14,7 @@ const Hour = ({value, ...rest}) => {
         <div
             {...rest}
             className={classNames({
-                "w-20 text-[10px] p-2 flex gap-2 justify-center items-start": true,
+                "w-12 text-[10px] py-2 flex gap-2 justify-center items-start": true,
                 "bg-transparent dark:bg-gray-700": true,
                 "text-black dark:text-white": true,
             })}>
@@ -84,7 +84,7 @@ export const HourEntry = ({
                     <textarea
                         className="w-full h-full text-xs bg-transparent"
                         value={reality}
-                        placeholder="Reality"
+                        placeholder="Thoughts..."
                         onChange={event => {
                             const value = event.target.value;
                             setReality(value);
@@ -106,7 +106,7 @@ export const HourEntry = ({
                     <textarea
                         className="w-full h-full text-wrap text-xs bg-transparent"
                         value={expectation}
-                        placeholder="What would you do instead?"
+                        placeholder="Anything else..."
                         onChange={event => {
                             const value = event.target.value;
                             setExpectation(value);

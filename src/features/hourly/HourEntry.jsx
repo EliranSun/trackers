@@ -14,7 +14,7 @@ const Hour = ({value, ...rest}) => {
         <div
             {...rest}
             className={classNames({
-                "w-20 text-xs p-2 flex gap-2 justify-center items-start": true,
+                "w-20 text-[10px] p-2 flex gap-2 justify-center items-start": true,
                 "bg-transparent dark:bg-gray-700": true,
                 "text-black dark:text-white": true,
             })}>
@@ -82,7 +82,7 @@ export const HourEntry = ({
                 <div className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border-2">
                     <LogEntry isActive>
                     <textarea
-                        className="w-full h-full text-sm bg-transparent"
+                        className="w-full h-full text-xs bg-transparent"
                         value={reality}
                         placeholder="Reality"
                         onChange={event => {
@@ -104,7 +104,7 @@ export const HourEntry = ({
                     </LogEntry>
                     <LogEntry isActive={isApproved === false}>
                     <textarea
-                        className="w-full h-full text-wrap text-sm bg-transparent"
+                        className="w-full h-full text-wrap text-xs bg-transparent"
                         value={expectation}
                         placeholder="What would you do instead?"
                         onChange={event => {

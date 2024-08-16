@@ -115,6 +115,7 @@ export const HourEntry = ({
                         </div>
                         <div className="my-4 text-black dark:text-white">
                             <textarea
+                            autoFocus
                                 className="w-full bg-white dark:bg-neutral-700 h-[25vh] bg-transparent font-mono border rounded-xl p-4"
                                 value={reality}
                                 placeholder="Thoughts..."

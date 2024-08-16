@@ -14,7 +14,7 @@ const Hour = ({value, ...rest}) => {
         <div
             {...rest}
             className={classNames({
-                "w-20 p-2 flex gap-2 justify-center items-center": true,
+                "w-20 text-sm p-2 flex gap-2 justify-center items-center": true,
                 "bg-transparent dark:bg-gray-700": true,
                 "text-black dark:text-white": true,
             })}>
@@ -69,7 +69,7 @@ export const HourEntry = ({
 
     return (
         <>
-            <div className="flex gap-1 w-full overflow-hidden">
+            <div className="flex items start gap-1 w-full overflow-hidden">
                 <Hour
                     value={hour}
                     onClick={() => {
@@ -79,7 +79,7 @@ export const HourEntry = ({
                             .catch(error => console.error("Failed to update isApproved", error))
                             .finally(refetch);
                     }}/>
-                <div className="flex flex-col gap-1 rounded-lg w-full border">
+                <div className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border">
                     <LogEntry isActive>
                     <textarea
                         className="w-full h-full text-xs bg-transparent"

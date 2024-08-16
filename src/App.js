@@ -37,7 +37,7 @@ function App() {
         // set meta theme color based on day/night
         const metaThemeColor = document.querySelector("meta[name=theme-color]");
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            metaThemeColor.setAttribute("content", "#1a202c");
+            metaThemeColor.setAttribute("content", "#f59e0b");
         } else {
             metaThemeColor.setAttribute("content", "#fcd34d");
         }
@@ -47,7 +47,7 @@ function App() {
         <div
             className={classNames({
                 "overflow-x-hidden w-screen h-screen": true,
-                "bg-slate-100 dark:bg-gray-900": true,
+                "bg-slate-100 dark:bg-neutral-900": true,
                 "flex flex-col text-center m-auto items-center px-4": true,
             })}>
             <DateNavigation

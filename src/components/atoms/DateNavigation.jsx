@@ -9,9 +9,9 @@ export const DateNavigation = ({dateObject, setDateObject, dateLabel, setDateLab
             className={classNames({
                 "w-screen": true,
                 "fixed top-0 z-10 h-10 left-0 p-2 px-8": true,
-                "text-black dark:text-white": true,
+                "text-black dark:text-amber-500": true,
                 "flex justify-between items-center": true,
-                "bg-[#fcd34d] dark:bg-amber-500": true,
+                "bg-[#fcd34d] dark:bg-neutral-800": true,
             })}>
             <div className="flex items-center font-bold gap-2">
                 <span>🪵</span>

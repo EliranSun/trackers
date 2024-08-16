@@ -15,8 +15,8 @@ const Hour = ({value, ...rest}) => {
         <div
             {...rest}
             className={classNames({
+                "bg-transparent": true,
                 "w-12 text-[10px] py-2 flex gap-2 justify-center items-start": true,
-                "bg-transparent dark:bg-gray-700": true,
                 "text-black dark:text-white": true,
             })}>
             {value}
@@ -30,7 +30,7 @@ const LogEntry = ({value, isSecondary}) => {
     }
 
     return (
-        <p className="bg-white text-left text-xs text-black dark:text-white dark:bg-gray-700 p-2 h-16 font-mono overflow-y-auto">
+        <p className="bg-white text-left text-xs text-black dark:text-white dark:bg-neutral-700 p-2 h-16 font-mono overflow-y-auto">
             {value}
         </p>
     );
@@ -103,21 +103,19 @@ export const HourEntry = ({
         <>
             {isAddEntryModalOpen ? (
                 <div className="fixed top-0 inset-x-0 w-screen h-screen z-30 backdrop-brightness-50">
-                    <div className="bg-gray-100 border rounded-t-2xl h-full w-full mt-5 p-4">
-                        <div className="flex w-full justify-between items-center">
+                    <div className="bg-gray-100 dark:bg-neutral-800 border rounded-t-2xl h-full w-full mt-5 p-4">
+                        <div className="flex w-full justify-between items-center text-black dark:text-white">
                             <X
-                                color="black"
                                 size={32}
                                 onClick={() => setIsAddEntryModalOpen(false)}/>
                             <SaveIcon
                                 className={isLoading ? "animate-spin" : ""}
-                                color="black"
                                 size={32}
                                 onClick={saveEntry}/>
                         </div>
-                        <div className="my-4">
+                        <div className="my-4 text-black dark:text-white">
                             <textarea
-                                className="w-full bg-white h-[25vh] text-black bg-transparent font-mono border rounded-xl p-4"
+                                className="w-full bg-white dark:bg-neutral-700 h-[25vh] bg-transparent font-mono border rounded-xl p-4"
                                 value={reality}
                                 placeholder="Thoughts..."
                                 onChange={event => {
@@ -126,7 +124,7 @@ export const HourEntry = ({
                                 }}
                             />
                             <textarea
-                                className="w-full bg-white h-[25vh] text-black bg-transparent font-mono border rounded-xl p-4"
+                                className="w-full bg-white dark:bg-neutral-700 h-[25vh] bg-transparent font-mono border rounded-xl p-4"
                                 value={expectation}
                                 placeholder="Anything else..."
                                 onChange={event => {
@@ -150,7 +148,7 @@ export const HourEntry = ({
                     }}/>
                 <div
                     onClick={() => setIsAddEntryModalOpen(true)}
-                    className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border-2">
+                    className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border-2 dark:border-black">
                     <LogEntry value={reality}/>
                     <LogEntry value={expectation} isSecondary/>
                 </div>

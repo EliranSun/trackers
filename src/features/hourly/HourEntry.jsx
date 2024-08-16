@@ -131,7 +131,7 @@ export const HourEntry = ({
                     "text-xs text-center fixed inset-x-0 m-auto bottom-32 bg-black text-white rounded-full p-4 w-fit h-5": true,
                     "opacity-0": !message,
                     "opacity-100": message,
-                    "pointer-events-none": true,
+                    // "pointer-events-none": true,
                 })}>
                 {message}
             </div>

@@ -1,17 +1,17 @@
 import './App.css';
-import { useEffect, useState } from "react";
-import { TrackerNames } from "./constants";
-import { Navbar } from "./components/atoms/Navbar";
-import { KetoTable } from "./features/keto/KetoTable";
-import { HourlyView } from "./features/hourly/HourlyView";
-import { DateNavigation } from "./components/atoms/DateNavigation";
-import { WeightView } from "./features/weight/WeightView";
-import { SleepView } from "./features/sleep/SleepView";
-import { AngerView } from "./features/anger/AngerView";
-import { DatesView } from "./features/dates/DatesView";
-import { DinnerView } from "./features/dinner/DinnerView";
-import { HubView } from "./features/hub/HubView";
-import { HabitTemplate } from "./components/templates/HabitTemplate";
+import {useEffect, useState} from "react";
+import {TrackerNames} from "./constants";
+import {Navbar} from "./components/atoms/Navbar";
+import {KetoTable} from "./features/keto/KetoTable";
+import {HourlyView} from "./features/hourly/HourlyView";
+import {DateNavigation} from "./components/atoms/DateNavigation";
+import {WeightView} from "./features/weight/WeightView";
+import {SleepView} from "./features/sleep/SleepView";
+import {AngerView} from "./features/anger/AngerView";
+import {DatesView} from "./features/dates/DatesView";
+import {DinnerView} from "./features/dinner/DinnerView";
+import {HubView} from "./features/hub/HubView";
+import {HabitTemplate} from "./components/templates/HabitTemplate";
 import classNames from "classnames";
 
 const ViewComponent = {
@@ -32,7 +32,7 @@ function App() {
     const [time, setTime] = useState(dateObject.toLocaleTimeString("en-IL"));
     const [selectedView, setSelectedView] = useState(TrackerNames.HABIT);
     const View = ViewComponent[selectedView];
-    
+
     useEffect(() => {
         // set meta theme color based on day/night
         const metaThemeColor = document.querySelector("meta[name=theme-color]");
@@ -42,7 +42,7 @@ function App() {
             metaThemeColor.setAttribute("content", "#fcd34d");
         }
     }, []);
-    
+
     return (
         <div
             className={classNames({
@@ -55,7 +55,7 @@ function App() {
                 setDateObject={setDateObject}
                 dateLabel={dateLabel}
                 setDateLabel={setDateLabel}/>
-            <div className="w-full pt-16 pb-48">
+            <div className="w-full pt-14 pb-48">
                 <View date={dateLabel} time={time}/>
             </div>
             <Navbar

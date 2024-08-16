@@ -1,9 +1,9 @@
-import { ONE_DAY } from "../../constants";
-import { ArrowSquareLeft, ArrowSquareRight } from "@phosphor-icons/react";
-import { format } from "date-fns";
+import {ONE_DAY} from "../../constants";
+import {ArrowSquareLeft, ArrowSquareRight} from "@phosphor-icons/react";
+import {format} from "date-fns";
 import classNames from "classnames";
 
-export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLabel }) => {
+export const DateNavigation = ({dateObject, setDateObject, dateLabel, setDateLabel}) => {
     return (
         <div
             className={classNames({
@@ -14,7 +14,8 @@ export const DateNavigation = ({ dateObject, setDateObject, dateLabel, setDateLa
                 "bg-[#fcd34d] dark:bg-amber-500": true,
             })}>
             <div className="flex items-center font-bold gap-2">
-                <h2 className="text-lg">{format(dateObject, "EEEE")},</h2>
+                <span>🪵</span>
+                <h2>{format(dateObject, "EEEE")},</h2>
                 <h1>{dateLabel}</h1>
             </div>
             <div className="flex gap-2">

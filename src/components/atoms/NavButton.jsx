@@ -8,7 +8,7 @@ export const NavButton = ({color, children, isSelected, onClick}) => {
                 "text-black": color === "black",
                 "text-amber-500 dark:text-amber-500": isSelected,
                 "text-black/30 dark:text-white/50": !isSelected && color !== "black",
-                "hover:bg-white dark:hover:bg-black user-select-none": true,
+                "user-select-none": true,
                 "py-2 relative z-20": true,
                 "flex flex-col items-center justify-center": true,
             })}>

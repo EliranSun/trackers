@@ -46,11 +46,11 @@ export const Checkbox = ({
             className={classNames({
                 "flex-grow": true,
                 "h-6": true,
-                "bg-gray-200": isChecked === null,
                 "border-gray-300": !isHighlighted,
-                "border-2 border-black": isHighlighted,
-                "bg-amber-400 text-black": isChecked !== null && showPositive,
-                "bg-neutral-600 text-black": isChecked !== null && !showPositive,
+                "border-2 border-black dark:border-white": isHighlighted,
+                "bg-gray-200 dark:bg-slate-50/10": isChecked === null,
+                "bg-amber-400 dark:bg-amber-500 text-black": isChecked !== null && showPositive,
+                "bg-neutral-600 dark:bg-neutral-500 text-black": isChecked !== null && !showPositive,
             })}>
         </button>
     )

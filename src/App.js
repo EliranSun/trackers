@@ -37,7 +37,7 @@ function App() {
         // set meta theme color based on day/night
         const metaThemeColor = document.querySelector("meta[name=theme-color]");
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            metaThemeColor.setAttribute("content", "#f59e0b");
+            metaThemeColor.setAttribute("content", "#262626");
         } else {
             metaThemeColor.setAttribute("content", "#fcd34d");
         }

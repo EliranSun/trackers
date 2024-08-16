@@ -9,8 +9,8 @@ const Button = ({children, isSelected, onClick}) => {
         <button
             className={classNames({
                 "py-1 px-2 rounded-full": true,
-                "bg-black text-white": isSelected,
-                "bg-white text-black": !isSelected,
+                "bg-black dark:bg-white text-white dark:text-black": isSelected,
+                "bg-white dark:bg-neutral-700 text-black dark:text-white": !isSelected,
             })}
             onClick={onClick}>
             {children}
@@ -66,7 +66,8 @@ export const HabitTemplate = ({date}) => {
             {checkboxTrackers.map(tracker => {
                 const Icon = tracker.icon;
                 return (
-                    <div key={tracker.name} className="flex flex-col gap-1 bg-white border-2 rounded-xl p-2">
+                    <div key={tracker.name}
+                         className="flex flex-col gap-1 bg-white dark:bg-neutral-700 border-2 dark:border-black rounded-xl p-2">
                         <h1 className="flex items-center gap-1 text-sm">
                             <Icon/><span className="">{tracker.name}</span>
                         </h1>

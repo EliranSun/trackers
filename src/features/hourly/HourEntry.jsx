@@ -14,7 +14,7 @@ const Hour = ({value, ...rest}) => {
         <div
             {...rest}
             className={classNames({
-                "w-20 text-sm p-2 flex gap-2 justify-center items-center": true,
+                "w-20 text-sm p-2 flex gap-2 justify-center items-start": true,
                 "bg-transparent dark:bg-gray-700": true,
                 "text-black dark:text-white": true,
             })}>
@@ -79,7 +79,7 @@ export const HourEntry = ({
                             .catch(error => console.error("Failed to update isApproved", error))
                             .finally(refetch);
                     }}/>
-                <div className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border">
+                <div className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border-2">
                     <LogEntry isActive>
                     <textarea
                         className="w-full h-full text-xs bg-transparent"

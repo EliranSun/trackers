@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {updateExpectation, updateHourlyIsApproved, updateReality} from "../../utils/db";
 import classNames from "classnames";
+import {Disc, FloppyDisk, X} from "@phosphor-icons/react";
 
 export const HourlyTypes = {
     UNKNOWN: "Unknown",
@@ -23,15 +24,15 @@ const Hour = ({value, ...rest}) => {
     );
 };
 
-const LogEntry = ({children, isActive}) => {
-    if (!isActive) {
+const LogEntry = ({value, isSecondary}) => {
+    if (isSecondary && !value) {
         return null;
     }
 
     return (
-        <div className="bg-white text-black dark:text-white dark:bg-gray-700 p-2 h-16 font-mono">
-            {children}
-        </div>
+        <p className="bg-white text-left text-xs text-black dark:text-white dark:bg-gray-700 p-2 h-16 font-mono overflow-y-auto">
+            {value}
+        </p>
     );
 };
 
@@ -45,6 +46,8 @@ export const HourEntry = ({
                               onEntryComplete,
                               refetch,
                           }) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [isAddEntryModalOpen, setIsAddEntryModalOpen] = useState(false);
     const [reality, setReality] = useState(initReality || "");
     const [expectation, setExpectation] = useState(initExpectation || "");
     const [isApproved, setIsApproved] = useState(initIsApproved);
@@ -64,11 +67,77 @@ export const HourEntry = ({
     }, [initReality, initExpectation]);
 
     useEffect(() => {
-        setTimeout(() => setMessage(""), 5000);
-    }, [reality, expectation]);
+        if (message) {
+            setTimeout(() => setMessage(""), 5000);
+        }
+    }, [message]);
+
+    const SaveIcon = isLoading ? Disc : FloppyDisk;
+
+    const saveEntry = useCallback(() => {
+        const promises = [];
+        if (reality !== initReality) {
+            promises.push(updateReality(date, hour, reality));
+        }
+        if (expectation !== initExpectation) {
+            promises.push(updateExpectation(date, hour, expectation));
+        }
+
+        setIsLoading(true);
+        Promise
+            .all(promises)
+            .then(data => {
+                setMessage(`${date} ${hour} saved!`);
+                onEntryComplete();
+            })
+            .catch(error => setMessage("Failed to update"))
+            .finally(() => {
+                setTimeout(() => {
+                    setIsAddEntryModalOpen(false);
+                    setIsLoading(false);
+                }, 1000);
+            });
+    }, [date, hour, reality, expectation, initReality, initExpectation, onEntryComplete]);
 
     return (
         <>
+            {isAddEntryModalOpen ? (
+                <div className="fixed top-0 inset-x-0 w-screen h-screen z-30 backdrop-brightness-50">
+                    <div className="bg-gray-100 border rounded-t-2xl h-full w-full mt-5 p-4">
+                        <div className="flex w-full justify-between items-center">
+                            <X
+                                color="black"
+                                size={32}
+                                onClick={() => setIsAddEntryModalOpen(false)}/>
+                            <SaveIcon
+                                className={isLoading ? "animate-spin" : ""}
+                                color="black"
+                                size={32}
+                                onClick={saveEntry}/>
+                        </div>
+                        <div className="my-4">
+                            <textarea
+                                className="w-full bg-white h-[25vh] text-black bg-transparent font-mono border rounded-xl p-4"
+                                value={reality}
+                                placeholder="Thoughts..."
+                                onChange={event => {
+                                    const value = event.target.value;
+                                    setReality(value);
+                                }}
+                            />
+                            <textarea
+                                className="w-full bg-white h-[25vh] text-black bg-transparent font-mono border rounded-xl p-4"
+                                value={expectation}
+                                placeholder="Anything else..."
+                                onChange={event => {
+                                    const value = event.target.value;
+                                    setExpectation(value);
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            ) : null}
             <div className="flex items start gap-1 w-full overflow-hidden">
                 <Hour
                     value={hour}
@@ -79,48 +148,11 @@ export const HourEntry = ({
                             .catch(error => console.error("Failed to update isApproved", error))
                             .finally(refetch);
                     }}/>
-                <div className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border-2">
-                    <LogEntry isActive>
-                    <textarea
-                        className="w-full h-full text-xs bg-transparent"
-                        value={reality}
-                        placeholder="Thoughts..."
-                        onChange={event => {
-                            const value = event.target.value;
-                            setReality(value);
-                        }}
-                        onBlur={event => {
-                            const value = event.target.value;
-                            if (value === initReality)
-                                return;
-
-                            updateReality(date, hour, value)
-                                .then(data => setMessage(`${date} ${hour} ${value.slice(-10)} saved!`))
-                                .catch(error => setMessage("Failed to update reality"));
-
-                            onEntryComplete();
-                        }}
-                    />
-                    </LogEntry>
-                    <LogEntry isActive={isApproved === false}>
-                    <textarea
-                        className="w-full h-full text-wrap text-xs bg-transparent"
-                        value={expectation}
-                        placeholder="Anything else..."
-                        onChange={event => {
-                            const value = event.target.value;
-                            setExpectation(value);
-                        }}
-                        onBlur={(event) => {
-                            const value = event.target.value;
-                            if (value === initExpectation)
-                                return;
-
-                            updateExpectation(date, hour, value)
-                                .then(data => setMessage(`${date} ${hour} ${value.slice(-10)} saved!`))
-                                .catch(error => setMessage("Failed to update expectation"));
-                        }}/>
-                    </LogEntry>
+                <div
+                    onClick={() => setIsAddEntryModalOpen(true)}
+                    className="flex flex-col gap-1 rounded-lg overflow-hidden w-full border-2">
+                    <LogEntry value={reality}/>
+                    <LogEntry value={expectation} isSecondary/>
                 </div>
             </div>
             <div

@@ -49,7 +49,7 @@ export const HabitTemplate = ({ date }) => {
         
         if (view === View.MONTH) {
             arrayLength = daysInCurrentMonth;
-            currentDayIndex = currentDateObject.getDay();
+            currentDayIndex = day;
         }
         
         return new Array(arrayLength).fill(0).map((_, index) => {

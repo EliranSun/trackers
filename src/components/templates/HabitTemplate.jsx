@@ -39,7 +39,7 @@ export const HabitTemplate = ({ date }) => {
         
         if (view === View.DAY) {
             arrayLength = 1;
-            currentDayIndex = currentDateObject.getDay();
+            currentDayIndex = 0;
         }
         
         if (view === View.WEEK) {

@@ -29,7 +29,7 @@ export const TrackerNames = {
     ANGER: "Anger",
     DATES: "Dates",
     ESX: "Sex",
-    LYING: "Trush",
+    LYING: "Speaking the Truth",
     DINNER: "Dinner",
     SMALL_THINGS: "Small Things",
     SNORE: "Snore",

@@ -47,7 +47,7 @@ export const Checkbox = ({
                 "h-6": true,
                 "border-none": isDayView,
                 "border-gray-300": !isHighlighted,
-                "border-2 border-black dark:border-white": isHighlighted,
+                "border-2 border-black rounded-lg dark:border-white": isHighlighted,
                 "bg-gray-200 dark:bg-slate-50/10": isChecked === null,
                 "bg-amber-400 dark:bg-amber-500 text-black": isChecked !== null && showPositive,
                 "bg-neutral-600 dark:bg-neutral-500 text-black": isChecked !== null && !showPositive,

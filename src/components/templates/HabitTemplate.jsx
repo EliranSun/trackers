@@ -93,14 +93,19 @@ export const HabitTemplate = ({ date }) => {
             {checkboxTrackers.map(tracker => {
                 const Icon = tracker.icon;
                 return (
-                    <div key={tracker.name}
-                         className="flex flex-col gap-1 bg-white dark:bg-neutral-700 border-2 dark:border-black rounded-xl p-2">
+                    <div
+                        key={tracker.name}
+                        className={classNames({
+                            "flex flex-col gap-1 p-2": true,
+                            "bg-white dark:bg-neutral-700": view !== View.DAY,
+                            "border-2 dark:border-black rounded-xl": view !== View.DAY,
+                        })}>
                         <h1 className="flex items-center gap-1 text-sm">
                             <Icon/><span className="">{tracker.name}</span>
                         </h1>
                         <div className={classNames({
                             "flex w-full rounded-lg overflow-hidden": true,
-                            "flex-col": view === View.DAY,
+                            "flex-col gap-0": view === View.DAY,
                             "gap-[2px]": view !== View.MONTH,
                             "gap-px": view === View.MONTH,
                         })}>
@@ -110,6 +115,7 @@ export const HabitTemplate = ({ date }) => {
                                         id={tracker.id}
                                         key={index}
                                         label={tracker.name}
+                                        isDayView={view === View.DAY}
                                         isSuccessMessage={tracker.isSuccessMessage}
                                         isFailureMessage={tracker.isFailureMessage}
                                         isPositive={tracker.isPositive}

@@ -98,7 +98,7 @@ export const HabitTemplate = ({ date }) => {
                         className={classNames({
                             "flex flex-col gap-1 p-2": true,
                             "bg-white dark:bg-neutral-700": view === View.MONTH,
-                            "border-2 dark:border-black rounded-xl": view !== View.DAY,
+                            "border-2 dark:border-black rounded-xl": view === View.MONTH,
                         })}>
                         <h1 className="flex items-center gap-1 text-sm">
                             <Icon/><span className="">{tracker.name}</span>

@@ -26,7 +26,7 @@ export const TrackerNames = {
     WEIGHT: "Weight",
     SLEEP: "Sleep 8 Hours",
     PRON: "Watching Porn",
-    ANGER: "Angery with Bzhuzh",
+    ANGER: "Angry with Bzhuzh",
     DATES: "Dates",
     ESX: "Sex",
     LYING: "Speaking the Truth",

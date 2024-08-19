@@ -24,15 +24,15 @@ export const TrackerNames = {
     HOURLY: "Hourly",
     HABIT: "Habit",
     WEIGHT: "Weight",
-    SLEEP: "Sleep",
-    PRON: "Porn",
-    ANGER: "Anger",
+    SLEEP: "Sleep 8 Hours",
+    PRON: "Watching Porn",
+    ANGER: "Angery with Bzhuzh",
     DATES: "Dates",
     ESX: "Sex",
     LYING: "Speaking the Truth",
     DINNER: "Dinner",
     SMALL_THINGS: "Small Things",
-    SNORE: "Snore",
+    SNORE: "Snoring to Bzhuzh",
 };
 
 export const TrackerIcons = {

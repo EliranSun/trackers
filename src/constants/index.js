@@ -32,7 +32,7 @@ export const TrackerNames = {
     LYING: "Speaking the Truth",
     DINNER: "Making Dinner",
     SMALL_THINGS: "Small Things",
-    SNORE: "Snoring to Bzhuzh",
+    SNORE: "Snore-Free Night to Bzhuzh",
 };
 
 export const TrackerIcons = {

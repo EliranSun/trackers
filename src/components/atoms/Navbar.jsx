@@ -16,7 +16,7 @@ export const Navbar = ({selectedView, setSelectedView}) => {
                 "text-gray-700": true,
                 "w-screen left-0 fixed bottom-0 z-20 h-24 pb-4 px-8 font-mono": true,
                 "bg-white dark:bg-neutral-800": true,
-                "flex justify-center gap-8": true,
+                "flex justify-center gap-16": true,
             })}>
                 {PagesList
                     .slice(0, NAVBAR_PAGE_LIMIT)

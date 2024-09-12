@@ -5,7 +5,7 @@ import {NavButton} from "./NavButton";
 import {NavMenu} from "./NavMenu";
 
 const PagesList = Object.values(TrackerNames);
-const NAVBAR_PAGE_LIMIT = 5;
+const NAVBAR_PAGE_LIMIT = 3;
 
 export const Navbar = ({selectedView, setSelectedView}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
